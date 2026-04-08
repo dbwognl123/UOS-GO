@@ -733,6 +733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 307
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &96204993
 GameObject:
   m_ObjectHideFlags: 0
@@ -100137,6 +100138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 311
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &193530302
 GameObject:
   m_ObjectHideFlags: 0
@@ -100289,6 +100291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 310
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &224404969
 GameObject:
   m_ObjectHideFlags: 0
@@ -105370,6 +105373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 303
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &364716561
 GameObject:
   m_ObjectHideFlags: 0
@@ -105522,6 +105526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 329
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &385167556
 GameObject:
   m_ObjectHideFlags: 0
@@ -105743,6 +105748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 308
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!61 &447432222
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -106139,6 +106145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 327
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &553669318
 GameObject:
   m_ObjectHideFlags: 0
@@ -114830,6 +114837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 301
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &726888399
 GameObject:
   m_ObjectHideFlags: 0
@@ -114982,6 +114990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 320
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &767153310
 GameObject:
   m_ObjectHideFlags: 0
@@ -115273,6 +115282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 315
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &835680836
 GameObject:
   m_ObjectHideFlags: 0
@@ -115946,6 +115956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 319
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &1103351793
 GameObject:
   m_ObjectHideFlags: 0
@@ -116562,7 +116573,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cec4872ef14642a499652aa60a822e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
-  classroomNumber: 0
+  classroomNumber: 333
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &1244563858
 GameObject:
   m_ObjectHideFlags: 0
@@ -116715,6 +116727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 312
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &1250099734
 GameObject:
   m_ObjectHideFlags: 0
@@ -116867,6 +116880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 318
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &1268818122
 GameObject:
   m_ObjectHideFlags: 0
@@ -116931,7 +116945,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.97
+  orthographic size: 1.96
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -117319,6 +117333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 305
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &1301557670
 GameObject:
   m_ObjectHideFlags: 0
@@ -117594,7 +117609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7134a5d436836c7469194473a947bce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController2D
-  moveSpeed: 3
+  moveSpeed: 10
   animator: {fileID: 1508538058}
 --- !u!61 &1407168444
 BoxCollider2D:
@@ -117897,6 +117912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 320
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &1467057990
 GameObject:
   m_ObjectHideFlags: 0
@@ -118098,6 +118114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 316
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &1508538057
 GameObject:
   m_ObjectHideFlags: 0
@@ -119007,6 +119024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 304
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &1677729418
 GameObject:
   m_ObjectHideFlags: 0
@@ -119159,6 +119177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 315
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &1697228976
 GameObject:
   m_ObjectHideFlags: 0
@@ -119865,7 +119884,7 @@ GameObject:
   - component: {fileID: 1827222284}
   - component: {fileID: 1827222283}
   m_Layer: 0
-  m_Name: Square
+  m_Name: 335
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119899,6 +119918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 335
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!61 &1827222284
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -120573,6 +120593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 337
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &2001125809
 GameObject:
   m_ObjectHideFlags: 0
@@ -120725,6 +120746,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 339
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &2016401486
 GameObject:
   m_ObjectHideFlags: 0
@@ -120877,6 +120899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 306
+  returnOffset: {x: 0, y: -0.8, z: 0}
 --- !u!1 &2042902906
 GameObject:
   m_ObjectHideFlags: 0

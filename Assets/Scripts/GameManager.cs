@@ -85,6 +85,8 @@ public class GameManager : MonoBehaviour
 
         return true;
     }
+
+
     public bool WorkPartTimeInEvening()
     {
         if (CurrentPlayer == null) return false;
@@ -102,6 +104,11 @@ public class GameManager : MonoBehaviour
         CurrentPlayer.happiness += value;
     }
 
+    public void AddGrade(int value)
+    {
+        if (CurrentPlayer == null) return;
+        CurrentPlayer.grade += value;
+    }
     public void AddCampusLife(int value)
     {
         if (CurrentPlayer == null) return;
@@ -169,6 +176,15 @@ public class GameManager : MonoBehaviour
             return -1;
 
         return todaySchedule[currentClassIndex];
+    }
+
+    public void FinishCurrentClass()
+    {
+        if (IsAllClassesFinished) return;
+        if (CurrentEnteredClassroom == -1) return;
+
+        currentClassIndex++;
+        CurrentEnteredClassroom = -1;
     }
 
     public bool CanEnterClassroom(int classroomNumber)
