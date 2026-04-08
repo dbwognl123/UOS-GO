@@ -3,8 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class DodgePlayerController : MonoBehaviour
 {
-    [SerializeField] private Transform arenaCenter;
-    [SerializeField] private float arenaRadius = 3.5f;
     [SerializeField] private float moveSpeedMin = 2.5f;
     [SerializeField] private float moveSpeedMax = 5.5f;
     [SerializeField] private float playerRadius = 0.25f;
@@ -13,9 +11,18 @@ public class DodgePlayerController : MonoBehaviour
     private Vector2 moveInput;
     private float currentMoveSpeed;
 
+    private Transform arenaCenter;
+    private float arenaRadius;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    public void SetupArena(Transform center, float radius)
+    {
+        arenaCenter = center;
+        arenaRadius = radius;
     }
 
     private void Start()

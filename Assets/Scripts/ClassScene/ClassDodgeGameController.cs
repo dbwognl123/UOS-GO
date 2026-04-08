@@ -7,12 +7,13 @@ public class ClassDodgeGameController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Transform arenaCenter;
-    [SerializeField] private Transform player;
+    [SerializeField] private DodgePlayerController player;
     [SerializeField] private DodgeProjectile projectilePrefab;
     [SerializeField] private TMP_Text timerText;
 
     [Header("Arena")]
-    [SerializeField] private float spawnRadius = 4.2f;
+    [SerializeField] private float arenaRadius = 3.5f;
+    [SerializeField] private float spawnPadding = 0.1f;
 
     [Header("Projectile Settings")]
     [SerializeField] private float projectileSpeed = 4.5f;
@@ -27,10 +28,17 @@ public class ClassDodgeGameController : MonoBehaviour
     private int projectilesPerWave;
     private bool isFinished = false;
 
+    public Transform ArenaCenter => arenaCenter;
+    public float ArenaRadius => arenaRadius;
+
     private void Start()
     {
         remainingTime = surviveTime;
         SetupDifficultyFromPlayerStats();
+
+        if (player != null)
+            player.SetupArena(arenaCenter, arenaRadius);
+
         StartCoroutine(SpawnRoutine());
     }
 
@@ -44,9 +52,7 @@ public class ClassDodgeGameController : MonoBehaviour
             timerText.text = Mathf.CeilToInt(remainingTime).ToString();
 
         if (remainingTime <= 0f)
-        {
             Success();
-        }
     }
 
     private void SetupDifficultyFromPlayerStats()
@@ -81,12 +87,14 @@ public class ClassDodgeGameController : MonoBehaviour
         {
             float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
             Vector2 dirFromCenter = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-            Vector2 spawnPos = (Vector2)arenaCenter.position + dirFromCenter * spawnRadius;
 
-            Vector2 targetDir = ((Vector2)player.position - spawnPos).normalized;
+            // 원 끝에서 아주 살짝 안쪽
+            Vector2 spawnPos = (Vector2)arenaCenter.position + dirFromCenter * (arenaRadius - spawnPadding);
+
+            Vector2 targetDir = ((Vector2)player.transform.position - spawnPos).normalized;
 
             DodgeProjectile projectile = Instantiate(projectilePrefab, spawnPos, Quaternion.identity);
-            projectile.Init(targetDir, projectileSpeed, this);
+            projectile.Init(targetDir, projectileSpeed, this, arenaCenter, arenaRadius);
         }
     }
 
@@ -105,12 +113,10 @@ public class ClassDodgeGameController : MonoBehaviour
         {
             GameManager.Instance.AddIntelligence(1);
             GameManager.Instance.AddGrade(1);
-
-            // 성공해도 현재 수업 소모
             GameManager.Instance.FinishCurrentClass();
         }
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SchoolScene");
+        SceneManager.LoadScene("SchoolScene");
     }
 
     private void Fail()
@@ -121,11 +127,17 @@ public class ClassDodgeGameController : MonoBehaviour
         if (GameManager.Instance != null)
         {
             GameManager.Instance.AddHealth(-1);
-
-            // 실패해도 현재 수업 소모
             GameManager.Instance.FinishCurrentClass();
         }
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SchoolScene");
+        SceneManager.LoadScene("SchoolScene");
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (arenaCenter == null) return;
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(arenaCenter.position, arenaRadius);
     }
 }

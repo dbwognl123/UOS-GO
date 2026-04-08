@@ -129,19 +129,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1682608757885424682, guid: 548ec8fafe873044f9b0a19478290fe8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1682608757885424682, guid: 548ec8fafe873044f9b0a19478290fe8, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1682608757885424682, guid: 548ec8fafe873044f9b0a19478290fe8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.73884
+      value: -5.63
       objectReference: {fileID: 0}
     - target: {fileID: 1682608757885424682, guid: 548ec8fafe873044f9b0a19478290fe8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.34815
+      value: -6.16
       objectReference: {fileID: 0}
     - target: {fileID: 1682608757885424682, guid: 548ec8fafe873044f9b0a19478290fe8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -205,6 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DodgeProjectile
   lifeTime: 5
+  exitPadding: 0.15
 --- !u!1 &286015465
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,7 +349,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 7e97b2900d9ffa34680234434191888a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.7019608}
@@ -407,11 +408,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 621938417}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 26.6, y: -171}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 26.600008, y: 0}
   m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &483385945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -735,10 +736,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClassDodgeGameController
   arenaCenter: {fileID: 1579477902}
-  player: {fileID: 1012456413}
+  player: {fileID: 1012456414}
   projectilePrefab: {fileID: 29718827}
   timerText: {fileID: 483385945}
-  spawnRadius: 1
+  arenaRadius: 3.5
+  spawnPadding: 0.1
   projectileSpeed: 1
   spawnInterval: 1
   minProjectilesPerWave: 0
@@ -939,8 +941,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce140b405cb84b24c846faeed49512c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DodgePlayerController
-  arenaCenter: {fileID: 0}
-  arenaRadius: 3.5
   moveSpeedMin: 2.5
   moveSpeedMax: 5.5
   playerRadius: 0.25
@@ -1233,8 +1233,8 @@ SceneRoots:
   - {fileID: 1587449222}
   - {fileID: 286015468}
   - {fileID: 681144884}
-  - {fileID: 1012456413}
   - {fileID: 333159314}
+  - {fileID: 1012456413}
   - {fileID: 1579477902}
   - {fileID: 621938417}
   - {fileID: 861971968}
