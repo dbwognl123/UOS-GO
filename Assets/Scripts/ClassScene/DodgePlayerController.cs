@@ -27,12 +27,15 @@ public class DodgePlayerController : MonoBehaviour
 
     private void Start()
     {
-        int health = 5;
+        float health01 = 1f;
 
         if (GameManager.Instance != null && GameManager.Instance.CurrentPlayer != null)
-            health = GameManager.Instance.CurrentPlayer.health;
+        {
+            var player = GameManager.Instance.CurrentPlayer;
+            health01 = (float)player.currentHealth / player.maxHealth;
+        }
 
-        float health01 = Mathf.Clamp01(health / 10f);
+        health01 = Mathf.Clamp01(health01);
         currentMoveSpeed = Mathf.Lerp(moveSpeedMin, moveSpeedMax, health01);
     }
 
