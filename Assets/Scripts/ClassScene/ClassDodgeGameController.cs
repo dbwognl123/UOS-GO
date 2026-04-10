@@ -126,7 +126,7 @@ public class ClassDodgeGameController : MonoBehaviour
 
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.AddHealth(-1);
+            GameManager.Instance.AddIntelligence(-1);
             GameManager.Instance.FinishCurrentClass();
         }
 

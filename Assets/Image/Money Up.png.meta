@@ -1,0 +1,3757 @@
+fileFormatVersion: 2
+guid: 7d7fe634aa8fdc94cbc03d5eacf2d278
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5980879191681136474
+    second: Money Up_0
+  - first:
+      213: -3369041509997432163
+    second: Money Up_1
+  - first:
+      213: 8641883702901080060
+    second: Money Up_2
+  - first:
+      213: 5803600890459723048
+    second: Money Up_3
+  - first:
+      213: 7357242168883462538
+    second: Money Up_4
+  - first:
+      213: 8131374532984995395
+    second: Money Up_5
+  - first:
+      213: 5843277456314345845
+    second: Money Up_6
+  - first:
+      213: 5702585530328542271
+    second: Money Up_7
+  - first:
+      213: 764970747918938921
+    second: Money Up_8
+  - first:
+      213: -7459448159129666964
+    second: Money Up_9
+  - first:
+      213: 9185637742589929153
+    second: Money Up_10
+  - first:
+      213: -4590873309492824954
+    second: Money Up_11
+  - first:
+      213: -4097787796299800339
+    second: Money Up_12
+  - first:
+      213: 6352240229831519023
+    second: Money Up_13
+  - first:
+      213: 1448188381750275903
+    second: Money Up_14
+  - first:
+      213: 3026409797317790231
+    second: Money Up_15
+  - first:
+      213: -6079134691547933522
+    second: Money Up_16
+  - first:
+      213: -7305172911402898411
+    second: Money Up_17
+  - first:
+      213: -2011231946281282601
+    second: Money Up_18
+  - first:
+      213: 3248265861509041024
+    second: Money Up_19
+  - first:
+      213: 2241119200492181411
+    second: Money Up_20
+  - first:
+      213: -5694526402851061017
+    second: Money Up_21
+  - first:
+      213: 8511134243738871533
+    second: Money Up_22
+  - first:
+      213: 5947787077790986407
+    second: Money Up_23
+  - first:
+      213: -4127578625116442241
+    second: Money Up_24
+  - first:
+      213: 7736082684078591855
+    second: Money Up_25
+  - first:
+      213: 4070787802785640482
+    second: Money Up_26
+  - first:
+      213: 1443381059056252179
+    second: Money Up_27
+  - first:
+      213: -3083733285362462121
+    second: Money Up_28
+  - first:
+      213: 2560825251902370290
+    second: Money Up_29
+  - first:
+      213: 7964542609700712745
+    second: Money Up_30
+  - first:
+      213: 6174696118539638180
+    second: Money Up_31
+  - first:
+      213: -5053093908776757490
+    second: Money Up_32
+  - first:
+      213: 5959991797181076158
+    second: Money Up_33
+  - first:
+      213: -380667914362408507
+    second: Money Up_34
+  - first:
+      213: 3054414449358079968
+    second: Money Up_35
+  - first:
+      213: -8758520826405307660
+    second: Money Up_36
+  - first:
+      213: 6366965995000726248
+    second: Money Up_37
+  - first:
+      213: -8601139089072317826
+    second: Money Up_38
+  - first:
+      213: 4469503930775863275
+    second: Money Up_39
+  - first:
+      213: 5294789723338336315
+    second: Money Up_40
+  - first:
+      213: 6921818889138994162
+    second: Money Up_41
+  - first:
+      213: 3322008423258836415
+    second: Money Up_42
+  - first:
+      213: 7630842438342024237
+    second: Money Up_43
+  - first:
+      213: 5742426800303194498
+    second: Money Up_44
+  - first:
+      213: -333128416228238500
+    second: Money Up_45
+  - first:
+      213: 1708995274596711303
+    second: Money Up_46
+  - first:
+      213: -5069276838416370649
+    second: Money Up_47
+  - first:
+      213: -4502878977548934448
+    second: Money Up_48
+  - first:
+      213: 890863677789402044
+    second: Money Up_49
+  - first:
+      213: 2833572305153354173
+    second: Money Up_50
+  - first:
+      213: 6104782379557535619
+    second: Money Up_51
+  - first:
+      213: -5845535172094816024
+    second: Money Up_52
+  - first:
+      213: 5879050947173089285
+    second: Money Up_53
+  - first:
+      213: -5276133956159876089
+    second: Money Up_54
+  - first:
+      213: -7056394343877484351
+    second: Money Up_55
+  - first:
+      213: 8383602199674915081
+    second: Money Up_56
+  - first:
+      213: -7838874864455728301
+    second: Money Up_57
+  - first:
+      213: -3688856030449960556
+    second: Money Up_58
+  - first:
+      213: 5956577033390118038
+    second: Money Up_59
+  - first:
+      213: -2136327713489146287
+    second: Money Up_60
+  - first:
+      213: -8255071408526233118
+    second: Money Up_61
+  - first:
+      213: -1311615517733288160
+    second: Money Up_62
+  - first:
+      213: -1793576037616851926
+    second: Money Up_63
+  - first:
+      213: -3692394665661637089
+    second: Money Up_64
+  - first:
+      213: -5865470731741319502
+    second: Money Up_65
+  - first:
+      213: 5847752895472384063
+    second: Money Up_66
+  - first:
+      213: -209015524984339578
+    second: Money Up_67
+  - first:
+      213: -1971762346265659208
+    second: Money Up_68
+  - first:
+      213: -6210800704468792761
+    second: Money Up_69
+  - first:
+      213: -7370670087744257061
+    second: Money Up_70
+  - first:
+      213: 758692547083243560
+    second: Money Up_71
+  - first:
+      213: -2575010274951680767
+    second: Money Up_72
+  - first:
+      213: 1803845951005365118
+    second: Money Up_73
+  - first:
+      213: 8041869514543047743
+    second: Money Up_74
+  - first:
+      213: 5422803963469511619
+    second: Money Up_75
+  - first:
+      213: -2927134713931594316
+    second: Money Up_76
+  - first:
+      213: -7989498445663038417
+    second: Money Up_77
+  - first:
+      213: 1540315187857914291
+    second: Money Up_78
+  - first:
+      213: -1619733325531172350
+    second: Money Up_79
+  - first:
+      213: -5084163489631367250
+    second: Money Up_80
+  - first:
+      213: -5603415282235835774
+    second: Money Up_81
+  - first:
+      213: -5446776980407018403
+    second: Money Up_82
+  - first:
+      213: 5349707891847774113
+    second: Money Up_83
+  - first:
+      213: -5281606489181903628
+    second: Money Up_84
+  - first:
+      213: -3842066827794219237
+    second: Money Up_85
+  - first:
+      213: 1220460043048593618
+    second: Money Up_86
+  - first:
+      213: -8897021735289362478
+    second: Money Up_87
+  - first:
+      213: -6750815067632676576
+    second: Money Up_88
+  - first:
+      213: 8535928227519167397
+    second: Money Up_89
+  - first:
+      213: -1744636230742792514
+    second: Money Up_90
+  - first:
+      213: 5639058781643042691
+    second: Money Up_91
+  - first:
+      213: 9109985151595407224
+    second: Money Up_92
+  - first:
+      213: -4727061673969139171
+    second: Money Up_93
+  - first:
+      213: 6553342082264171788
+    second: Money Up_94
+  - first:
+      213: 4800829539751699185
+    second: Money Up_95
+  - first:
+      213: 7246524254305074265
+    second: Money Up_96
+  - first:
+      213: 8087158408695808959
+    second: Money Up_97
+  - first:
+      213: -3980418766397036276
+    second: Money Up_98
+  - first:
+      213: 8861186829830967274
+    second: Money Up_99
+  - first:
+      213: 7856251379299299325
+    second: Money Up_100
+  - first:
+      213: -7700749892237912558
+    second: Money Up_101
+  - first:
+      213: 5347842626773479819
+    second: Money Up_102
+  - first:
+      213: -8090279059580974961
+    second: Money Up_103
+  - first:
+      213: 773001895813492619
+    second: Money Up_104
+  - first:
+      213: -516748431268717978
+    second: Money Up_105
+  - first:
+      213: 2475180005740857902
+    second: Money Up_106
+  - first:
+      213: 5648356542662154637
+    second: Money Up_107
+  - first:
+      213: -6636464751298578027
+    second: Money Up_108
+  - first:
+      213: -305626431101286446
+    second: Money Up_109
+  - first:
+      213: -2352115009090859706
+    second: Money Up_110
+  - first:
+      213: 7651070263814924659
+    second: Money Up_111
+  - first:
+      213: 1404634394365204241
+    second: Money Up_112
+  - first:
+      213: -8131615069001719273
+    second: Money Up_113
+  - first:
+      213: -2177192844833562726
+    second: Money Up_114
+  - first:
+      213: -4069311575634063918
+    second: Money Up_115
+  - first:
+      213: -3775494116611360952
+    second: Money Up_116
+  - first:
+      213: 6420756596578851335
+    second: Money Up_117
+  - first:
+      213: 1956915892439211504
+    second: Money Up_118
+  - first:
+      213: -5526587658719513154
+    second: Money Up_119
+  - first:
+      213: -4149047184973335069
+    second: Money Up_120
+  - first:
+      213: -3872619574044303610
+    second: Money Up_121
+  - first:
+      213: -779749923332951189
+    second: Money Up_122
+  - first:
+      213: -2184289621217796408
+    second: Money Up_123
+  - first:
+      213: 9009125726574525927
+    second: Money Up_124
+  - first:
+      213: 9214387317442095772
+    second: Money Up_125
+  - first:
+      213: 8950294561525739458
+    second: Money Up_126
+  - first:
+      213: -3200249382222280914
+    second: Money Up_127
+  - first:
+      213: 2270305843747861474
+    second: Money Up_128
+  - first:
+      213: 5270827394588269935
+    second: Money Up_129
+  - first:
+      213: -3253024388251081242
+    second: Money Up_130
+  - first:
+      213: -4435153809638212622
+    second: Money Up_131
+  - first:
+      213: 4428531719221082976
+    second: Money Up_132
+  - first:
+      213: 2468392716807673907
+    second: Money Up_133
+  - first:
+      213: -5699107588570776602
+    second: Money Up_134
+  - first:
+      213: 4524273389017555017
+    second: Money Up_135
+  - first:
+      213: -7859056478166028868
+    second: Money Up_136
+  - first:
+      213: -4950473928851746591
+    second: Money Up_137
+  - first:
+      213: -6306106177139463614
+    second: Money Up_138
+  - first:
+      213: -4745887297015668804
+    second: Money Up_139
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Money Up_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 97
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a8025f2016affca0800000000000000
+      internalID: -5980879191681136474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_1
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 710
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d92be0bb892ce31d0800000000000000
+      internalID: -3369041509997432163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_2
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 630
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfff7ade0732ee770800000000000000
+      internalID: 8641883702901080060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_3
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 320
+        width: 10
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8251ef5d2488a8050800000000000000
+      internalID: 5803600890459723048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_4
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 816
+        width: 9
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a81c2d2b5cc2a1660800000000000000
+      internalID: 7357242168883462538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_5
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 992
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34e7a3e4e0278d070800000000000000
+      internalID: 8131374532984995395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_6
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 982
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5792aa333ed771150800000000000000
+      internalID: 5843277456314345845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_7
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 974
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3ce3848357a32f40800000000000000
+      internalID: 5702585530328542271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_8
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 838
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 923f54d97d8bd9a00800000000000000
+      internalID: 764970747918938921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_9
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 774
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6a72aecb67ba7890800000000000000
+      internalID: -7459448159129666964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_10
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 750
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c66e7afbd0f97f70800000000000000
+      internalID: 9185637742589929153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_11
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 734
+        width: 8
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 684bbda6c01f940c0800000000000000
+      internalID: -4590873309492824954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_12
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 718
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de0ae94d5bbb127c0800000000000000
+      internalID: -4097787796299800339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_13
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 686
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2bad0b55d0b72850800000000000000
+      internalID: 6352240229831519023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_14
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 662
+        width: 8
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3fa21e09aff81410800000000000000
+      internalID: 1448188381750275903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_15
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 654
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71a83e11da7fff920800000000000000
+      internalID: 3026409797317790231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_16
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 648
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea41888e43392aba0800000000000000
+      internalID: -6079134691547933522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_17
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 616
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51c260901ffce9a90800000000000000
+      internalID: -7305172911402898411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_18
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 592
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d39cf8633ba614e0800000000000000
+      internalID: -2011231946281282601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_19
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 584
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08b464b4798241d20800000000000000
+      internalID: 3248265861509041024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_20
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 558
+        width: 8
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a7d4a4f90e0a1f10800000000000000
+      internalID: 2241119200492181411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_21
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 536
+        width: 8
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e2caf1586af8f0b0800000000000000
+      internalID: -5694526402851061017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_22
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 526
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de6e7b1308f9d1670800000000000000
+      internalID: 8511134243738871533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_23
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 518
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a0f363a5d8ca8250800000000000000
+      internalID: 5947787077790986407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_24
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 510
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f71707bfb15e7b6c0800000000000000
+      internalID: -4127578625116442241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_25
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 494
+        width: 8
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6f0e81b6361c5b60800000000000000
+      internalID: 7736082684078591855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_26
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 470
+        width: 8
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 220f70d40f75e7830800000000000000
+      internalID: 4070787802785640482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_27
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 456
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31533940d6be70410800000000000000
+      internalID: 1443381059056252179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_28
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 446
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7521cef4ae06435d0800000000000000
+      internalID: -3083733285362462121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_29
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 433
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f1bd7faff0e98320800000000000000
+      internalID: 2560825251902370290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_30
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 422
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9217ca93e4db78e60800000000000000
+      internalID: 7964542609700712745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_31
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 406
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a5d985a76de0b550800000000000000
+      internalID: 6174696118539638180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_32
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 384
+        width: 8
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e07dba6ccddcfd9b0800000000000000
+      internalID: -5053093908776757490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_33
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 350
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb2583f46f426b250800000000000000
+      internalID: 5959991797181076158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_34
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 344
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c13a0b7c8897baf0800000000000000
+      internalID: -380667914362408507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_35
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 310
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e70fca32c5736a20800000000000000
+      internalID: 3054414449358079968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_36
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 302
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fa304886bb737680800000000000000
+      internalID: -8758520826405307660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_37
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 286
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e2820db6d10c5850800000000000000
+      internalID: 6366965995000726248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_38
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 264
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7a1e1cb19d92a880800000000000000
+      internalID: -8601139089072317826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_39
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 232
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bef7b14052ed60e30800000000000000
+      internalID: 4469503930775863275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_40
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 224
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3868fb433fda7940800000000000000
+      internalID: 5294789723338336315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_41
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 206
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fbf7b63b9d3f0060800000000000000
+      internalID: 6921818889138994162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_42
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 190
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbdc2396f052a1e20800000000000000
+      internalID: 3322008423258836415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_43
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 160
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2c1a5a84c236e960800000000000000
+      internalID: 7630842438342024237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_44
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 95
+        width: 6
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28141cc00c231bf40800000000000000
+      internalID: 5742426800303194498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_45
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 86
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5b902e687d706bf0800000000000000
+      internalID: -333128416228238500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_46
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 22
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78b7829c52297b710800000000000000
+      internalID: 1708995274596711303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_47
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 0
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 724b31ad29f46a9b0800000000000000
+      internalID: -5069276838416370649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_48
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 1006
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d22f9c5d6f8281c0800000000000000
+      internalID: -4502878977548934448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_49
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 950
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb37fe18bcbfc5c00800000000000000
+      internalID: 890863677789402044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_50
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 902
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db9ec06affed25720800000000000000
+      internalID: 2833572305153354173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_51
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 870
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38f379cca3b88b450800000000000000
+      internalID: 6104782379557535619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_52
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 800
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e09c316bbc70eea0800000000000000
+      internalID: -5845535172094816024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_53
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 728
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5000daa10b5969150800000000000000
+      internalID: 5879050947173089285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_54
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 696
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 704d6bbfe1867c6b0800000000000000
+      internalID: -5276133956159876089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_55
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 680
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c06b1a0bb6a21e90800000000000000
+      internalID: -7056394343877484351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_56
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 640
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9098ec948c9885470800000000000000
+      internalID: 8383602199674915081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_57
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 622
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 353c069c7d8b63390800000000000000
+      internalID: -7838874864455728301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_58
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 608
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 499f8751cfc8eccc0800000000000000
+      internalID: -3688856030449960556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_59
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 600
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 694d778a0430aa250800000000000000
+      internalID: 5956577033390118038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_60
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 576
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15e28a9634d3a52e0800000000000000
+      internalID: -2136327713489146287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_61
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 374
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e17f4b8a48107d80800000000000000
+      internalID: -8255071408526233118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_62
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 296
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0270e97c2a43ccde0800000000000000
+      internalID: -1311615517733288160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_63
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 271
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a24e138b810fb17e0800000000000000
+      internalID: -1793576037616851926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_64
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 216
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1ed0be5d9af1ccc0800000000000000
+      internalID: -3692394665661637089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_65
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 198
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2beab123279a99ea0800000000000000
+      internalID: -5865470731741319502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_66
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 150
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f38b4e49644672150800000000000000
+      internalID: 5847752895472384063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_67
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 126
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68344c8cc7d691df0800000000000000
+      internalID: -209015524984339578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_68
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 110
+        width: 7
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b83859c794e2a4e0800000000000000
+      internalID: -1971762346265659208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_69
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 8
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74a446f5aadcec9a0800000000000000
+      internalID: -6210800704468792761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_70
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 0
+        width: 672
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd3086f4b9e16b990800000000000000
+      internalID: -7370670087744257061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_71
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 818
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82012a21ada678a00800000000000000
+      internalID: 758692547083243560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_72
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 320
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10d26844cc9b34cd0800000000000000
+      internalID: -2575010274951680767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_73
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 408
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e739333d55c880910800000000000000
+      internalID: 1803845951005365118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_74
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 400
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f34a16047b57a9f60800000000000000
+      internalID: 8041869514543047743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_75
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 384
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cb3e29397ba14b40800000000000000
+      internalID: 5422803963469511619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_76
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 240
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b5846e7c7ab067d0800000000000000
+      internalID: -2927134713931594316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_77
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 754
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2418bc6e799f1190800000000000000
+      internalID: -7989498445663038417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_78
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 330
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b9f86e908c406510800000000000000
+      internalID: 1540315187857914291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_79
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 330
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2023ad44f1d8589e0800000000000000
+      internalID: -1619733325531172350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_80
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 322
+        width: 41
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaf03844e3c6179b0800000000000000
+      internalID: -5084163489631367250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_81
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 320
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28a765d2d7bac32b0800000000000000
+      internalID: -5603415282235835774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_82
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 280
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5c9010d1392964b0800000000000000
+      internalID: -5446776980407018403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_83
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 240
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1afb0b1dbfafd3a40800000000000000
+      internalID: 5349707891847774113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_84
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 272
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f42ae891e6f3b6b0800000000000000
+      internalID: -5281606489181903628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_85
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 330
+        width: 46
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1f7306839c3eaac0800000000000000
+      internalID: -3842066827794219237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_86
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 232
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d8287061f1ffe010800000000000000
+      internalID: 1220460043048593618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_87
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 320
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d7e525cedd678480800000000000000
+      internalID: -8897021735289362478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_88
+      rect:
+        serializedVersion: 2
+        x: 762
+        y: 0
+        width: 774
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 021566d96794052a0800000000000000
+      internalID: -6750815067632676576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_89
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 619
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ab72856f75b57670800000000000000
+      internalID: 8535928227519167397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_90
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 543
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb6ac44779ec9c7e0800000000000000
+      internalID: -1744636230742792514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_91
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 224
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38f616bb516f14e40800000000000000
+      internalID: 5639058781643042691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_92
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 626
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8776de58a3b2d6e70800000000000000
+      internalID: 9109985151595407224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_93
+      rect:
+        serializedVersion: 2
+        x: 961
+        y: 622
+        width: 18
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d12c4bbd37a166eb0800000000000000
+      internalID: -4727061673969139171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_94
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 362
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0589f817e522fa50800000000000000
+      internalID: 6553342082264171788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_95
+      rect:
+        serializedVersion: 2
+        x: 977
+        y: 623
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f22a10d709ff9240800000000000000
+      internalID: 4800829539751699185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_96
+      rect:
+        serializedVersion: 2
+        x: 993
+        y: 347
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95c3b126a63d09460800000000000000
+      internalID: 7246524254305074265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_97
+      rect:
+        serializedVersion: 2
+        x: 993
+        y: 336
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb380a0a9bb5b3070800000000000000
+      internalID: 8087158408695808959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_98
+      rect:
+        serializedVersion: 2
+        x: 993
+        y: 296
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c092b9b9836b2c8c0800000000000000
+      internalID: -3980418766397036276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_99
+      rect:
+        serializedVersion: 2
+        x: 993
+        y: 200
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aefc170297249fa70800000000000000
+      internalID: 8861186829830967274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_100
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 907
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dffae495103070d60800000000000000
+      internalID: 7856251379299299325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_101
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 810
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2161809f5c0712590800000000000000
+      internalID: -7700749892237912558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_102
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 778
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b817683f88a573a40800000000000000
+      internalID: 5347842626773479819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_103
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 354
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8805e73f0e89bf80800000000000000
+      internalID: -8090279059580974961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_104
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 280
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8faaa2f0214aba00800000000000000
+      internalID: 773001895813492619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_105
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 272
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66adcf32a0424d8f0800000000000000
+      internalID: -516748431268717978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_106
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 234
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2a4555e91b995220800000000000000
+      internalID: 2475180005740857902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_107
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 184
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d89912a695ef26e40800000000000000
+      internalID: 5648356542662154637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_108
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 138
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 599727e587a86e3a0800000000000000
+      internalID: -6636464751298578027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_109
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 103
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d7cc34516232cbf0800000000000000
+      internalID: -305626431101286446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_110
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 843
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64d464c7cdb9b5fd0800000000000000
+      internalID: -2352115009090859706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_111
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 320
+        width: 6
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3792e3a2edf0e2a60800000000000000
+      internalID: 7651070263814924659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_112
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 306
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1171f632a834e7310800000000000000
+      internalID: 1404634394365204241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_113
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 10
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71260f98d23b62f80800000000000000
+      internalID: -8131615069001719273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_114
+      rect:
+        serializedVersion: 2
+        x: 1015
+        y: 994
+        width: 80
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9f5c2494ae09c1e0800000000000000
+      internalID: -2177192844833562726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_115
+      rect:
+        serializedVersion: 2
+        x: 1039
+        y: 359
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dd42fd9ea6e687c0800000000000000
+      internalID: -4069311575634063918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_116
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 805
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8477dc7ba10ca9bc0800000000000000
+      internalID: -3775494116611360952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_117
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 773
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70a14502b1c1b1950800000000000000
+      internalID: 6420756596578851335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_118
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 758
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fdd720d2ac582b10800000000000000
+      internalID: 1956915892439211504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_119
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 366
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb537f53ecd9d43b0800000000000000
+      internalID: -5526587658719513154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_120
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 350
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e5745f519f9b66c0800000000000000
+      internalID: -4149047184973335069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_121
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 335
+        width: 6
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60f5dd2f301b14ac0800000000000000
+      internalID: -3872619574044303610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_122
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 319
+        width: 6
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b63f9167395cd25f0800000000000000
+      internalID: -779749923332951189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_123
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 312
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ce9db09928dfa1e0800000000000000
+      internalID: -2184289621217796408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_124
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 303
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7edbe4dad18d60d70800000000000000
+      internalID: 9009125726574525927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_125
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 296
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9a200ff17410ef70800000000000000
+      internalID: 9214387317442095772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_126
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 279
+        width: 6
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cf2ad6ab75d53c70800000000000000
+      internalID: 8950294561525739458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_127
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 269
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e274afb742e6693d0800000000000000
+      internalID: -3200249382222280914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_128
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 200
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e3b514e22fb18f10800000000000000
+      internalID: 2270305843747861474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_129
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 346
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6dd4ded69db52940800000000000000
+      internalID: 5270827394588269935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_130
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 362
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e5ac9cdd8fead2d0800000000000000
+      internalID: -3253024388251081242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_131
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 328
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fb3b4ccb1b2372c0800000000000000
+      internalID: -4435153809638212622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_132
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 298
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06bf8b0a22e457d30800000000000000
+      internalID: 4428531719221082976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_133
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 280
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3389b7b091e714220800000000000000
+      internalID: 2468392716807673907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_134
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 266
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6eb7186e7d3b8e0b0800000000000000
+      internalID: -5699107588570776602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_135
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 242
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 940e42b3da279ce30800000000000000
+      internalID: 4524273389017555017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_136
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 194
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbd6e2da5c50fe290800000000000000
+      internalID: -7859056478166028868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_137
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 10
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e095f0c0326c4bb0800000000000000
+      internalID: -4950473928851746591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_138
+      rect:
+        serializedVersion: 2
+        x: 1089
+        y: 987
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24aa4b3d7d53c78a0800000000000000
+      internalID: -6306106177139463614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money Up_139
+      rect:
+        serializedVersion: 2
+        x: 1131
+        y: 320
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbf975de5a8332eb0800000000000000
+      internalID: -4745887297015668804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Money Up_0: -5980879191681136474
+      Money Up_1: -3369041509997432163
+      Money Up_10: 9185637742589929153
+      Money Up_100: 7856251379299299325
+      Money Up_101: -7700749892237912558
+      Money Up_102: 5347842626773479819
+      Money Up_103: -8090279059580974961
+      Money Up_104: 773001895813492619
+      Money Up_105: -516748431268717978
+      Money Up_106: 2475180005740857902
+      Money Up_107: 5648356542662154637
+      Money Up_108: -6636464751298578027
+      Money Up_109: -305626431101286446
+      Money Up_11: -4590873309492824954
+      Money Up_110: -2352115009090859706
+      Money Up_111: 7651070263814924659
+      Money Up_112: 1404634394365204241
+      Money Up_113: -8131615069001719273
+      Money Up_114: -2177192844833562726
+      Money Up_115: -4069311575634063918
+      Money Up_116: -3775494116611360952
+      Money Up_117: 6420756596578851335
+      Money Up_118: 1956915892439211504
+      Money Up_119: -5526587658719513154
+      Money Up_12: -4097787796299800339
+      Money Up_120: -4149047184973335069
+      Money Up_121: -3872619574044303610
+      Money Up_122: -779749923332951189
+      Money Up_123: -2184289621217796408
+      Money Up_124: 9009125726574525927
+      Money Up_125: 9214387317442095772
+      Money Up_126: 8950294561525739458
+      Money Up_127: -3200249382222280914
+      Money Up_128: 2270305843747861474
+      Money Up_129: 5270827394588269935
+      Money Up_13: 6352240229831519023
+      Money Up_130: -3253024388251081242
+      Money Up_131: -4435153809638212622
+      Money Up_132: 4428531719221082976
+      Money Up_133: 2468392716807673907
+      Money Up_134: -5699107588570776602
+      Money Up_135: 4524273389017555017
+      Money Up_136: -7859056478166028868
+      Money Up_137: -4950473928851746591
+      Money Up_138: -6306106177139463614
+      Money Up_139: -4745887297015668804
+      Money Up_14: 1448188381750275903
+      Money Up_15: 3026409797317790231
+      Money Up_16: -6079134691547933522
+      Money Up_17: -7305172911402898411
+      Money Up_18: -2011231946281282601
+      Money Up_19: 3248265861509041024
+      Money Up_2: 8641883702901080060
+      Money Up_20: 2241119200492181411
+      Money Up_21: -5694526402851061017
+      Money Up_22: 8511134243738871533
+      Money Up_23: 5947787077790986407
+      Money Up_24: -4127578625116442241
+      Money Up_25: 7736082684078591855
+      Money Up_26: 4070787802785640482
+      Money Up_27: 1443381059056252179
+      Money Up_28: -3083733285362462121
+      Money Up_29: 2560825251902370290
+      Money Up_3: 5803600890459723048
+      Money Up_30: 7964542609700712745
+      Money Up_31: 6174696118539638180
+      Money Up_32: -5053093908776757490
+      Money Up_33: 5959991797181076158
+      Money Up_34: -380667914362408507
+      Money Up_35: 3054414449358079968
+      Money Up_36: -8758520826405307660
+      Money Up_37: 6366965995000726248
+      Money Up_38: -8601139089072317826
+      Money Up_39: 4469503930775863275
+      Money Up_4: 7357242168883462538
+      Money Up_40: 5294789723338336315
+      Money Up_41: 6921818889138994162
+      Money Up_42: 3322008423258836415
+      Money Up_43: 7630842438342024237
+      Money Up_44: 5742426800303194498
+      Money Up_45: -333128416228238500
+      Money Up_46: 1708995274596711303
+      Money Up_47: -5069276838416370649
+      Money Up_48: -4502878977548934448
+      Money Up_49: 890863677789402044
+      Money Up_5: 8131374532984995395
+      Money Up_50: 2833572305153354173
+      Money Up_51: 6104782379557535619
+      Money Up_52: -5845535172094816024
+      Money Up_53: 5879050947173089285
+      Money Up_54: -5276133956159876089
+      Money Up_55: -7056394343877484351
+      Money Up_56: 8383602199674915081
+      Money Up_57: -7838874864455728301
+      Money Up_58: -3688856030449960556
+      Money Up_59: 5956577033390118038
+      Money Up_6: 5843277456314345845
+      Money Up_60: -2136327713489146287
+      Money Up_61: -8255071408526233118
+      Money Up_62: -1311615517733288160
+      Money Up_63: -1793576037616851926
+      Money Up_64: -3692394665661637089
+      Money Up_65: -5865470731741319502
+      Money Up_66: 5847752895472384063
+      Money Up_67: -209015524984339578
+      Money Up_68: -1971762346265659208
+      Money Up_69: -6210800704468792761
+      Money Up_7: 5702585530328542271
+      Money Up_70: -7370670087744257061
+      Money Up_71: 758692547083243560
+      Money Up_72: -2575010274951680767
+      Money Up_73: 1803845951005365118
+      Money Up_74: 8041869514543047743
+      Money Up_75: 5422803963469511619
+      Money Up_76: -2927134713931594316
+      Money Up_77: -7989498445663038417
+      Money Up_78: 1540315187857914291
+      Money Up_79: -1619733325531172350
+      Money Up_8: 764970747918938921
+      Money Up_80: -5084163489631367250
+      Money Up_81: -5603415282235835774
+      Money Up_82: -5446776980407018403
+      Money Up_83: 5349707891847774113
+      Money Up_84: -5281606489181903628
+      Money Up_85: -3842066827794219237
+      Money Up_86: 1220460043048593618
+      Money Up_87: -8897021735289362478
+      Money Up_88: -6750815067632676576
+      Money Up_89: 8535928227519167397
+      Money Up_9: -7459448159129666964
+      Money Up_90: -1744636230742792514
+      Money Up_91: 5639058781643042691
+      Money Up_92: 9109985151595407224
+      Money Up_93: -4727061673969139171
+      Money Up_94: 6553342082264171788
+      Money Up_95: 4800829539751699185
+      Money Up_96: 7246524254305074265
+      Money Up_97: 8087158408695808959
+      Money Up_98: -3980418766397036276
+      Money Up_99: 8861186829830967274
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
