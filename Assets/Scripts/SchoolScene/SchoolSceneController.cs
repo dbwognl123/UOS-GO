@@ -7,15 +7,35 @@ public class SchoolSceneController : MonoBehaviour
 
     private void Start()
     {
-        SpawnPlayerAtEntryPoint();
+        SpawnPlayer();
     }
 
-    private void SpawnPlayerAtEntryPoint()
+    private void SpawnPlayer()
     {
+        if (GameManager.Instance == null)
+        {
+            Debug.LogError("GameManager가 없습니다.");
+            return;
+        }
+
+        if (player == null)
+        {
+            Debug.LogError("player가 연결되지 않았습니다.");
+            return;
+        }
+
+        if (GameManager.Instance.HasSavedSchoolPlayerPosition)
+        {
+            player.position = GameManager.Instance.SavedSchoolPlayerPosition;
+            return;
+        }
+
         SchoolEntryType entryType = GameManager.Instance.CurrentSchoolEntry;
 
         foreach (var point in spawnPoints)
         {
+            if (point == null) continue;
+
             if (point.entryType == entryType)
             {
                 player.position = point.transform.position;
