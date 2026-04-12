@@ -3,7 +3,7 @@
 public class SchoolFatigueController : MonoBehaviour
 {
     [SerializeField] private float drainInterval = 8f;
-    [SerializeField] private int drainAmount = 1;
+    [SerializeField] private int drainAmount = 5;
 
     private float timer;
 

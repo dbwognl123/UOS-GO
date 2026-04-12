@@ -6,11 +6,11 @@ public class PlayerHUD : MonoBehaviour
 {
     [Header("Health")]
     [SerializeField] private Image healthFill;
-    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private int maxHealthDisplay = 100;
 
     [Header("Intelligence")]
     [SerializeField] private Image intelligenceFill;
-    [SerializeField] private int maxIntelligence = 100;
+    [SerializeField] private int maxIntelligence = 200;
 
     [Header("Money")]
     [SerializeField] private TMP_Text moneyText;
@@ -47,17 +47,19 @@ public class PlayerHUD : MonoBehaviour
 
         var player = GameManager.Instance.CurrentPlayer;
 
+        // 체력바: 현재체력을 100 기준 전체 바에서 표시
         if (healthFill != null)
         {
-            float value = 1f;
-
-            if (player.maxHealth > 0)
-                value = (float)player.currentHealth / player.maxHealth;
-
-            healthFill.fillAmount = Mathf.Clamp01(value);
+            float hpRatio = (float)player.currentHealth / maxHealthDisplay;
+            healthFill.fillAmount = Mathf.Clamp01(hpRatio);
         }
+
+        // 지능바: 현재지능을 200 기준 전체 바에서 표시
         if (intelligenceFill != null)
-            intelligenceFill.fillAmount = Mathf.Clamp01((float)player.intelligence / maxIntelligence);
+        {
+            float intRatio = (float)player.intelligence / maxIntelligence;
+            intelligenceFill.fillAmount = Mathf.Clamp01(intRatio);
+        }
 
         if (moneyText != null)
             moneyText.text = player.money.ToString();

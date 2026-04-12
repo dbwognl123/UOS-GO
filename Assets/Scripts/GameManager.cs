@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,9 +41,9 @@ public class GameManager : MonoBehaviour
         01, 03, 04, 05, 06, 07,
         08, 10, 11, 14, 15,
         16, 18, 19, 20, 27,
-        29 ,33, 35, 39 
+        29 ,33, 35, 39
     };
-   
+
 
     private List<int> todaySchedule = new List<int>();
     private int currentClassIndex = 0;
@@ -68,39 +69,41 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
-
+    public event Action<PlayerStatType, int> OnPlayerStatChanged;
+    public event Action OnPlayerStatsRefreshed;
+   
     public void StartNewGame()
     {
         CurrentWeek = 1;
         CurrentSchoolEntry = SchoolEntryType.None;
         StudiedToday = false;
         WorkedToday = false;
+
         CurrentPlayer = new PlayerRunData
         {
             happiness = 5,
             campusLife = 0,
-            intelligence = 0,
-            maxHealth = 10,
-            currentHealth = 10,
+            intelligence = 10,
+            maxHealth = 100,
+            currentHealth = 100,
             money = 5,
             hasGirlfriend = false,
-            appearance = 5
+            appearance = 5,
+            grade = 0
         };
+
         GenerateTodaySchedule();
         ClearSavedSchoolPlayerPosition();
         OnPlayerStatsRefreshed?.Invoke();
         SceneManager.LoadScene("MorningScene");
     }
-    public event Action<PlayerStatType, int> OnPlayerStatChanged;
-    public event Action OnPlayerStatsRefreshed;
-
     public bool StudyInEvening()
     {
         if (CurrentPlayer == null) return false;
         if (StudiedToday) return false;
 
-        AddMaxHealth(-1);
-        AddIntelligence(1);
+        AddMaxHealth(-5);
+        AddIntelligence(5);
         StudiedToday = true;
 
         return true;
@@ -112,7 +115,7 @@ public class GameManager : MonoBehaviour
         if (CurrentPlayer == null) return false;
         if (WorkedToday) return false;
 
-        AddMaxHealth(-1);
+        AddMaxHealth(-3);
         AddMoney(3);
         WorkedToday = true;
 
@@ -148,7 +151,7 @@ public class GameManager : MonoBehaviour
     {
         if (CurrentPlayer == null) return;
 
-        CurrentPlayer.intelligence = Mathf.Clamp(CurrentPlayer.intelligence + value, 0, 20);
+        CurrentPlayer.intelligence = Mathf.Clamp(CurrentPlayer.intelligence + value, 0, 200);
         OnPlayerStatChanged?.Invoke(PlayerStatType.Intelligence, value);
         OnPlayerStatsRefreshed?.Invoke();
     }
@@ -157,9 +160,8 @@ public class GameManager : MonoBehaviour
     {
         if (CurrentPlayer == null) return;
 
-        CurrentPlayer.maxHealth = Mathf.Clamp(CurrentPlayer.maxHealth + value, 1, 10);
+        CurrentPlayer.maxHealth = Mathf.Clamp(CurrentPlayer.maxHealth + value, 1, 100);
 
-        // 최대체력이 줄어들면 현재체력이 최대체력을 넘지 않게 맞춤
         if (CurrentPlayer.currentHealth > CurrentPlayer.maxHealth)
             CurrentPlayer.currentHealth = CurrentPlayer.maxHealth;
 
@@ -219,7 +221,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("SchoolScene");
     }
 
-    
+
     public void GenerateTodaySchedule()
     {
         List<int> pool = new List<int>(allClassrooms);

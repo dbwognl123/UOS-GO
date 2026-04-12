@@ -1,25 +1,17 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class StatPopupWorld : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer iconRenderer;
-    [SerializeField] private TMP_Text valueText;
-    [SerializeField] private float lifeTime = 1f;
-    [SerializeField] private float floatSpeed = 1f;
+    [SerializeField] private float lifeTime = 0.7f;
+    [SerializeField] private float floatSpeed = 0.7f;
 
     private float timer;
 
-    public void Init(Sprite icon, int delta)
+    public void Init(Sprite icon)
     {
         if (iconRenderer != null)
             iconRenderer.sprite = icon;
-
-        if (valueText != null)
-        {
-            string sign = delta > 0 ? "+" : "";
-            valueText.text = sign + delta.ToString();
-        }
     }
 
     private void Update()

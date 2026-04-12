@@ -13,6 +13,14 @@ public class PlayerStatPopupSpawner : MonoBehaviour
     [SerializeField] private Sprite moneyUpIcon;
     [SerializeField] private Sprite moneyDownIcon;
 
+    [Header("Popup Spread")]
+    [SerializeField] private float horizontalSpacing = 0.45f;
+    [SerializeField] private float verticalSpacing = 0.2f;
+    [SerializeField] private float comboResetTime = 0.15f;
+
+    private int burstIndex = 0;
+    private float lastSpawnTime = -999f;
+
     private void OnEnable()
     {
         if (GameManager.Instance != null)
@@ -31,14 +39,35 @@ public class PlayerStatPopupSpawner : MonoBehaviour
         if (delta == 0) return;
 
         Sprite icon = GetIcon(statType, delta);
+        if (icon == null) return;
+
+        if (Time.time - lastSpawnTime > comboResetTime)
+            burstIndex = 0;
+
+        Vector3 offset = GetSpawnOffset(burstIndex);
+        burstIndex++;
+        lastSpawnTime = Time.time;
 
         StatPopupWorld popup = Instantiate(
             popupPrefab,
-            popupSpawnPoint.position,
+            popupSpawnPoint.position + offset,
             Quaternion.identity
         );
 
-        popup.Init(icon, delta);
+        popup.Init(icon);
+    }
+
+    private Vector3 GetSpawnOffset(int index)
+    {
+        switch (index % 3)
+        {
+            case 0:
+                return new Vector3(-horizontalSpacing, 0f, 0f); // 왼쪽
+            case 1:
+                return new Vector3(horizontalSpacing, 0f, 0f);  // 오른쪽
+            default:
+                return new Vector3(0f, verticalSpacing, 0f);    // 위쪽
+        }
     }
 
     private Sprite GetIcon(PlayerStatType statType, int delta)

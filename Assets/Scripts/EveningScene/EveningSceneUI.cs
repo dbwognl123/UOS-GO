@@ -42,6 +42,14 @@ public class EveningSceneUI : MonoBehaviour
         if (isBusy) return;
         if (popupPanel == null || popupText == null) return;
 
+        // 이미 오늘 한 행동이면 팝업 자체를 안 띄움
+        if (IsInteractionBlocked(type))
+        {
+            currentInteractionType = EveningInteractionType.None;
+            popupPanel.SetActive(false);
+            return;
+        }
+
         currentInteractionType = type;
         popupPanel.SetActive(true);
 
@@ -79,6 +87,12 @@ public class EveningSceneUI : MonoBehaviour
     {
         if (GameManager.Instance == null || isBusy) return;
 
+        if (IsInteractionBlocked(currentInteractionType))
+        {
+            ClosePopupForce();
+            return;
+        }
+
         switch (currentInteractionType)
         {
             case EveningInteractionType.Door:
@@ -94,14 +108,10 @@ public class EveningSceneUI : MonoBehaviour
                 break;
         }
     }
-
     private IEnumerator DoSleepRoutine()
     {
         isBusy = true;
         ClosePopupForce();
-
-        // 체력 증가 먼저 처리
-        GameManager.Instance.SleepInEvening();
 
         int nextWeek = GameManager.Instance.CurrentWeek + 1;
 
@@ -118,7 +128,6 @@ public class EveningSceneUI : MonoBehaviour
         if (weekTransitionText != null)
             weekTransitionText.gameObject.SetActive(false);
 
-        // 여기서 실제 다음날로 이동
         GameManager.Instance.EndDay();
     }
 
@@ -186,5 +195,21 @@ public class EveningSceneUI : MonoBehaviour
 
         if (popupPanel != null)
             popupPanel.SetActive(false);
+    }
+    private bool IsInteractionBlocked(EveningInteractionType type)
+    {
+        if (GameManager.Instance == null) return false;
+
+        switch (type)
+        {
+            case EveningInteractionType.Computer:
+                return GameManager.Instance.StudiedToday;
+
+            case EveningInteractionType.Door:
+                return GameManager.Instance.WorkedToday;
+
+            default:
+                return false;
+        }
     }
 }
