@@ -608,6 +608,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 483385944}
+  - {fileID: 1981479063}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -739,13 +740,36 @@ MonoBehaviour:
   player: {fileID: 1012456414}
   projectilePrefab: {fileID: 29718827}
   timerText: {fileID: 483385945}
+  darknessOverlay: {fileID: 1981479060}
   arenaRadius: 3.5
   spawnPadding: 0.1
-  projectileSpeed: 1
-  spawnInterval: 1
-  minProjectilesPerWave: 0
-  maxProjectilesPerWave: 6
   surviveTime: 20
+  easyProjectilesPerWave: 2
+  easyProjectileSpeed: 3.2
+  easySpawnInterval: 1.25
+  day8ProjectilesPerWave: 3
+  day8ProjectileSpeed: 4.4
+  day8SpawnInterval: 0.9
+  day8DarknessInterval: 4
+  day8DarknessDuration: 0.65
+  day8DarknessAlpha: 0.82
+  hardMinProjectilesPerWave: 3
+  hardMaxProjectilesPerWave: 8
+  hardMinProjectileSpeed: 4.8
+  hardMaxProjectileSpeed: 8.6
+  hardSlowestSpawnInterval: 0.95
+  hardFastestSpawnInterval: 0.35
+  finalMinProjectilesPerWave: 4
+  finalMaxProjectilesPerWave: 9
+  finalMinProjectileSpeed: 6.2
+  finalMaxProjectileSpeed: 9.5
+  finalSlowestSpawnInterval: 0.75
+  finalFastestSpawnInterval: 0.28
+  finalDarknessInterval: 3
+  finalDarknessDuration: 0.85
+  finalDarknessAlpha: 0.9
+  finalInvisibilityInterval: 3.8
+  finalInvisibilityDuration: 0.65
 --- !u!4 &861971968
 Transform:
   m_ObjectHideFlags: 0
@@ -941,9 +965,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce140b405cb84b24c846faeed49512c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DodgePlayerController
-  moveSpeedMin: 2.5
-  moveSpeedMax: 5.5
+  easyMoveSpeedMin: 3.6
+  easyMoveSpeedMax: 6
+  hardMoveSpeedMin: 1.2
+  hardMoveSpeedMax: 5.8
+  finalMoveSpeedMin: 0.8
+  finalMoveSpeedMax: 5.5
   playerRadius: 0.25
+  difficultyHealthCap: 100
+  currentHealthScale: 10
 --- !u!1 &1579477901
 GameObject:
   m_ObjectHideFlags: 0
@@ -1226,6 +1256,94 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1012456413}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1981479059
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1981479063}
+  - component: {fileID: 1981479062}
+  - component: {fileID: 1981479061}
+  - component: {fileID: 1981479060}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!225 &1981479060
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981479059}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &1981479061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981479059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1981479062
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981479059}
+  m_CullTransparentMesh: 1
+--- !u!224 &1981479063
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981479059}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 621938417}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
