@@ -11,6 +11,7 @@ public class SchoolNPCActor : MonoBehaviour
     [SerializeField] private GameObject interactHint;
 
     private bool playerInRange;
+    private bool isConsumed;
 
     public NPCEncounterSO EncounterData => encounterData;
 
@@ -20,6 +21,16 @@ public class SchoolNPCActor : MonoBehaviour
 
         if (worldSpriteRenderer != null && data != null && data.portrait != null)
             worldSpriteRenderer.sprite = data.portrait;
+    }
+
+    public void Consume()
+    {
+        isConsumed = true;
+
+        if (interactHint != null)
+            interactHint.SetActive(false);
+
+        gameObject.SetActive(false);
     }
 
     private void Awake()
@@ -33,6 +44,7 @@ public class SchoolNPCActor : MonoBehaviour
 
     private void Update()
     {
+        if (isConsumed) return;
         if (!playerInRange) return;
         if (encounterData == null) return;
 
@@ -45,6 +57,7 @@ public class SchoolNPCActor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (isConsumed) return;
         if (!other.CompareTag("Player")) return;
 
         playerInRange = true;
