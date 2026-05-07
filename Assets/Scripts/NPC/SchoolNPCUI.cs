@@ -29,7 +29,7 @@ public class SchoolNPCUI : MonoBehaviour
 
     private SchoolNPCActor currentActor;
     private readonly List<Button> spawnedButtons = new();
-    private bool shouldConsumeCurrentActor;
+    
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -45,6 +45,29 @@ public class SchoolNPCUI : MonoBehaviour
 
         if (closeButton != null)
             closeButton.onClick.AddListener(CloseDialogue);
+    }
+
+    public void OpenSimpleDialogue(string npcName, Sprite portrait, string line)
+    {
+        currentActor = null;
+
+        if (rootPanel != null)
+            rootPanel.SetActive(true);
+
+        if (portraitImage != null)
+            portraitImage.sprite = portrait;
+
+        if (nameText != null)
+            nameText.text = npcName;
+
+        if (dialogueText != null)
+            dialogueText.text = line;
+
+        if (resultText != null)
+            resultText.text = string.Empty;
+
+        ClearChoiceButtons();
+        LockPlayer(true);
     }
 
     public void OpenDialogue(SchoolNPCActor actor)
@@ -69,16 +92,12 @@ public class SchoolNPCUI : MonoBehaviour
 
         if (resultText != null)
             resultText.text = string.Empty;
-        shouldConsumeCurrentActor = false;
         LockPlayer(true);
         RebuildChoiceButtons(data);
     }
 
     public void CloseDialogue()
     {
-        if (shouldConsumeCurrentActor && currentActor != null)
-            currentActor.Consume();
-
         ClearChoiceButtons();
 
         if (rootPanel != null)
@@ -88,11 +107,9 @@ public class SchoolNPCUI : MonoBehaviour
             resultText.text = string.Empty;
 
         currentActor = null;
-        shouldConsumeCurrentActor = false;
 
         LockPlayer(false);
     }
-
     private void RebuildChoiceButtons(NPCEncounterSO data)
     {
         ClearChoiceButtons();
@@ -157,13 +174,16 @@ public class SchoolNPCUI : MonoBehaviour
         // NPC를 1회성으로 만들고 싶으면 주석 해제
         // if (currentActor != null)
         //     currentActor.gameObject.SetActive(false);
-        shouldConsumeCurrentActor = true;
+    
+
     }
 
     private void ApplyChoiceResult(NPCChoiceData choice, bool success)
     {
-        if (GameManager.Instance == null || GameManager.Instance.CurrentPlayer == null)
+        if (GameManager.Instance == null || GameManager.Instance.CurrentPlayer == null || currentActor == null || currentActor.EncounterData == null)
             return;
+
+        SchoolNPCType npcType = currentActor.EncounterData.npcType;
 
         if (success)
         {
@@ -172,9 +192,26 @@ public class SchoolNPCUI : MonoBehaviour
             ApplyCampusLife(choice.successCampusLifeDelta);
             ApplyIntelligence(choice.successIntelligenceDelta);
             ApplyGrade(choice.successGradeDelta);
+            ApplyHappiness(choice.successHappinessDelta);
+            ApplyMaxHealth(choice.successMaxHealthDelta);
 
             if (choice.successSetGirlfriend)
                 GameManager.Instance.CurrentPlayer.hasGirlfriend = true;
+
+            if (choice.successSetStageTo >= 1)
+                GameManager.Instance.SetNPCStage(npcType, choice.successSetStageTo);
+
+            if (choice.successSetStageCapTo >= 1)
+                GameManager.Instance.SetNPCStageCap(npcType, choice.successSetStageCapTo);
+
+            if (choice.successRetireNpcType)
+                GameManager.Instance.RetireNPCType(npcType);
+
+            if (choice.successProfessorQuestionCountDelta != 0)
+                GameManager.Instance.AddProfessorQuestionCount(choice.successProfessorQuestionCountDelta);
+
+            if (!string.IsNullOrEmpty(choice.successUnlockEndingId))
+                GameManager.Instance.UnlockEndingFlag(choice.successUnlockEndingId);
         }
         else
         {
@@ -183,9 +220,27 @@ public class SchoolNPCUI : MonoBehaviour
             ApplyCampusLife(choice.failCampusLifeDelta);
             ApplyIntelligence(choice.failIntelligenceDelta);
             ApplyGrade(choice.failGradeDelta);
+            ApplyHappiness(choice.failHappinessDelta);
+            ApplyMaxHealth(choice.failMaxHealthDelta);
+
+            if (choice.failSetStageTo >= 1)
+                GameManager.Instance.SetNPCStage(npcType, choice.failSetStageTo);
+
+            if (choice.failSetStageCapTo >= 1)
+                GameManager.Instance.SetNPCStageCap(npcType, choice.failSetStageCapTo);
+
+            if (choice.failRetireNpcType)
+                GameManager.Instance.RetireNPCType(npcType);
+
+            if (choice.failProfessorQuestionCountDelta != 0)
+                GameManager.Instance.AddProfessorQuestionCount(choice.failProfessorQuestionCountDelta);
+
+            if (!string.IsNullOrEmpty(choice.failUnlockEndingId))
+                GameManager.Instance.UnlockEndingFlag(choice.failUnlockEndingId);
         }
 
-        RefreshHUDIfPossible();
+        // 같은 종류 NPC는 오늘 더 이상 대화 불가
+        GameManager.Instance.MarkNPCTypeUsedToday(npcType);
     }
 
     private void ApplyMoney(int delta)
@@ -208,19 +263,28 @@ public class SchoolNPCUI : MonoBehaviour
 
     private void ApplyAppearance(int delta)
     {
-        if (delta == 0 || GameManager.Instance == null || GameManager.Instance.CurrentPlayer == null) return;
-
-        GameManager.Instance.CurrentPlayer.appearance =
-            Mathf.Clamp(GameManager.Instance.CurrentPlayer.appearance + delta, 0, 999);
+        if (delta == 0 || GameManager.Instance == null) return;
+        GameManager.Instance.AddAppearance(delta);
     }
 
     private void ApplyCampusLife(int delta)
     {
-        if (delta == 0 || GameManager.Instance == null || GameManager.Instance.CurrentPlayer == null) return;
-
-        GameManager.Instance.CurrentPlayer.campusLife =
-            Mathf.Clamp(GameManager.Instance.CurrentPlayer.campusLife + delta, 0, 999);
+        if (delta == 0 || GameManager.Instance == null) return;
+        GameManager.Instance.AddCampusLife(delta);
     }
+
+    private void ApplyHappiness(int delta)
+    {
+        if (delta == 0 || GameManager.Instance == null) return;
+        GameManager.Instance.AddHappiness(delta);
+    }
+
+    private void ApplyMaxHealth(int delta)
+    {
+        if (delta == 0 || GameManager.Instance == null) return;
+        GameManager.Instance.AddMaxHealth(delta);
+    }
+    
 
     private void RefreshHUDIfPossible()
     {

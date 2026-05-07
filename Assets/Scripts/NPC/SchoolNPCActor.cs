@@ -42,6 +42,8 @@ public class SchoolNPCActor : MonoBehaviour
             interactHint.SetActive(false);
     }
 
+
+
     private void Update()
     {
         if (isConsumed) return;
@@ -50,11 +52,22 @@ public class SchoolNPCActor : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (SchoolNPCUI.Instance != null)
+            if (SchoolNPCUI.Instance == null) return;
+
+            if (GameManager.Instance != null && GameManager.Instance.IsNPCTypeUsedToday(encounterData.npcType))
+            {
+                SchoolNPCUI.Instance.OpenSimpleDialogue(
+                    encounterData.npcName,
+                    encounterData.portrait,
+                    "안녕"
+                );
+            }
+            else
+            {
                 SchoolNPCUI.Instance.OpenDialogue(this);
+            }
         }
     }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (isConsumed) return;

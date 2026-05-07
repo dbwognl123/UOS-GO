@@ -24,9 +24,16 @@ public class SchoolNPCManager : MonoBehaviour
             if (zone == null) continue;
             if (zone.spawnPoint == null) continue;
 
-            NPCSpawnCandidate selected = PickCandidate(zone);
-            if (selected == null || selected.encounterData == null)
+            NPCSpawnCandidate selectedCandidate = PickCandidate(zone);
+            if (selectedCandidate == null)
                 continue;
+
+            NPCEncounterSO selectedEncounter = ResolveEncounterForCurrentProgress(selectedCandidate);
+            if (selectedEncounter == null)
+            {
+                Debug.Log($"[{zone.zoneId}] 조건을 만족하는 단계형 대화가 없음");
+                continue;
+            }
 
             GameObject npcObj = Instantiate(
                 npcPrefab,
@@ -34,17 +41,11 @@ public class SchoolNPCManager : MonoBehaviour
                 Quaternion.identity
             );
 
-            npcObj.name = $"NPC_{selected.npcType}_{zone.zoneId}";
+            npcObj.name = $"NPC_{selectedEncounter.npcType}_{selectedEncounter.stageIndex}_{zone.zoneId}";
 
             SchoolNPCActor actor = npcObj.GetComponent<SchoolNPCActor>();
             if (actor != null)
-            {
-                actor.Setup(selected.encounterData);
-            }
-            else
-            {
-                Debug.LogWarning("SchoolNPCManager: npcPrefab에 SchoolNPCActor가 없음");
-            }
+                actor.Setup(selectedEncounter);
         }
     }
 
@@ -59,7 +60,6 @@ public class SchoolNPCManager : MonoBehaviour
         {
             NPCSpawnCandidate c = zone.candidates[i];
             if (c == null) continue;
-            if (c.encounterData == null) continue;
             totalWeight += Mathf.Max(0f, c.weight);
         }
 
@@ -68,12 +68,8 @@ public class SchoolNPCManager : MonoBehaviour
 
         float roll = Random.Range(0f, totalWeight);
 
-        // "아무도 안 뜸"
         if (roll < zone.noneWeight)
-        {
-            Debug.Log($"[{zone.zoneId}] 아무도 스폰되지 않음");
             return null;
-        }
 
         roll -= zone.noneWeight;
 
@@ -81,18 +77,78 @@ public class SchoolNPCManager : MonoBehaviour
         {
             NPCSpawnCandidate c = zone.candidates[i];
             if (c == null) continue;
-            if (c.encounterData == null) continue;
 
             float w = Mathf.Max(0f, c.weight);
             if (roll < w)
-            {
-                Debug.Log($"[{zone.zoneId}] 선택된 NPC 타입: {c.npcType}");
                 return c;
-            }
 
             roll -= w;
         }
 
         return null;
+    }
+
+    private NPCEncounterSO ResolveEncounterForCurrentProgress(NPCSpawnCandidate candidate)
+    {
+        if (candidate == null || candidate.stageEncounters == null || candidate.stageEncounters.Length == 0)
+            return null;
+
+        if (GameManager.Instance == null || GameManager.Instance.CurrentPlayer == null)
+            return null;
+
+        if (GameManager.Instance.IsNPCRetired(candidate.npcType))
+            return null;
+
+        int currentStage = GameManager.Instance.GetNPCCurrentStage(candidate.npcType);
+        int stageCap = GameManager.Instance.GetNPCStageCap(candidate.npcType);
+
+        int targetStage = Mathf.Min(currentStage, stageCap);
+
+        NPCEncounterSO fallback = null;
+
+        for (int i = 0; i < candidate.stageEncounters.Length; i++)
+        {
+            NPCEncounterSO encounter = candidate.stageEncounters[i];
+            if (encounter == null) continue;
+
+            if (encounter.stageIndex == targetStage)
+            {
+                if (CanEncounterAppear(encounter))
+                    return encounter;
+            }
+
+            if (encounter.stageIndex == 1)
+                fallback = encounter;
+        }
+
+        return fallback;
+    }
+
+    private bool CanEncounterAppear(NPCEncounterSO encounter)
+    {
+        PlayerRunData player = GameManager.Instance.CurrentPlayer;
+        if (player == null) return false;
+
+        if (player.appearance < encounter.minAppearanceToAppear)
+            return false;
+
+        if (player.campusLife < encounter.minCampusLifeToAppear)
+            return false;
+
+        if (player.intelligence < encounter.minIntelligenceToAppear)
+            return false;
+
+        if (player.money < encounter.minMoneyToAppear)
+            return false;
+
+        if (encounter.requireNoGirlfriend && player.hasGirlfriend)
+            return false;
+
+        if (encounter.requiredProfessorQuestionCount > 0 &&
+            GameManager.Instance.professorQuestionCount < encounter.requiredProfessorQuestionCount)
+            return false;
+
+        float roll = Random.Range(0f, 100f);
+        return roll <= encounter.appearChance;
     }
 }

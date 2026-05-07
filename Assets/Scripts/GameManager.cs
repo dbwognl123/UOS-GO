@@ -34,8 +34,21 @@ public enum PlayerStatType
 
 public class GameManager : MonoBehaviour
 {
+    private void Update()
+    {
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.F8))
+        {
+            SceneManager.LoadScene("EndingScene");
+        }
+#endif
+    }
     public static GameManager Instance { get; private set; }
 
+    [Header("Ending Sequence Result")]
+    public EndingSequenceResult currentEndingSequence = new EndingSequenceResult();
+
+    
     [Header("NPC Progress")]
     public int friendCurrentStage = 1;
     public int friendStageCap = 99;
@@ -162,8 +175,12 @@ public class GameManager : MonoBehaviour
     public void AddProfessorQuestionCount(int value)
     {
         professorQuestionCount = Mathf.Max(0, professorQuestionCount + value);
-    }
 
+        if (professorQuestionCount >= 10 && !professorRetired)
+        {
+            professorCurrentStage = Mathf.Max(professorCurrentStage, 2);
+        }
+    }
     public void AddGrade(int value)
     {
         if (CurrentPlayer == null) return;
@@ -466,27 +483,24 @@ public class GameManager : MonoBehaviour
     public void EndDay()
     {
         CurrentWeek++;
-        ResetDailyNPCUsage();
+
         if (CurrentWeek > MAX_WEEK)
         {
+            BuildEndingSequenceResult();
             SceneManager.LoadScene("EndingScene");
-        }
-        else
-        {
-            StudiedToday = false;
-            WorkedToday = false;
-
-            // 다음날 시작할 때 현재체력은 최대체력으로 리셋
-            if (CurrentPlayer != null)
-                CurrentPlayer.currentHealth = CurrentPlayer.maxHealth;
-
-            GenerateTodaySchedule();
-            OnPlayerStatsRefreshed?.Invoke();
-            SceneManager.LoadScene("MorningScene");
+            return;
         }
 
+        StudiedToday = false;
+        WorkedToday = false;
+        ResetDailyNPCUsage();
 
+        if (CurrentPlayer != null)
+            CurrentPlayer.currentHealth = CurrentPlayer.maxHealth;
 
+        GenerateTodaySchedule();
+        OnPlayerStatsRefreshed?.Invoke();
+        SceneManager.LoadScene("MorningScene");
     }
     public void UnlockEndingFlag(string endingId)
     {
@@ -503,4 +517,53 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+    private void BuildEndingSequenceResult()
+    {
+        if (CurrentPlayer == null)
+            return;
+
+        currentEndingSequence = new EndingSequenceResult();
+
+        // A: 학교생활력
+        if (CurrentPlayer.campusLife >= 200)
+            currentEndingSequence.sceneA = EndingSceneAType.GoodCampusLife;
+        else if (CurrentPlayer.campusLife >= 80)
+            currentEndingSequence.sceneA = EndingSceneAType.NormalCampusLife;
+        else
+            currentEndingSequence.sceneA = EndingSceneAType.LonerCampusLife;
+
+        // B: 학점
+        if (CurrentPlayer.grade >= 150)
+            currentEndingSequence.sceneB = EndingSceneBType.GoodGrade;
+        else if (CurrentPlayer.grade >= 70)
+            currentEndingSequence.sceneB = EndingSceneBType.NormalGrade;
+        else
+            currentEndingSequence.sceneB = EndingSceneBType.BadGrade;
+
+        // C: 여자친구 유무
+        currentEndingSequence.sceneC = CurrentPlayer.hasGirlfriend
+            ? EndingSceneCType.HasGirlfriend
+            : EndingSceneCType.NoGirlfriend;
+
+        // D: 특수 이벤트
+        if (endingACutUnlocked)
+            currentEndingSequence.sceneD = EndingSceneDType.BestFriend;
+        else if (endingGraduateSchoolUnlocked)
+            currentEndingSequence.sceneD = EndingSceneDType.GraduateSchool;
+        else
+            currentEndingSequence.sceneD = EndingSceneDType.None;
+
+        // E: 최대체력
+        if (CurrentPlayer.maxHealth >= 60)
+            currentEndingSequence.sceneE = EndingSceneEType.Healthy;
+        else
+            currentEndingSequence.sceneE = EndingSceneEType.Tired;
+
+        // F: 행복
+        if (CurrentPlayer.happiness >= 50)
+            currentEndingSequence.sceneF = EndingSceneFType.Happy;
+        else
+            currentEndingSequence.sceneF = EndingSceneFType.Unsatisfied;
+    }
+
 }

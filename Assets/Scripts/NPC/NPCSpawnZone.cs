@@ -5,8 +5,12 @@ using UnityEngine;
 public class NPCSpawnCandidate
 {
     public SchoolNPCType npcType;
-    public NPCEncounterSO encounterData;
-    [Range(0f, 100f)] public float weight = 10f;
+
+    [Tooltip("이 NPC 타입의 단계별 대화 에셋들")]
+    public NPCEncounterSO[] stageEncounters;
+
+    [Range(0f, 100f)]
+    public float weight = 10f;
 }
 
 public class NPCSpawnZone : MonoBehaviour
@@ -16,7 +20,8 @@ public class NPCSpawnZone : MonoBehaviour
     public Transform spawnPoint;
 
     [Header("No Spawn Weight")]
-    [Range(0f, 100f)] public float noneWeight = 50f;
+    [Range(0f, 100f)]
+    public float noneWeight = 50f;
 
     [Header("Candidates")]
     public NPCSpawnCandidate[] candidates;

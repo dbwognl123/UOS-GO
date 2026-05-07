@@ -1067,6 +1067,38 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 14.219563, y: 22.936687}
   m_EdgeRadius: 0
+--- !u!1 &145116504
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 145116505}
+  m_Layer: 0
+  m_Name: NPC_Zone (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &145116505
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145116504}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 134.3, y: 15.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1425648262}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &148405474
 GameObject:
   m_ObjectHideFlags: 0
@@ -110917,6 +110949,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &357712482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 357712483}
+  m_Layer: 0
+  m_Name: NPC_Zone (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &357712483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357712482}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 23, y: 8.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1244761964}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &364716561
 GameObject:
   m_ObjectHideFlags: 0
@@ -111130,7 +111194,7 @@ Transform:
   m_GameObject: {fileID: 387445734}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.46, y: 2.9, z: 0}
+  m_LocalPosition: {x: 95.1, y: 21.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -128914,20 +128978,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCSpawnZone
   zoneId: JunggiFront
   spawnPoint: {fileID: 702826935}
-  noneWeight: 50
+  noneWeight: 10
   candidates:
   - npcType: 2
-    encounterData: {fileID: 11400000, guid: 5916342a4661558479220a3df3001ba5, type: 2}
-    weight: 15
+    stageEncounters:
+    - {fileID: 11400000, guid: db1bfb2dccf33f34fb22f4226c00582d, type: 2}
+    - {fileID: 11400000, guid: 655613a2fb1c37948be7bff17393df06, type: 2}
+    - {fileID: 11400000, guid: fbab848141b659b4c884d29d37570ea7, type: 2}
+    - {fileID: 11400000, guid: 3e354daee55f80d4fb27fea8ac431eec, type: 2}
+    weight: 25
   - npcType: 0
-    encounterData: {fileID: 11400000, guid: 7bf8c4e652dc2154b8014a3d7d41c229, type: 2}
-    weight: 15
+    stageEncounters:
+    - {fileID: 11400000, guid: 727691a00e1ce2243b1c9a1a0cea370f, type: 2}
+    - {fileID: 11400000, guid: b38ff8d3ee80bfe4c87fec8722a544ef, type: 2}
+    weight: 25
   - npcType: 1
-    encounterData: {fileID: 11400000, guid: e08babee4acbb4746ab6734effa148d0, type: 2}
-    weight: 15
+    stageEncounters:
+    - {fileID: 11400000, guid: 174b6277d9c03d34484a5db737b6d99e, type: 2}
+    weight: 25
   - npcType: 3
-    encounterData: {fileID: 11400000, guid: a507580b68488b34184d3094b8fa2e52, type: 2}
-    weight: 5
+    stageEncounters: []
+    weight: 15
 --- !u!1 &726888399
 GameObject:
   m_ObjectHideFlags: 0
@@ -129511,6 +129582,38 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 15.832823, y: 20.327236}
   m_EdgeRadius: 0
+--- !u!1 &853210620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 853210621}
+  m_Layer: 0
+  m_Name: NPC_Zone (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &853210621
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853210620}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 78.2, y: 33.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1960214044}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &863896852
 GameObject:
   m_ObjectHideFlags: 0
@@ -129573,6 +129676,73 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &899477631
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 899477632}
+  - component: {fileID: 899477633}
+  m_Layer: 0
+  m_Name: NPCSpawnZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &899477632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899477631}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.79, y: -0.79, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1887273101}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &899477633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899477631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44cde591f51a660419fa20efe3dc16b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCSpawnZone
+  zoneId: JunggiFront
+  spawnPoint: {fileID: 899477632}
+  noneWeight: 10
+  candidates:
+  - npcType: 2
+    stageEncounters:
+    - {fileID: 11400000, guid: db1bfb2dccf33f34fb22f4226c00582d, type: 2}
+    - {fileID: 11400000, guid: 655613a2fb1c37948be7bff17393df06, type: 2}
+    - {fileID: 11400000, guid: fbab848141b659b4c884d29d37570ea7, type: 2}
+    - {fileID: 11400000, guid: 3e354daee55f80d4fb27fea8ac431eec, type: 2}
+    weight: 25
+  - npcType: 0
+    stageEncounters:
+    - {fileID: 11400000, guid: 727691a00e1ce2243b1c9a1a0cea370f, type: 2}
+    - {fileID: 11400000, guid: b38ff8d3ee80bfe4c87fec8722a544ef, type: 2}
+    weight: 25
+  - npcType: 1
+    stageEncounters:
+    - {fileID: 11400000, guid: 174b6277d9c03d34484a5db737b6d99e, type: 2}
+    weight: 25
+  - npcType: 3
+    stageEncounters: []
+    weight: 15
 --- !u!1 &903285922
 GameObject:
   m_ObjectHideFlags: 0
@@ -129926,6 +130096,73 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 957774754}
   m_CullTransparentMesh: 1
+--- !u!1 &981394332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 981394333}
+  - component: {fileID: 981394334}
+  m_Layer: 0
+  m_Name: NPCSpawnZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &981394333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981394332}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.79, y: -0.79, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1748236782}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &981394334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981394332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44cde591f51a660419fa20efe3dc16b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCSpawnZone
+  zoneId: JunggiFront
+  spawnPoint: {fileID: 981394333}
+  noneWeight: 10
+  candidates:
+  - npcType: 2
+    stageEncounters:
+    - {fileID: 11400000, guid: db1bfb2dccf33f34fb22f4226c00582d, type: 2}
+    - {fileID: 11400000, guid: 655613a2fb1c37948be7bff17393df06, type: 2}
+    - {fileID: 11400000, guid: fbab848141b659b4c884d29d37570ea7, type: 2}
+    - {fileID: 11400000, guid: 3e354daee55f80d4fb27fea8ac431eec, type: 2}
+    weight: 25
+  - npcType: 0
+    stageEncounters:
+    - {fileID: 11400000, guid: 727691a00e1ce2243b1c9a1a0cea370f, type: 2}
+    - {fileID: 11400000, guid: b38ff8d3ee80bfe4c87fec8722a544ef, type: 2}
+    weight: 25
+  - npcType: 1
+    stageEncounters:
+    - {fileID: 11400000, guid: 174b6277d9c03d34484a5db737b6d99e, type: 2}
+    weight: 25
+  - npcType: 3
+    stageEncounters: []
+    weight: 15
 --- !u!1 &1008650857
 GameObject:
   m_ObjectHideFlags: 0
@@ -131545,6 +131782,73 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ClassroomTrigger
   classroomNumber: 12
   returnOffset: {x: 0, y: -0.8, z: 0}
+--- !u!1 &1244761963
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1244761964}
+  - component: {fileID: 1244761965}
+  m_Layer: 0
+  m_Name: NPCSpawnZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1244761964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244761963}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.79, y: -0.79, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 357712483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1244761965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244761963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44cde591f51a660419fa20efe3dc16b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCSpawnZone
+  zoneId: JunggiFront
+  spawnPoint: {fileID: 1244761964}
+  noneWeight: 10
+  candidates:
+  - npcType: 2
+    stageEncounters:
+    - {fileID: 11400000, guid: db1bfb2dccf33f34fb22f4226c00582d, type: 2}
+    - {fileID: 11400000, guid: 655613a2fb1c37948be7bff17393df06, type: 2}
+    - {fileID: 11400000, guid: fbab848141b659b4c884d29d37570ea7, type: 2}
+    - {fileID: 11400000, guid: 3e354daee55f80d4fb27fea8ac431eec, type: 2}
+    weight: 25
+  - npcType: 0
+    stageEncounters:
+    - {fileID: 11400000, guid: 727691a00e1ce2243b1c9a1a0cea370f, type: 2}
+    - {fileID: 11400000, guid: b38ff8d3ee80bfe4c87fec8722a544ef, type: 2}
+    weight: 25
+  - npcType: 1
+    stageEncounters:
+    - {fileID: 11400000, guid: 174b6277d9c03d34484a5db737b6d99e, type: 2}
+    weight: 25
+  - npcType: 3
+    stageEncounters: []
+    weight: 15
 --- !u!1 &1246480873
 GameObject:
   m_ObjectHideFlags: 0
@@ -132915,6 +133219,73 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1381540473}
   m_CullTransparentMesh: 1
+--- !u!1 &1425648261
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1425648262}
+  - component: {fileID: 1425648263}
+  m_Layer: 0
+  m_Name: NPCSpawnZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1425648262
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425648261}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.79, y: -0.79, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 145116505}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1425648263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425648261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44cde591f51a660419fa20efe3dc16b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCSpawnZone
+  zoneId: JunggiFront
+  spawnPoint: {fileID: 1425648262}
+  noneWeight: 10
+  candidates:
+  - npcType: 2
+    stageEncounters:
+    - {fileID: 11400000, guid: db1bfb2dccf33f34fb22f4226c00582d, type: 2}
+    - {fileID: 11400000, guid: 655613a2fb1c37948be7bff17393df06, type: 2}
+    - {fileID: 11400000, guid: fbab848141b659b4c884d29d37570ea7, type: 2}
+    - {fileID: 11400000, guid: 3e354daee55f80d4fb27fea8ac431eec, type: 2}
+    weight: 25
+  - npcType: 0
+    stageEncounters:
+    - {fileID: 11400000, guid: 727691a00e1ce2243b1c9a1a0cea370f, type: 2}
+    - {fileID: 11400000, guid: b38ff8d3ee80bfe4c87fec8722a544ef, type: 2}
+    weight: 25
+  - npcType: 1
+    stageEncounters:
+    - {fileID: 11400000, guid: 174b6277d9c03d34484a5db737b6d99e, type: 2}
+    weight: 25
+  - npcType: 3
+    stageEncounters: []
+    weight: 15
 --- !u!1 &1445541287
 GameObject:
   m_ObjectHideFlags: 0
@@ -133118,6 +133489,73 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1467317648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1467317649}
+  - component: {fileID: 1467317650}
+  m_Layer: 0
+  m_Name: NPCSpawnZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1467317649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467317648}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.79, y: -0.79, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1865405751}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1467317650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467317648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44cde591f51a660419fa20efe3dc16b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCSpawnZone
+  zoneId: JunggiFront
+  spawnPoint: {fileID: 1467317649}
+  noneWeight: 10
+  candidates:
+  - npcType: 2
+    stageEncounters:
+    - {fileID: 11400000, guid: db1bfb2dccf33f34fb22f4226c00582d, type: 2}
+    - {fileID: 11400000, guid: 655613a2fb1c37948be7bff17393df06, type: 2}
+    - {fileID: 11400000, guid: fbab848141b659b4c884d29d37570ea7, type: 2}
+    - {fileID: 11400000, guid: 3e354daee55f80d4fb27fea8ac431eec, type: 2}
+    weight: 25
+  - npcType: 0
+    stageEncounters:
+    - {fileID: 11400000, guid: 727691a00e1ce2243b1c9a1a0cea370f, type: 2}
+    - {fileID: 11400000, guid: b38ff8d3ee80bfe4c87fec8722a544ef, type: 2}
+    weight: 25
+  - npcType: 1
+    stageEncounters:
+    - {fileID: 11400000, guid: 174b6277d9c03d34484a5db737b6d99e, type: 2}
+    weight: 25
+  - npcType: 3
+    stageEncounters: []
+    weight: 15
 --- !u!1 &1468165406
 GameObject:
   m_ObjectHideFlags: 0
@@ -133828,6 +134266,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SchoolNPCManager
   zones:
   - {fileID: 702826936}
+  - {fileID: 981394334}
+  - {fileID: 1960214045}
+  - {fileID: 899477633}
+  - {fileID: 1244761965}
+  - {fileID: 1467317650}
+  - {fileID: 1425648263}
+  - {fileID: 1809475334}
   npcPrefab: {fileID: 6010033134341945550, guid: 1e8eb9010aaff4c469856660a84f1428, type: 3}
 --- !u!4 &1586314737
 Transform:
@@ -135260,6 +135705,105 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1729738845}
   m_CullTransparentMesh: 1
+--- !u!1 &1748236781
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1748236782}
+  m_Layer: 0
+  m_Name: NPC_Zone (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1748236782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748236781}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 36.4, y: -0.84, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 981394333}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1809475332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1809475333}
+  - component: {fileID: 1809475334}
+  m_Layer: 0
+  m_Name: NPCSpawnZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1809475333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809475332}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.79, y: -0.79, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2049456309}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1809475334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809475332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44cde591f51a660419fa20efe3dc16b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCSpawnZone
+  zoneId: JunggiFront
+  spawnPoint: {fileID: 1809475333}
+  noneWeight: 10
+  candidates:
+  - npcType: 2
+    stageEncounters:
+    - {fileID: 11400000, guid: db1bfb2dccf33f34fb22f4226c00582d, type: 2}
+    - {fileID: 11400000, guid: 655613a2fb1c37948be7bff17393df06, type: 2}
+    - {fileID: 11400000, guid: fbab848141b659b4c884d29d37570ea7, type: 2}
+    - {fileID: 11400000, guid: 3e354daee55f80d4fb27fea8ac431eec, type: 2}
+    weight: 25
+  - npcType: 0
+    stageEncounters:
+    - {fileID: 11400000, guid: 727691a00e1ce2243b1c9a1a0cea370f, type: 2}
+    - {fileID: 11400000, guid: b38ff8d3ee80bfe4c87fec8722a544ef, type: 2}
+    weight: 25
+  - npcType: 1
+    stageEncounters:
+    - {fileID: 11400000, guid: 174b6277d9c03d34484a5db737b6d99e, type: 2}
+    weight: 25
+  - npcType: 3
+    stageEncounters: []
+    weight: 15
 --- !u!1 &1823032764
 GameObject:
   m_ObjectHideFlags: 0
@@ -135830,6 +136374,38 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 10.761406, y: 6.595832}
   m_EdgeRadius: 0
+--- !u!1 &1865405750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1865405751}
+  m_Layer: 0
+  m_Name: NPC_Zone (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1865405751
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865405750}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 67, y: -21.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1467317649}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1872754698
 GameObject:
   m_ObjectHideFlags: 0
@@ -135943,6 +136519,38 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 295149894}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1887273100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1887273101}
+  m_Layer: 0
+  m_Name: NPC_Zone (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1887273101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887273100}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.1, y: 2.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 899477632}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1934519099
 GameObject:
@@ -136083,6 +136691,73 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 13.894527, y: 6.239999}
   m_EdgeRadius: 0
+--- !u!1 &1960214043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1960214044}
+  - component: {fileID: 1960214045}
+  m_Layer: 0
+  m_Name: NPCSpawnZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1960214044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960214043}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.79, y: -0.79, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 853210621}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1960214045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960214043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44cde591f51a660419fa20efe3dc16b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCSpawnZone
+  zoneId: JunggiFront
+  spawnPoint: {fileID: 1960214044}
+  noneWeight: 10
+  candidates:
+  - npcType: 2
+    stageEncounters:
+    - {fileID: 11400000, guid: db1bfb2dccf33f34fb22f4226c00582d, type: 2}
+    - {fileID: 11400000, guid: 655613a2fb1c37948be7bff17393df06, type: 2}
+    - {fileID: 11400000, guid: fbab848141b659b4c884d29d37570ea7, type: 2}
+    - {fileID: 11400000, guid: 3e354daee55f80d4fb27fea8ac431eec, type: 2}
+    weight: 25
+  - npcType: 0
+    stageEncounters:
+    - {fileID: 11400000, guid: 727691a00e1ce2243b1c9a1a0cea370f, type: 2}
+    - {fileID: 11400000, guid: b38ff8d3ee80bfe4c87fec8722a544ef, type: 2}
+    weight: 25
+  - npcType: 1
+    stageEncounters:
+    - {fileID: 11400000, guid: 174b6277d9c03d34484a5db737b6d99e, type: 2}
+    weight: 25
+  - npcType: 3
+    stageEncounters: []
+    weight: 15
 --- !u!1 &1985563045
 GameObject:
   m_ObjectHideFlags: 0
@@ -136681,6 +137356,38 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 21.77094, y: 10.999714}
   m_EdgeRadius: 0
+--- !u!1 &2049456308
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2049456309}
+  m_Layer: 0
+  m_Name: NPC_Zone (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2049456309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049456308}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 143.8, y: 45.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1809475333}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2106186375
 GameObject:
   m_ObjectHideFlags: 0
@@ -136917,4 +137624,11 @@ SceneRoots:
   - {fileID: 295149894}
   - {fileID: 1328050434}
   - {fileID: 387445735}
+  - {fileID: 1748236782}
+  - {fileID: 853210621}
+  - {fileID: 1887273101}
+  - {fileID: 357712483}
+  - {fileID: 1865405751}
+  - {fileID: 145116505}
+  - {fileID: 2049456309}
   - {fileID: 1586314737}
