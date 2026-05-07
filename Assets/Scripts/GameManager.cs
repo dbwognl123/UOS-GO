@@ -5,6 +5,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
+
+[Serializable]
+public class NPCProgressEntry
+{
+    public SchoolNPCType npcType;
+    public int highestSuccessStage;
+}
 public enum SchoolEntryType
 {
     None,
@@ -27,8 +34,46 @@ public enum PlayerStatType
 
 public class GameManager : MonoBehaviour
 {
+    private void Update()
+    {
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.F8))
+        {
+            SceneManager.LoadScene("EndingScene");
+        }
+#endif
+    }
     public static GameManager Instance { get; private set; }
 
+    [Header("Ending Sequence Result")]
+    public EndingSequenceResult currentEndingSequence = new EndingSequenceResult();
+
+    
+    [Header("NPC Progress")]
+    public int friendCurrentStage = 1;
+    public int friendStageCap = 99;
+    public bool friendRetired = false;
+    public bool friendUsedToday = false;
+
+    public int seniorCurrentStage = 1;
+    public int seniorStageCap = 99;
+    public bool seniorRetired = false;
+    public bool seniorUsedToday = false;
+
+    public int professorCurrentStage = 2; // 1단계 기본 + 질문 10회 달성 시 2단계 제안이 뜨게
+    public int professorStageCap = 99;
+    public bool professorRetired = false;
+    public bool professorUsedToday = false;
+    public int professorQuestionCount = 0;
+
+    public int romanceCurrentStage = 1;
+    public int romanceStageCap = 99;
+    public bool romanceRetired = false;
+    public bool romanceUsedToday = false;
+
+    [Header("Ending Unlock Flags")]
+    public bool endingACutUnlocked = false;
+    public bool endingGraduateSchoolUnlocked = false;
     public int CurrentWeek { get; private set; } = 1;
     public SchoolEntryType CurrentSchoolEntry { get; private set; } = SchoolEntryType.None;
     public PlayerRunData CurrentPlayer { get; private set; }
@@ -78,7 +123,7 @@ public class GameManager : MonoBehaviour
         CurrentSchoolEntry = SchoolEntryType.None;
         StudiedToday = false;
         WorkedToday = false;
-
+        ResetDailyNPCUsage();
         CurrentPlayer = new PlayerRunData
         {
             happiness = 5,
@@ -124,12 +169,18 @@ public class GameManager : MonoBehaviour
     public void AddHappiness(int value)
     {
         if (CurrentPlayer == null) return;
-
-        CurrentPlayer.happiness = Mathf.Clamp(CurrentPlayer.happiness + value, 0, 100);
-        OnPlayerStatChanged?.Invoke(PlayerStatType.Happiness, value);
+        CurrentPlayer.happiness = Mathf.Clamp(CurrentPlayer.happiness + value, 0, 999);
         OnPlayerStatsRefreshed?.Invoke();
     }
+    public void AddProfessorQuestionCount(int value)
+    {
+        professorQuestionCount = Mathf.Max(0, professorQuestionCount + value);
 
+        if (professorQuestionCount >= 10 && !professorRetired)
+        {
+            professorCurrentStage = Mathf.Max(professorCurrentStage, 2);
+        }
+    }
     public void AddGrade(int value)
     {
         if (CurrentPlayer == null) return;
@@ -141,9 +192,7 @@ public class GameManager : MonoBehaviour
     public void AddCampusLife(int value)
     {
         if (CurrentPlayer == null) return;
-
-        CurrentPlayer.campusLife += value;
-        OnPlayerStatChanged?.Invoke(PlayerStatType.CampusLife, value);
+        CurrentPlayer.campusLife = Mathf.Clamp(CurrentPlayer.campusLife + value, 0, 999);
         OnPlayerStatsRefreshed?.Invoke();
     }
 
@@ -195,9 +244,7 @@ public class GameManager : MonoBehaviour
     public void AddAppearance(int value)
     {
         if (CurrentPlayer == null) return;
-
-        CurrentPlayer.appearance = Mathf.Clamp(CurrentPlayer.appearance + value, 0, 10);
-        OnPlayerStatChanged?.Invoke(PlayerStatType.Appearance, value);
+        CurrentPlayer.appearance = Mathf.Clamp(CurrentPlayer.appearance + value, 0, 999);
         OnPlayerStatsRefreshed?.Invoke();
     }
 
@@ -219,6 +266,111 @@ public class GameManager : MonoBehaviour
         CurrentSchoolEntry = entryType;
         ClearSavedSchoolPlayerPosition();
         SceneManager.LoadScene("SchoolScene");
+    }
+
+
+    public void ResetDailyNPCUsage()
+    {
+        friendUsedToday = false;
+        seniorUsedToday = false;
+        professorUsedToday = false;
+        romanceUsedToday = false;
+    }
+
+    public bool IsNPCTypeUsedToday(SchoolNPCType type)
+    {
+        switch (type)
+        {
+            case SchoolNPCType.Friend: return friendUsedToday;
+            case SchoolNPCType.Senior: return seniorUsedToday;
+            case SchoolNPCType.Professor: return professorUsedToday;
+            case SchoolNPCType.Romance: return romanceUsedToday;
+        }
+        return false;
+    }
+
+    public void MarkNPCTypeUsedToday(SchoolNPCType type)
+    {
+        switch (type)
+        {
+            case SchoolNPCType.Friend: friendUsedToday = true; break;
+            case SchoolNPCType.Senior: seniorUsedToday = true; break;
+            case SchoolNPCType.Professor: professorUsedToday = true; break;
+            case SchoolNPCType.Romance: romanceUsedToday = true; break;
+        }
+    }
+
+    public int GetNPCCurrentStage(SchoolNPCType type)
+    {
+        switch (type)
+        {
+            case SchoolNPCType.Friend: return friendCurrentStage;
+            case SchoolNPCType.Senior: return seniorCurrentStage;
+            case SchoolNPCType.Professor: return professorCurrentStage;
+            case SchoolNPCType.Romance: return romanceCurrentStage;
+        }
+        return 1;
+    }
+
+    public int GetNPCStageCap(SchoolNPCType type)
+    {
+        switch (type)
+        {
+            case SchoolNPCType.Friend: return friendStageCap;
+            case SchoolNPCType.Senior: return seniorStageCap;
+            case SchoolNPCType.Professor: return professorStageCap;
+            case SchoolNPCType.Romance: return romanceStageCap;
+        }
+        return 99;
+    }
+
+    public void SetNPCStage(SchoolNPCType type, int stage)
+    {
+        stage = Mathf.Max(1, stage);
+
+        switch (type)
+        {
+            case SchoolNPCType.Friend: friendCurrentStage = stage; break;
+            case SchoolNPCType.Senior: seniorCurrentStage = stage; break;
+            case SchoolNPCType.Professor: professorCurrentStage = stage; break;
+            case SchoolNPCType.Romance: romanceCurrentStage = stage; break;
+        }
+    }
+
+    public void SetNPCStageCap(SchoolNPCType type, int cap)
+    {
+        cap = Mathf.Max(1, cap);
+
+        switch (type)
+        {
+            case SchoolNPCType.Friend: friendStageCap = cap; break;
+            case SchoolNPCType.Senior: seniorStageCap = cap; break;
+            case SchoolNPCType.Professor: professorStageCap = cap; break;
+            case SchoolNPCType.Romance: romanceStageCap = cap; break;
+        }
+    }
+
+    public bool IsNPCRetired(SchoolNPCType type)
+    {
+        switch (type)
+        {
+            case SchoolNPCType.Friend: return friendRetired;
+            case SchoolNPCType.Senior: return seniorRetired;
+            case SchoolNPCType.Professor: return professorRetired;
+            case SchoolNPCType.Romance: return romanceRetired;
+        }
+        return false;
+    }
+
+    public void RetireNPCType(SchoolNPCType type)
+    {
+        switch (type)
+        {
+            case SchoolNPCType.Friend: friendRetired = true; break;
+            case SchoolNPCType.Senior: seniorRetired = true; break;
+            case SchoolNPCType.Professor: professorRetired = true; break;
+            case SchoolNPCType.Romance: romanceRetired = true; break;
+        }
     }
 
 
@@ -334,20 +486,84 @@ public class GameManager : MonoBehaviour
 
         if (CurrentWeek > MAX_WEEK)
         {
+            BuildEndingSequenceResult();
             SceneManager.LoadScene("EndingScene");
+            return;
         }
-        else
+
+        StudiedToday = false;
+        WorkedToday = false;
+        ResetDailyNPCUsage();
+
+        if (CurrentPlayer != null)
+            CurrentPlayer.currentHealth = CurrentPlayer.maxHealth;
+
+        GenerateTodaySchedule();
+        OnPlayerStatsRefreshed?.Invoke();
+        SceneManager.LoadScene("MorningScene");
+    }
+    public void UnlockEndingFlag(string endingId)
+    {
+        if (string.IsNullOrEmpty(endingId)) return;
+
+        switch (endingId)
         {
-            StudiedToday = false;
-            WorkedToday = false;
+            case "A_CUT":
+                endingACutUnlocked = true;
+                break;
 
-            // 다음날 시작할 때 현재체력은 최대체력으로 리셋
-            if (CurrentPlayer != null)
-                CurrentPlayer.currentHealth = CurrentPlayer.maxHealth;
-
-            GenerateTodaySchedule();
-            OnPlayerStatsRefreshed?.Invoke();
-            SceneManager.LoadScene("MorningScene");
+            case "GRAD_SCHOOL":
+                endingGraduateSchoolUnlocked = true;
+                break;
         }
     }
+    private void BuildEndingSequenceResult()
+    {
+        if (CurrentPlayer == null)
+            return;
+
+        currentEndingSequence = new EndingSequenceResult();
+
+        // A: 학교생활력
+        if (CurrentPlayer.campusLife >= 200)
+            currentEndingSequence.sceneA = EndingSceneAType.GoodCampusLife;
+        else if (CurrentPlayer.campusLife >= 80)
+            currentEndingSequence.sceneA = EndingSceneAType.NormalCampusLife;
+        else
+            currentEndingSequence.sceneA = EndingSceneAType.LonerCampusLife;
+
+        // B: 학점
+        if (CurrentPlayer.grade >= 150)
+            currentEndingSequence.sceneB = EndingSceneBType.GoodGrade;
+        else if (CurrentPlayer.grade >= 70)
+            currentEndingSequence.sceneB = EndingSceneBType.NormalGrade;
+        else
+            currentEndingSequence.sceneB = EndingSceneBType.BadGrade;
+
+        // C: 여자친구 유무
+        currentEndingSequence.sceneC = CurrentPlayer.hasGirlfriend
+            ? EndingSceneCType.HasGirlfriend
+            : EndingSceneCType.NoGirlfriend;
+
+        // D: 특수 이벤트
+        if (endingACutUnlocked)
+            currentEndingSequence.sceneD = EndingSceneDType.BestFriend;
+        else if (endingGraduateSchoolUnlocked)
+            currentEndingSequence.sceneD = EndingSceneDType.GraduateSchool;
+        else
+            currentEndingSequence.sceneD = EndingSceneDType.None;
+
+        // E: 최대체력
+        if (CurrentPlayer.maxHealth >= 60)
+            currentEndingSequence.sceneE = EndingSceneEType.Healthy;
+        else
+            currentEndingSequence.sceneE = EndingSceneEType.Tired;
+
+        // F: 행복
+        if (CurrentPlayer.happiness >= 50)
+            currentEndingSequence.sceneF = EndingSceneFType.Happy;
+        else
+            currentEndingSequence.sceneF = EndingSceneFType.Unsatisfied;
+    }
+
 }

@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1c5225fbcf2dac4fb43cd08c361062d, type: 3}
+  m_Name: NPC_Senior
+  m_EditorClassIdentifier: Assembly-CSharp::NPCEncounterSO
+  encounterId: Senior
+  npcType: 1
+  npcName: S
+  portrait: {fileID: 4470525716388319290, guid: 88ae8d2e5d3064d4b8a6e5ff962a6a23, type: 3}
+  openingLine: "\uC544 \uC548\uB155 \uC2E0\uC785\uC0DD\uC774\uAD6C\uB098 \uB09C \uB124
+    \uC120\uBC30\uB780\uB2E4 \uD544\uC694\uD55C\uAC70 \uC788\uB2C8?"
+  stageIndex: 1
+  minAppearanceToAppear: 0
+  minCampusLifeToAppear: 0
+  minIntelligenceToAppear: 0
+  minMoneyToAppear: 0
+  requireNoGirlfriend: 0
+  requiredProfessorQuestionCount: 0
+  appearChance: 100
+  choices:
+  - choiceText: "\uBC25\uC0AC\uC8FC\uC138\uC694"
+    requiredMoney: 0
+    minAppearance: 0
+    minCampusLife: 0
+    minIntelligence: 0
+    blockIfHasGirlfriend: 0
+    useFixedChance: 0
+    fixedSuccessChance: 100
+    autoFailIfAppearanceBelow: 0
+    autoFailIfCampusLifeBelow: 0
+    autoFailIfIntelligenceBelow: 0
+    baseChance: 100
+    appearanceWeight: 0
+    campusLifeWeight: 0
+    intelligenceWeight: 0
+    minChance: 100
+    maxChance: 100
+    successLine: "\uADF8\uB798 \uAC00\uC790\t"
+    failLine: "\uC544 \uC624\uB298 \uC2DC\uAC04\uC774 \uC548\uB3FC\uC11C \uB2E4\uC74C\uC5D0
+      \uAC08\uAE4C \u314E\u314E"
+    successMoneyDelta: 0
+    successAppearanceDelta: 0
+    successCampusLifeDelta: 2
+    successIntelligenceDelta: 0
+    successGradeDelta: 0
+    successHappinessDelta: 2
+    successMaxHealthDelta: 5
+    successSetGirlfriend: 0
+    failMoneyDelta: 0
+    failAppearanceDelta: 0
+    failCampusLifeDelta: 0
+    failIntelligenceDelta: 0
+    failGradeDelta: 0
+    failHappinessDelta: 0
+    failMaxHealthDelta: 0
+    successSetStageTo: 0
+    successSetStageCapTo: 0
+    successRetireNpcType: 0
+    successProfessorQuestionCountDelta: 0
+    successUnlockEndingId: 
+    failSetStageTo: 0
+    failSetStageCapTo: 0
+    failRetireNpcType: 0
+    failProfessorQuestionCountDelta: 0
+    failUnlockEndingId: 
+  - choiceText: "\uC871\uBCF4\uC880 \uC8FC\uC138\uC694"
+    requiredMoney: 0
+    minAppearance: 0
+    minCampusLife: 0
+    minIntelligence: 0
+    blockIfHasGirlfriend: 0
+    useFixedChance: 0
+    fixedSuccessChance: 50
+    autoFailIfAppearanceBelow: 0
+    autoFailIfCampusLifeBelow: 0
+    autoFailIfIntelligenceBelow: 0
+    baseChance: 50
+    appearanceWeight: 0
+    campusLifeWeight: 0
+    intelligenceWeight: 0
+    minChance: 50
+    maxChance: 50
+    successLine: "\uADF8\uB798 \uBA54\uC77C\uB85C \uBCF4\uB0B4\uC904\uAC8C\t\t\t"
+    failLine: "\uBBF8\uC548 \uB098\uB3C4 \uACF5\uBD80\uB97C \uC548\uD574\uC11C \u314E..."
+    successMoneyDelta: 0
+    successAppearanceDelta: 0
+    successCampusLifeDelta: 2
+    successIntelligenceDelta: 10
+    successGradeDelta: 0
+    successHappinessDelta: 2
+    successMaxHealthDelta: 0
+    successSetGirlfriend: 0
+    failMoneyDelta: 0
+    failAppearanceDelta: 0
+    failCampusLifeDelta: 0
+    failIntelligenceDelta: 0
+    failGradeDelta: 0
+    failHappinessDelta: 0
+    failMaxHealthDelta: 0
+    successSetStageTo: 0
+    successSetStageCapTo: 0
+    successRetireNpcType: 0
+    successProfessorQuestionCountDelta: 0
+    successUnlockEndingId: 
+    failSetStageTo: 0
+    failSetStageCapTo: 0
+    failRetireNpcType: 0
+    failProfessorQuestionCountDelta: 0
+    failUnlockEndingId: 

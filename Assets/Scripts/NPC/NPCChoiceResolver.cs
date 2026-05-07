@@ -4,9 +4,17 @@ public static class NPCChoiceResolver
 {
     public static bool CanChoose(PlayerRunData player, NPCChoiceData choice, out string reason)
     {
-        if (player.money < choice.requiredMoney)
+        int neededMoney = choice.requiredMoney;
+
+        if (choice.successMoneyDelta < 0)
+            neededMoney = Mathf.Max(neededMoney, -choice.successMoneyDelta);
+
+        if (choice.failMoneyDelta < 0)
+            neededMoney = Mathf.Max(neededMoney, -choice.failMoneyDelta);
+
+        if (player.money < neededMoney)
         {
-            reason = "돈이 부족합니다.";
+            reason = $"돈이 부족합니다. (필요: {neededMoney})";
             return false;
         }
 
@@ -40,6 +48,18 @@ public static class NPCChoiceResolver
 
     public static float EvaluateSuccessChance(PlayerRunData player, NPCChoiceData choice)
     {
+        if (choice.autoFailIfAppearanceBelow > 0 && player.appearance < choice.autoFailIfAppearanceBelow)
+            return 0f;
+
+        if (choice.autoFailIfCampusLifeBelow > 0 && player.campusLife < choice.autoFailIfCampusLifeBelow)
+            return 0f;
+
+        if (choice.autoFailIfIntelligenceBelow > 0 && player.intelligence < choice.autoFailIfIntelligenceBelow)
+            return 0f;
+
+        if (choice.useFixedChance)
+            return Mathf.Clamp(choice.fixedSuccessChance, 0f, 100f);
+
         float chance = choice.baseChance;
         chance += player.appearance * choice.appearanceWeight;
         chance += player.campusLife * choice.campusLifeWeight;
