@@ -141,13 +141,16 @@ public class EveningSceneUI : MonoBehaviour
         isBusy = true;
         ClosePopupForce();
 
-        GameManager.Instance.WorkPartTimeInEvening();
-
         yield return StartCoroutine(Fade(0f, 1f));
-        yield return new WaitForSeconds(blackScreenStayTime);
-        yield return StartCoroutine(Fade(1f, 0f));
 
-        isBusy = false;
+        bool started = GameManager.Instance.StartPartTimeQTEMinigame();
+
+        if (!started)
+        {
+            yield return new WaitForSeconds(blackScreenStayTime);
+            yield return StartCoroutine(Fade(1f, 0f));
+            isBusy = false;
+        }
     }
 
     private IEnumerator DoStudyRoutine()
@@ -155,15 +158,17 @@ public class EveningSceneUI : MonoBehaviour
         isBusy = true;
         ClosePopupForce();
 
-        GameManager.Instance.StudyInEvening();
-
         yield return StartCoroutine(Fade(0f, 1f));
-        yield return new WaitForSeconds(blackScreenStayTime);
-        yield return StartCoroutine(Fade(1f, 0f));
 
-        isBusy = false;
+        bool started = GameManager.Instance.StartStudyMinigame();
+
+        if (!started)
+        {
+            yield return new WaitForSeconds(blackScreenStayTime);
+            yield return StartCoroutine(Fade(1f, 0f));
+            isBusy = false;
+        }
     }
-
     private IEnumerator Fade(float from, float to)
     {
         if (fadeImage == null) yield break;

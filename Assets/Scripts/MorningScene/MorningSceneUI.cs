@@ -33,7 +33,7 @@ public class MorningSceneUI : MonoBehaviour
             if (classTexts[i] == null) continue;
 
             if (i < schedule.Count)
-                classTexts[i].text = schedule[i].ToString();
+                classTexts[i].text = GameManager.Instance.GetClassroomDisplayMultiline(schedule[i]);
             else
                 classTexts[i].text = "-";
         }
