@@ -31,7 +31,13 @@ public enum PlayerStatType
     Happiness,
     Girlfriend
 }
-
+public enum ClassEnterResult
+{
+    WrongClass,
+    AttendanceOnly,
+    StartFinalMinigame,
+    AlreadyFinished
+}
 public class GameManager : MonoBehaviour
 {
     private void Update()
@@ -39,7 +45,7 @@ public class GameManager : MonoBehaviour
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.F8))
         {
-            SceneManager.LoadScene("EndingScene");
+            SceneTransitionManager.Instance.LoadScene("EndingScene");
         }
 #endif
     }
@@ -84,10 +90,65 @@ public class GameManager : MonoBehaviour
     private readonly int[] allClassrooms =
     {
         01, 03, 04, 05, 06, 07,
-        08, 10, 11, 14, 15,
+        08, 10, 11, 15,
         16, 18, 19, 20, 27,
-        29 ,33, 35, 39
+        29 ,33, 35, 37, 39
     };
+    private static readonly Dictionary<int, string> classroomNameMap = new Dictionary<int, string>
+{
+    { 1, "전농관" },
+    { 3, "건설공학관" },
+    { 4, "창공관" },
+    { 5, "인문학관" },
+    { 6, "배봉관" },
+    { 7, "대학본부" },
+    { 8, "자연과학관" },
+    { 10, "경농관" },
+    { 11, "창의혁신관" },
+    { 12, "학생회관" },
+    { 13, "시대인재관" },
+    { 14, "과학기술관" },
+    { 15, "21세기관" },
+    { 16, "조형관" },
+    { 18, "자작마루" },
+    { 19, "정보기술관" },
+    { 20, "법학관" },
+    { 21, "중앙도서관" },
+    { 22, "생활관" },
+    { 23, "건축구조실험동" },
+    { 24, "토목구조실험동" },
+    { 25, "미디어관" },
+    { 27, "대강당" },
+    { 28, "운동장" },
+    { 29, "박물관" },
+    { 32, "웰니스센터" },
+    { 33, "미래관" },
+    { 34, "국제학사" },
+    { 35, "음악관" },
+    { 36, "어린이집" },
+    { 37, "100주년 기념관" },
+    { 38, "스마트연구동" },
+    { 39, "시대융합관" },
+    { 41, "실외테니스장" },
+    { 81, "자동화온실" }
+};
+    public string GetClassroomName(int classroomNumber)
+    {
+        if (classroomNameMap.TryGetValue(classroomNumber, out string name))
+            return name;
+
+        return $"건물 {classroomNumber}";
+    }
+
+    public string GetClassroomDisplayMultiline(int classroomNumber)
+    {
+        return $"{classroomNumber}\n{GetClassroomName(classroomNumber)}";
+    }
+
+    public string GetClassroomDisplayInline(int classroomNumber)
+    {
+        return $"{classroomNumber} {GetClassroomName(classroomNumber)}";
+    }
 
 
     private List<int> todaySchedule = new List<int>();
@@ -116,7 +177,13 @@ public class GameManager : MonoBehaviour
     }
     public event Action<PlayerStatType, int> OnPlayerStatChanged;
     public event Action OnPlayerStatsRefreshed;
-   
+    public event Action<string> OnSchoolMessagePopupRequested;
+    private void RaiseSchoolMessagePopup(string message)
+    {
+        OnSchoolMessagePopupRequested?.Invoke(message);
+    }
+
+
     public void StartNewGame()
     {
         CurrentWeek = 1;
@@ -140,7 +207,8 @@ public class GameManager : MonoBehaviour
         GenerateTodaySchedule();
         ClearSavedSchoolPlayerPosition();
         OnPlayerStatsRefreshed?.Invoke();
-        SceneManager.LoadScene("MorningScene");
+        
+        SceneTransitionManager.Instance.LoadScene("MorningScene");
     }
     public bool StudyInEvening()
     {
@@ -152,6 +220,30 @@ public class GameManager : MonoBehaviour
         StudiedToday = true;
 
         return true;
+    }
+    public bool StartStudyMinigame()
+    {
+        if (CurrentPlayer == null) return false;
+        if (StudiedToday) return false;
+
+        // 공부 시작 비용
+        AddMaxHealth(-5);
+        StudiedToday = true;
+        SceneTransitionManager.Instance.LoadScene("StudyMemoryScene");
+        
+        return true;
+    }
+
+    
+    public void FinishStudyMinigame(int intelligenceGain)
+    {
+        if (CurrentPlayer == null) return;
+
+        AddIntelligence(intelligenceGain);
+        OnPlayerStatsRefreshed?.Invoke();
+
+        SceneTransitionManager.Instance.LoadScene("EveningScene");
+
     }
 
 
@@ -265,7 +357,7 @@ public class GameManager : MonoBehaviour
     {
         CurrentSchoolEntry = entryType;
         ClearSavedSchoolPlayerPosition();
-        SceneManager.LoadScene("SchoolScene");
+        SceneTransitionManager.Instance.LoadScene("SchoolScene");
     }
 
 
@@ -393,6 +485,14 @@ public class GameManager : MonoBehaviour
         ClearSavedSchoolPlayerPosition();
     }
 
+    public bool IsLastClassOfToday
+    {
+        get
+        {
+            if (todaySchedule == null || todaySchedule.Count == 0) return false;
+            return currentClassIndex == todaySchedule.Count - 1;
+        }
+    }
     public int GetCurrentTargetClassroom()
     {
         if (IsAllClassesFinished)
@@ -401,12 +501,42 @@ public class GameManager : MonoBehaviour
         return todaySchedule[currentClassIndex];
     }
 
+    public ClassEnterResult TryEnterClassroom(int classroomNumber, Vector3 schoolPlayerPosition)
+    {
+        if (IsAllClassesFinished)
+            return ClassEnterResult.AlreadyFinished;
+
+        if (classroomNumber != GetCurrentTargetClassroom())
+            return ClassEnterResult.WrongClass;
+
+        // 1~4교시는 출석만 처리
+        if (!IsLastClassOfToday)
+        {
+            currentClassIndex++;
+            CurrentEnteredClassroom = -1;
+            SaveSchoolPlayerPosition(schoolPlayerPosition);
+
+            int nextClassroom = GetCurrentTargetClassroom();
+            RaiseSchoolMessagePopup(
+    $"출석 완료!\n다음 장소: {GetClassroomDisplayInline(nextClassroom)}"
+);
+            return ClassEnterResult.AttendanceOnly;
+        }
+
+        // 마지막 수업이면 미니게임 시작
+        CurrentEnteredClassroom = classroomNumber;
+        SaveSchoolPlayerPosition(schoolPlayerPosition);
+        return ClassEnterResult.StartFinalMinigame;
+    }
     public void FinishCurrentClass()
     {
-        if (IsAllClassesFinished) return;
-        if (CurrentEnteredClassroom == -1) return;
+        if (IsAllClassesFinished)
+            return;
 
+        // 마지막 수업 미니게임이 끝났으므로 그 수업까지 완료 처리
         currentClassIndex++;
+
+        // 혹시 현재 진입한 교실 저장값이 있으면 초기화
         CurrentEnteredClassroom = -1;
     }
 
@@ -437,7 +567,7 @@ public class GameManager : MonoBehaviour
 
         CurrentEnteredClassroom = classroomNumber;
         SaveSchoolPlayerPosition(schoolPlayerPosition);
-        SceneManager.LoadScene("ClassScene");
+        SceneTransitionManager.Instance.LoadScene("ClassScene");
     }
 
     public void CompleteCurrentClass()
@@ -453,25 +583,28 @@ public class GameManager : MonoBehaviour
     }
     public void GoToShop()
     {
-        SceneManager.LoadScene("ShopScene");
+        SceneTransitionManager.Instance.LoadScene("ShopScene");
+
+
+
     }
 
     public void GoToCollection()
     {
-        SceneManager.LoadScene("CollectionScene");
+        SceneTransitionManager.Instance.LoadScene("CollectionScene");
     }
     public void ReturnToMain()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneTransitionManager.Instance.LoadScene("MainScene");
     }
     public void SkipSchool()
     {
-        SceneManager.LoadScene("EveningScene");
+        SceneTransitionManager.Instance.LoadScene("EveningScene");
     }
 
     public void GoToEvening()
     {
-        SceneManager.LoadScene("EveningScene");
+        SceneTransitionManager.Instance.LoadScene("EveningScene");
     }
 
     public void SleepInEvening()
@@ -487,7 +620,7 @@ public class GameManager : MonoBehaviour
         if (CurrentWeek > MAX_WEEK)
         {
             BuildEndingSequenceResult();
-            SceneManager.LoadScene("EndingScene");
+            SceneTransitionManager.Instance.LoadScene("EndingScene");
             return;
         }
 
@@ -500,7 +633,7 @@ public class GameManager : MonoBehaviour
 
         GenerateTodaySchedule();
         OnPlayerStatsRefreshed?.Invoke();
-        SceneManager.LoadScene("MorningScene");
+        SceneTransitionManager.Instance.LoadScene("MorningScene");
     }
     public void UnlockEndingFlag(string endingId)
     {
@@ -566,4 +699,26 @@ public class GameManager : MonoBehaviour
             currentEndingSequence.sceneF = EndingSceneFType.Unsatisfied;
     }
 
+
+    public bool StartPartTimeQTEMinigame()
+    {
+        if (CurrentPlayer == null) return false;
+        if (WorkedToday) return false;
+
+        AddMaxHealth(-5);
+        WorkedToday = true;
+
+        SceneTransitionManager.Instance.LoadScene("PartTimeQTEScene");
+        return true;
+    }
+
+    public void FinishPartTimeQTEMinigame(int moneyGain)
+    {
+        if (CurrentPlayer == null) return;
+
+        AddMoney(moneyGain);
+        OnPlayerStatsRefreshed?.Invoke();
+
+        SceneTransitionManager.Instance.LoadScene("EveningScene");
+    }
 }

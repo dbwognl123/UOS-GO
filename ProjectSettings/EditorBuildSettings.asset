@@ -24,6 +24,12 @@ EditorBuildSettings:
     path: Assets/Scenes/EveningScene.unity
     guid: f16fae763662cf044b0920b2cc8442a0
   - enabled: 1
+    path: Assets/Scenes/PartTimeQTEScene.unity
+    guid: 2c555421d57bc9c48bc71fb383d8bf4b
+  - enabled: 1
+    path: Assets/Scenes/StudyMemoryScene.unity
+    guid: 8b695121640d5ef428c5354d45cf535a
+  - enabled: 1
     path: Assets/Scenes/ClassScene.unity
     guid: ad9ed7a41db5a8b4bbdab4caad279007
   - enabled: 1

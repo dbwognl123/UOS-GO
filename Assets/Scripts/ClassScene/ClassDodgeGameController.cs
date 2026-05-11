@@ -210,7 +210,6 @@ public class ClassDodgeGameController : MonoBehaviour
 
         SceneManager.LoadScene("SchoolScene");
     }
-
     private void OnDrawGizmosSelected()
     {
         if (arenaCenter == null) return;

@@ -395,9 +395,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.043147206
+    y: 0.04534005
     width: 1
-    height: 0.9137056
+    height: 0.906801
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -909,6 +909,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHUD
   healthFill: {fileID: 1250640966}
+  maxHealthDisplay: 100
   intelligenceFill: {fileID: 415339340}
   maxIntelligence: 20
   moneyText: {fileID: 881346763}
@@ -2801,7 +2802,7 @@ MonoBehaviour:
   m_text: New Text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 38c2778289bdbd540b1372a4b31acb4e, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: -310113910790461695, guid: 38c2778289bdbd540b1372a4b31acb4e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
