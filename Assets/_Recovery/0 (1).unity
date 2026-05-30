@@ -2768,11 +2768,6 @@ MonoBehaviour:
   seniorStageCap: 99
   seniorRetired: 0
   seniorUsedToday: 0
-  hasEnergyDrinkToday: 0
-  hasMemoryBreadToday: 0
-  vendingItemCost: 10
-  energyDrinkDrainMultiplier: 0.5
-  memoryBreadRequiredIntReduction: 20
   regularEarned: 0
   regularPossible: 0
   midtermScore: 0

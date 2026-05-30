@@ -74,8 +74,13 @@ public class ClassDodgeGameController : MonoBehaviour
         // 1주차  15  30 45  60  75  90 105 120 135 150 165 180 195 210 225
         // 플레   10  20 30 40 50 60 70 80 90 100 110 120 130 140 150
         int requiredIntelligence = week * 15;
-        int gap = Mathf.Max(0, requiredIntelligence - intelligence);
 
+        if (GameManager.Instance != null)
+            requiredIntelligence -= GameManager.Instance.GetRequiredIntelligenceReduction();
+
+        requiredIntelligence = Mathf.Max(0, requiredIntelligence);
+
+        int gap = Mathf.Max(0, requiredIntelligence - intelligence);
         int difficultyTier;
 
         if (gap <= 10)
@@ -183,19 +188,26 @@ public class ClassDodgeGameController : MonoBehaviour
         Fail();
     }
 
+    private int GetSurvivedSeconds()
+    {
+        float survived = surviveTime - remainingTime;
+        return Mathf.Clamp(Mathf.FloorToInt(survived), 0, Mathf.FloorToInt(surviveTime));
+    }
     private void Success()
     {
         if (isFinished) return;
         isFinished = true;
 
+        int survivedSeconds = Mathf.FloorToInt(surviveTime);
+
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.AddIntelligence(1);
-            GameManager.Instance.AddGrade(1);
+            GameManager.Instance.AddIntelligence(survivedSeconds);
+            GameManager.Instance.ApplyClassResult(survivedSeconds, surviveTime);
             GameManager.Instance.FinishCurrentClass();
         }
 
-        SceneManager.LoadScene("SchoolScene");
+        SceneTransitionManager.Instance.LoadScene("SchoolScene");
     }
 
     private void Fail()
@@ -203,12 +215,16 @@ public class ClassDodgeGameController : MonoBehaviour
         if (isFinished) return;
         isFinished = true;
 
+        int survivedSeconds = GetSurvivedSeconds();
+
         if (GameManager.Instance != null)
         {
+            GameManager.Instance.AddIntelligence(survivedSeconds);
+            GameManager.Instance.ApplyClassResult(survivedSeconds, surviveTime);
             GameManager.Instance.FinishCurrentClass();
         }
 
-        SceneManager.LoadScene("SchoolScene");
+        SceneTransitionManager.Instance.LoadScene("SchoolScene");
     }
     private void OnDrawGizmosSelected()
     {

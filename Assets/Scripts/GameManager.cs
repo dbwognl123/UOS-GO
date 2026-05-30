@@ -20,6 +20,12 @@ public enum SchoolEntryType
     BackGate
 }
 
+public enum SchoolFacilityType
+{
+    Playground,
+    WellnessCenter
+}
+
 public enum PlayerStatType
 {
     Health,
@@ -37,6 +43,12 @@ public enum ClassEnterResult
     AttendanceOnly,
     StartFinalMinigame,
     AlreadyFinished
+}
+
+public enum ShopItemType
+{
+    EnergyDrink,
+    MemoryBread
 }
 public class GameManager : MonoBehaviour
 {
@@ -66,6 +78,25 @@ public class GameManager : MonoBehaviour
     public bool seniorRetired = false;
     public bool seniorUsedToday = false;
 
+    [Header("Vending Buffs")]
+    public bool hasEnergyDrinkToday = false;
+    public bool hasMemoryBreadToday = false;
+
+    [SerializeField] private int vendingItemCost = 10;
+    [SerializeField] private float energyDrinkDrainMultiplier = 0.5f;
+    [SerializeField] private int memoryBreadRequiredIntReduction = 20;
+
+    [Header("Grade Components")]
+    [SerializeField] private float regularEarned = 0f;
+    [SerializeField] private float regularPossible = 0f;
+    [SerializeField] private int midtermScore = 0; // 0 ~ 30
+    [SerializeField] private int finalScore = 0;   // 0 ~ 30
+
+    public float RegularEarned => regularEarned;
+    public float RegularPossible => regularPossible;
+    public int MidtermScore => midtermScore;
+    public int FinalScore => finalScore;
+
     public int professorCurrentStage = 2; // 1단계 기본 + 질문 10회 달성 시 2단계 제안이 뜨게
     public int professorStageCap = 99;
     public bool professorRetired = false;
@@ -76,6 +107,9 @@ public class GameManager : MonoBehaviour
     public int romanceStageCap = 99;
     public bool romanceRetired = false;
     public bool romanceUsedToday = false;
+
+    [Header("School Facility")]
+    public bool usedSchoolFacilityToday = false;
 
     [Header("Ending Unlock Flags")]
     public bool endingACutUnlocked = false;
@@ -186,11 +220,19 @@ public class GameManager : MonoBehaviour
 
     public void StartNewGame()
     {
+        usedSchoolFacilityToday = false;
         CurrentWeek = 1;
         CurrentSchoolEntry = SchoolEntryType.None;
         StudiedToday = false;
         WorkedToday = false;
         ResetDailyNPCUsage();
+        regularEarned = 0f;
+        regularPossible = 0f;
+        midtermScore = 0;
+        finalScore = 0;
+
+        hasEnergyDrinkToday = false;
+        hasMemoryBreadToday = false;
         CurrentPlayer = new PlayerRunData
         {
             happiness = 5,
@@ -218,6 +260,38 @@ public class GameManager : MonoBehaviour
         AddMaxHealth(-5);
         AddIntelligence(5);
         StudiedToday = true;
+
+        return true;
+    }
+
+    public bool CanUseSchoolFacility()
+    {
+        if (CurrentPlayer == null) return false;
+        return !usedSchoolFacilityToday;
+    }
+
+    public bool TryUseWorkoutFacility()
+    {
+        if (!CanUseWorkoutFacility())
+            return false;
+
+        AddCurrentHealth(-10);
+        AddMaxHealth(2);
+        AddAppearance(1);
+
+        usedSchoolFacilityToday = true;
+        OnPlayerStatsRefreshed?.Invoke();
+
+        return true;
+    }
+
+    public bool CanUseWorkoutFacility()
+    {
+        if (CurrentPlayer == null) return false;
+
+        if (usedSchoolFacilityToday) return false;
+        if (!IsAllClassesFinished) return false;
+        if (CurrentPlayer.currentHealth < 10) return false;
 
         return true;
     }
@@ -353,6 +427,39 @@ public class GameManager : MonoBehaviour
             OnPlayerStatsRefreshed?.Invoke();
         }
     }
+    public int GetMidtermScore()
+    {
+        return midtermScore;
+    }
+
+    public int GetFinalExamScore()
+    {
+        return finalScore;
+    }
+    public void ApplyClassResult(float survivedSeconds, float maxSeconds)
+    {
+        if (CurrentPlayer == null) return;
+
+        float ratio = 0f;
+        if (maxSeconds > 0f)
+            ratio = Mathf.Clamp01(survivedSeconds / maxSeconds);
+
+        if (IsMidtermWeek())
+        {
+            midtermScore = Mathf.RoundToInt(ratio * 30f);
+        }
+        else if (IsFinalWeek())
+        {
+            finalScore = Mathf.RoundToInt(ratio * 30f);
+        }
+        else
+        {
+            regularEarned += survivedSeconds;
+            regularPossible += maxSeconds;
+        }
+
+        RefreshComputedGrade();
+    }
     public void EnterSchool(SchoolEntryType entryType)
     {
         CurrentSchoolEntry = entryType;
@@ -360,6 +467,112 @@ public class GameManager : MonoBehaviour
         SceneTransitionManager.Instance.LoadScene("SchoolScene");
     }
 
+    public int GetShopItemCost(ShopItemType itemType)
+    {
+        switch (itemType)
+        {
+            case ShopItemType.EnergyDrink:
+                return 10;
+
+            case ShopItemType.MemoryBread:
+                return 10;
+        }
+
+        return 9999;
+    }
+
+    public string GetShopItemName(ShopItemType itemType)
+    {
+        switch (itemType)
+        {
+            case ShopItemType.EnergyDrink:
+                return "에너지드링크";
+
+            case ShopItemType.MemoryBread:
+                return "암기빵";
+        }
+
+        return "알 수 없음";
+    }
+
+    public string GetShopItemDescription(ShopItemType itemType)
+    {
+        switch (itemType)
+        {
+            case ShopItemType.EnergyDrink:
+                return "오늘 학교에서 현재체력 감소 속도가 1/2이 됩니다.";
+
+            case ShopItemType.MemoryBread:
+                return "오늘 수업의 요구 지능이 감소합니다.";
+        }
+
+        return "";
+    }
+
+    public bool HasBoughtShopItemToday(ShopItemType itemType)
+    {
+        switch (itemType)
+        {
+            case ShopItemType.EnergyDrink:
+                return hasEnergyDrinkToday;
+
+            case ShopItemType.MemoryBread:
+                return hasMemoryBreadToday;
+        }
+
+        return false;
+    }
+
+    public bool CanBuyShopItem(ShopItemType itemType, out string reason)
+    {
+        reason = "";
+
+        if (CurrentPlayer == null)
+        {
+            reason = "플레이어 정보가 없습니다.";
+            return false;
+        }
+
+        int cost = GetShopItemCost(itemType);
+
+        if (CurrentPlayer.money < cost)
+        {
+            reason = "돈이 부족합니다.";
+            return false;
+        }
+
+        if (HasBoughtShopItemToday(itemType))
+        {
+            reason = "오늘은 이미 구매했습니다.";
+            return false;
+        }
+
+        return true;
+    }
+
+    public bool TryBuyShopItem(ShopItemType itemType, out string message)
+    {
+        if (!CanBuyShopItem(itemType, out message))
+            return false;
+
+        AddMoney(-GetShopItemCost(itemType));
+
+        switch (itemType)
+        {
+            case ShopItemType.EnergyDrink:
+                hasEnergyDrinkToday = true;
+                message = "에너지드링크를 구매했습니다.";
+                break;
+
+            case ShopItemType.MemoryBread:
+                hasMemoryBreadToday = true;
+                message = "암기빵을 구매했습니다.";
+                break;
+        }
+
+        OnPlayerStatsRefreshed?.Invoke();
+        return true;
+    }
 
     public void ResetDailyNPCUsage()
     {
@@ -465,6 +678,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+   
+
+    
+
+
+    public float GetSchoolHealthDrainMultiplier()
+    {
+        return hasEnergyDrinkToday ? 0.5f : 1f;
+    }
+
+    public int GetRequiredIntelligenceReduction()
+    {
+        return hasMemoryBreadToday ? memoryBreadRequiredIntReduction : 0;
+    }
 
     public void GenerateTodaySchedule()
     {
@@ -581,6 +808,43 @@ public class GameManager : MonoBehaviour
         currentClassIndex++;
         CurrentEnteredClassroom = -1;
     }
+
+    public bool IsMidtermWeek()
+    {
+        return CurrentWeek == 8;
+    }
+
+    public bool IsFinalWeek()
+    {
+        return CurrentWeek == 16;
+    }
+
+    public bool IsExamWeek()
+    {
+        return IsMidtermWeek() || IsFinalWeek();
+    }
+
+    public int GetRegularWeightedScore()
+    {
+        if (regularPossible <= 0f)
+            return 0;
+
+        float ratio = Mathf.Clamp01(regularEarned / regularPossible);
+        return Mathf.RoundToInt(ratio * 40f);
+    }
+
+    public int GetTotalGradeScore()
+    {
+        return GetRegularWeightedScore() + midtermScore + finalScore;
+    }
+
+    private void RefreshComputedGrade()
+    {
+        if (CurrentPlayer == null) return;
+
+        CurrentPlayer.grade = GetTotalGradeScore();
+        OnPlayerStatsRefreshed?.Invoke();
+    }
     public void GoToShop()
     {
         SceneTransitionManager.Instance.LoadScene("ShopScene");
@@ -616,7 +880,7 @@ public class GameManager : MonoBehaviour
     public void EndDay()
     {
         CurrentWeek++;
-
+        usedSchoolFacilityToday = false;
         if (CurrentWeek > MAX_WEEK)
         {
             BuildEndingSequenceResult();
@@ -626,6 +890,8 @@ public class GameManager : MonoBehaviour
 
         StudiedToday = false;
         WorkedToday = false;
+        hasEnergyDrinkToday = false;
+        hasMemoryBreadToday = false;
         ResetDailyNPCUsage();
 
         if (CurrentPlayer != null)
