@@ -1,10 +1,18 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class ClassDodgeGameController : MonoBehaviour
 {
+    [Header("Blackout")]
+    [SerializeField] private CanvasGroup blackoutOverlay;
+    [SerializeField] private float blackoutInterval = 5f;
+    [SerializeField] private float blackoutDuration = 0.5f;
+    [SerializeField] private float blackoutFadeTime = 0.12f;
+
+    private Coroutine blackoutRoutine;
+
     [Header("References")]
     [SerializeField] private Transform arenaCenter;
     [SerializeField] private DodgePlayerController player;
@@ -43,6 +51,19 @@ public class ClassDodgeGameController : MonoBehaviour
 
         if (player != null)
             player.SetupArena(arenaCenter, arenaRadius);
+
+        if (blackoutOverlay != null)
+        {
+            blackoutOverlay.alpha = 0f;
+            blackoutOverlay.blocksRaycasts = false;
+            blackoutOverlay.interactable = false;
+        }
+
+        if (GameManager.Instance != null &&
+            (GameManager.Instance.CurrentWeek == 8 || GameManager.Instance.CurrentWeek == 16))
+        {
+            blackoutRoutine = StartCoroutine(BlackoutRoutine());
+        }
 
         StartCoroutine(SpawnRoutine());
     }
@@ -187,7 +208,7 @@ public class ClassDodgeGameController : MonoBehaviour
         if (isFinished) return;
         Fail();
     }
-
+   
     private int GetSurvivedSeconds()
     {
         float survived = surviveTime - remainingTime;
@@ -195,8 +216,17 @@ public class ClassDodgeGameController : MonoBehaviour
     }
     private void Success()
     {
+
         if (isFinished) return;
         isFinished = true;
+        if (blackoutRoutine != null)
+        {
+            StopCoroutine(blackoutRoutine);
+            blackoutRoutine = null;
+        }
+
+        if (blackoutOverlay != null)
+            blackoutOverlay.alpha = 0f;
 
         int survivedSeconds = Mathf.FloorToInt(surviveTime);
 
@@ -214,7 +244,14 @@ public class ClassDodgeGameController : MonoBehaviour
     {
         if (isFinished) return;
         isFinished = true;
+        if (blackoutRoutine != null)
+        {
+            StopCoroutine(blackoutRoutine);
+            blackoutRoutine = null;
+        }
 
+        if (blackoutOverlay != null)
+            blackoutOverlay.alpha = 0f;
         int survivedSeconds = GetSurvivedSeconds();
 
         if (GameManager.Instance != null)
@@ -232,5 +269,39 @@ public class ClassDodgeGameController : MonoBehaviour
 
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(arenaCenter.position, arenaRadius);
+    }
+
+    private IEnumerator BlackoutRoutine()
+    {
+        while (!isFinished)
+        {
+            yield return new WaitForSeconds(blackoutInterval);
+
+            if (isFinished)
+                yield break;
+
+            yield return StartCoroutine(FadeBlackout(0f, 1f, blackoutFadeTime));
+            yield return new WaitForSeconds(blackoutDuration);
+            yield return StartCoroutine(FadeBlackout(1f, 0f, blackoutFadeTime));
+        }
+    }
+
+    private IEnumerator FadeBlackout(float from, float to, float duration)
+    {
+        if (blackoutOverlay == null)
+            yield break;
+
+        float time = 0f;
+        blackoutOverlay.alpha = from;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = Mathf.Clamp01(time / duration);
+            blackoutOverlay.alpha = Mathf.Lerp(from, to, t);
+            yield return null;
+        }
+
+        blackoutOverlay.alpha = to;
     }
 }

@@ -52,12 +52,27 @@ public enum ShopItemType
 }
 public class GameManager : MonoBehaviour
 {
+
     private void Update()
     {
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.F8))
         {
             SceneTransitionManager.Instance.LoadScene("EndingScene");
+        }
+#endif
+
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
+            CurrentWeek = 8;
+            Debug.Log("테스트용: 현재 주차를 8주차로 변경");
+        }
+
+        if (Input.GetKeyDown(KeyCode.F7))
+        {
+            CurrentWeek = 16;
+            Debug.Log("테스트용: 현재 주차를 16주차로 변경");
         }
 #endif
     }

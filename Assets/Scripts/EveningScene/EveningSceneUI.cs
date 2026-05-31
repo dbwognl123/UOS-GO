@@ -120,7 +120,13 @@ public class EveningSceneUI : MonoBehaviour
         if (weekTransitionText != null)
         {
             weekTransitionText.gameObject.SetActive(true);
-            weekTransitionText.text = $"{nextWeek}주차";
+
+            if (nextWeek == 8)
+                weekTransitionText.text = $"{nextWeek}주차 \n(중간고사)";
+            else if (nextWeek == 16)
+                weekTransitionText.text = $"{nextWeek}주차 \n(기말고사)";
+            else
+                weekTransitionText.text = $"{nextWeek}주차";
         }
 
         yield return new WaitForSeconds(weekTextShowTime);
