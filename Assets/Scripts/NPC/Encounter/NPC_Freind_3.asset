@@ -19,8 +19,8 @@ MonoBehaviour:
   openingLine: "\uC774\uBC88\uC5D0 \uACFC\uD305 \uD558\uB824\uB294\uB370 \uB108\uB3C4
     \uAC08\uB798?"
   stageIndex: 3
-  minAppearanceToAppear: 0
-  minCampusLifeToAppear: 0
+  minAppearanceToAppear: 10
+  minCampusLifeToAppear: 90
   minIntelligenceToAppear: 0
   minMoneyToAppear: 0
   requireNoGirlfriend: 0
@@ -46,14 +46,15 @@ MonoBehaviour:
     maxChance: 0
     successLine: "\uC751 \uC5F0\uB77D\uC904\uAC8C"
     failLine: "\uC544 \uADFC\uB370 \uC774\uBBF8 \uAF49\uCC3C\uB2E4\uB124 \uBBF8\uC548"
-    successMoneyDelta: -4
+    successMoneyDelta: -20
     successAppearanceDelta: 0
-    successCampusLifeDelta: 30
+    successCampusLifeDelta: 60
     successIntelligenceDelta: 0
     successGradeDelta: 0
-    successHappinessDelta: 0
+    successHappinessDelta: -5
     successMaxHealthDelta: -5
     successSetGirlfriend: 0
+    successScheduleMeetingScene: 1
     failMoneyDelta: 0
     failAppearanceDelta: 0
     failCampusLifeDelta: 0
@@ -98,6 +99,7 @@ MonoBehaviour:
     successHappinessDelta: 0
     successMaxHealthDelta: 0
     successSetGirlfriend: 0
+    successScheduleMeetingScene: 0
     failMoneyDelta: 0
     failAppearanceDelta: 0
     failCampusLifeDelta: 0

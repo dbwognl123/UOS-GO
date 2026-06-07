@@ -75,6 +75,49 @@ public class GameManager : MonoBehaviour
             Debug.Log("테스트용: 현재 주차를 16주차로 변경");
         }
 #endif
+
+#if UNITY_EDITOR
+        if (CurrentPlayer != null)
+        {
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                AddIntelligence(10);
+                Debug.Log("디버그: 지능 +10");
+            }
+
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                AddIntelligence(-10);
+                Debug.Log("디버그: 지능 -10");
+            }
+
+            if (Input.GetKeyDown(KeyCode.F3))
+            {
+                AddCurrentHealth(10);
+                Debug.Log("디버그: 현재체력 +10");
+            }
+
+            if (Input.GetKeyDown(KeyCode.F4))
+            {
+                AddCurrentHealth(-10);
+                Debug.Log("디버그: 현재체력 -10");
+            }
+
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                AddMoney(50);
+                Debug.Log("디버그: 돈 +50");
+            }
+
+          
+        }
+#endif
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            Debug.Log("테스트용: MeetingScene으로 이동");
+            meetingSceneScheduled = true;
+            SceneTransitionManager.Instance.LoadScene("MeetingScene");
+        }
     }
     public static GameManager Instance { get; private set; }
 
@@ -86,12 +129,12 @@ public class GameManager : MonoBehaviour
     public int friendCurrentStage = 1;
     public int friendStageCap = 99;
     public bool friendRetired = false;
-    public bool friendUsedToday = false;
+   
 
     public int seniorCurrentStage = 1;
     public int seniorStageCap = 99;
     public bool seniorRetired = false;
-    public bool seniorUsedToday = false;
+ 
 
     [Header("Vending Buffs")]
     public bool hasEnergyDrinkToday = false;
@@ -107,6 +150,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int midtermScore = 0; // 0 ~ 30
     [SerializeField] private int finalScore = 0;   // 0 ~ 30
 
+    [Header("Meeting")]
+public bool meetingSceneScheduled = false;
+public int femaleFriendCount = 0;
+public bool romanceNpc1Unlocked = false;
+
+    private readonly HashSet<string> usedNpcStageToday = new HashSet<string>();
     public float RegularEarned => regularEarned;
     public float RegularPossible => regularPossible;
     public int MidtermScore => midtermScore;
@@ -115,13 +164,13 @@ public class GameManager : MonoBehaviour
     public int professorCurrentStage = 2; // 1단계 기본 + 질문 10회 달성 시 2단계 제안이 뜨게
     public int professorStageCap = 99;
     public bool professorRetired = false;
-    public bool professorUsedToday = false;
+
     public int professorQuestionCount = 0;
 
     public int romanceCurrentStage = 1;
     public int romanceStageCap = 99;
     public bool romanceRetired = false;
-    public bool romanceUsedToday = false;
+
 
     [Header("School Facility")]
     public bool usedSchoolFacilityToday = false;
@@ -588,37 +637,29 @@ public class GameManager : MonoBehaviour
         OnPlayerStatsRefreshed?.Invoke();
         return true;
     }
+    private string GetNpcStageUsageKey(SchoolNPCType type, int stage)
+    {
+        return $"{type}_{stage}";
+    }
 
     public void ResetDailyNPCUsage()
     {
-        friendUsedToday = false;
-        seniorUsedToday = false;
-        professorUsedToday = false;
-        romanceUsedToday = false;
+        usedNpcStageToday.Clear();
     }
 
-    public bool IsNPCTypeUsedToday(SchoolNPCType type)
+    public bool IsNPCStageUsedToday(SchoolNPCType type, int stage)
     {
-        switch (type)
-        {
-            case SchoolNPCType.Friend: return friendUsedToday;
-            case SchoolNPCType.Senior: return seniorUsedToday;
-            case SchoolNPCType.Professor: return professorUsedToday;
-            case SchoolNPCType.Romance: return romanceUsedToday;
-        }
-        return false;
+        return usedNpcStageToday.Contains(GetNpcStageUsageKey(type, stage));
     }
 
-    public void MarkNPCTypeUsedToday(SchoolNPCType type)
+    public void MarkNPCStageUsedToday(SchoolNPCType type, int stage)
     {
-        switch (type)
-        {
-            case SchoolNPCType.Friend: friendUsedToday = true; break;
-            case SchoolNPCType.Senior: seniorUsedToday = true; break;
-            case SchoolNPCType.Professor: professorUsedToday = true; break;
-            case SchoolNPCType.Romance: romanceUsedToday = true; break;
-        }
+        usedNpcStageToday.Add(GetNpcStageUsageKey(type, stage));
     }
+
+
+
+
 
     public int GetNPCCurrentStage(SchoolNPCType type)
     {
@@ -860,6 +901,29 @@ public class GameManager : MonoBehaviour
         CurrentPlayer.grade = GetTotalGradeScore();
         OnPlayerStatsRefreshed?.Invoke();
     }
+
+    public void ScheduleMeetingScene()
+    {
+        meetingSceneScheduled = true;
+    }
+
+    public void ApplyMeetingSceneResult(int correctCount)
+    {
+        correctCount = Mathf.Clamp(correctCount, 0, 3);
+
+        femaleFriendCount += correctCount;
+
+        // 기본 보상은 일단 학교생활력으로 두는 걸 추천
+        AddCampusLife(correctCount * 10);
+
+        if (correctCount == 3)
+            romanceNpc1Unlocked = true;
+
+        meetingSceneScheduled = false;
+
+        EndDay();
+    }
+
     public void GoToShop()
     {
         SceneTransitionManager.Instance.LoadScene("ShopScene");
@@ -883,6 +947,12 @@ public class GameManager : MonoBehaviour
 
     public void GoToEvening()
     {
+        if (meetingSceneScheduled)
+        {
+            SceneTransitionManager.Instance.LoadScene("MeetingScene");
+            return;
+        }
+
         SceneTransitionManager.Instance.LoadScene("EveningScene");
     }
 

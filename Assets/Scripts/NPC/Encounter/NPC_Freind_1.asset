@@ -46,7 +46,7 @@ MonoBehaviour:
     maxChance: 0
     successLine: "\uADF8\uB798 \uC774\uB530 \uBD10"
     failLine: 
-    successMoneyDelta: -2
+    successMoneyDelta: -10
     successAppearanceDelta: 0
     successCampusLifeDelta: 10
     successIntelligenceDelta: 0

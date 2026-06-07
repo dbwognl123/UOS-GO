@@ -212,6 +212,10 @@ public class SchoolNPCUI : MonoBehaviour
 
             if (!string.IsNullOrEmpty(choice.successUnlockEndingId))
                 GameManager.Instance.UnlockEndingFlag(choice.successUnlockEndingId);
+
+            // 추가: 친구 3단계 성공 선택지 같은 특수 이벤트 예약
+            if (choice.successScheduleMeetingScene)
+                GameManager.Instance.ScheduleMeetingScene();
         }
         else
         {
@@ -239,8 +243,10 @@ public class SchoolNPCUI : MonoBehaviour
                 GameManager.Instance.UnlockEndingFlag(choice.failUnlockEndingId);
         }
 
-        // 같은 종류 NPC는 오늘 더 이상 대화 불가
-        GameManager.Instance.MarkNPCTypeUsedToday(npcType);
+        GameManager.Instance.MarkNPCStageUsedToday(
+            npcType,
+            currentActor.EncounterData.stageIndex
+        );
     }
 
     private void ApplyMoney(int delta)

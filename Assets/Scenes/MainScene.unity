@@ -2760,14 +2760,12 @@ MonoBehaviour:
     sceneD: 0
     sceneE: 0
     sceneF: 0
-  friendCurrentStage: 1
+  friendCurrentStage: 2
   friendStageCap: 99
   friendRetired: 0
-  friendUsedToday: 0
   seniorCurrentStage: 1
   seniorStageCap: 99
   seniorRetired: 0
-  seniorUsedToday: 0
   hasEnergyDrinkToday: 0
   hasMemoryBreadToday: 0
   vendingItemCost: 10
@@ -2780,12 +2778,10 @@ MonoBehaviour:
   professorCurrentStage: 2
   professorStageCap: 99
   professorRetired: 0
-  professorUsedToday: 0
   professorQuestionCount: 0
   romanceCurrentStage: 1
   romanceStageCap: 99
   romanceRetired: 0
-  romanceUsedToday: 0
   usedSchoolFacilityToday: 0
   endingACutUnlocked: 0
   endingGraduateSchoolUnlocked: 0

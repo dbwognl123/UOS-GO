@@ -16,18 +16,18 @@ MonoBehaviour:
   npcType: 2
   npcName: A
   portrait: {fileID: -8441426913774170602, guid: e984ea5e2b7005a41b66a23b9415c0a0, type: 3}
-  openingLine: "\uC774\uBC88\uC5D0 MT\uD55C\uB2E4\uB294\uB370 \uAC08\uAC70\uC57C?"
+  openingLine: "\uC624\uB298 \uAC8C\uC784 \u3131\u3131?"
   stageIndex: 2
   minAppearanceToAppear: 0
-  minCampusLifeToAppear: 0
+  minCampusLifeToAppear: 30
   minIntelligenceToAppear: 0
   minMoneyToAppear: 0
   requireNoGirlfriend: 0
   requiredProfessorQuestionCount: 0
   appearChance: 100
   choices:
-  - choiceText: "\uC751 \uAC00\uB824\uACE0"
-    requiredMoney: 4
+  - choiceText: "\uADF8\uB798 "
+    requiredMoney: 0
     minAppearance: 0
     minCampusLife: 0
     minIntelligence: 0
@@ -43,15 +43,15 @@ MonoBehaviour:
     intelligenceWeight: 0
     minChance: 0
     maxChance: 0
-    successLine: "\uADF8\uB798 \uAC19\uC774 \uAC00\uC790"
+    successLine: "\uC624\uCF00\uC774 \uC624\uB298 \uC9C8\uB54C\uAE4C\uC9C0 \uD558\uB294\uAC70\uB2E4"
     failLine: 
-    successMoneyDelta: -4
+    successMoneyDelta: 0
     successAppearanceDelta: 0
     successCampusLifeDelta: 30
-    successIntelligenceDelta: 0
+    successIntelligenceDelta: -10
     successGradeDelta: 0
     successHappinessDelta: 0
-    successMaxHealthDelta: -5
+    successMaxHealthDelta: 0
     successSetGirlfriend: 0
     failMoneyDelta: 0
     failAppearanceDelta: 0
@@ -70,7 +70,7 @@ MonoBehaviour:
     failRetireNpcType: 0
     failProfessorQuestionCountDelta: 0
     failUnlockEndingId: 
-  - choiceText: "\uC544\uB2C8 \uC880 \uBD88\uD3B8\uD574\uC11C"
+  - choiceText: "\uC544\uB2C8 \uC624\uB298 \uC548\uB420\uB4EF"
     requiredMoney: 0
     minAppearance: 0
     minCampusLife: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
     failGradeDelta: 0
     failHappinessDelta: 0
     failMaxHealthDelta: 0
-    successSetStageTo: 1
+    successSetStageTo: 2
     successSetStageCapTo: 1
     successRetireNpcType: 0
     successProfessorQuestionCountDelta: 0

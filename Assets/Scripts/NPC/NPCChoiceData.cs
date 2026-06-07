@@ -44,7 +44,7 @@ public class NPCChoiceData
     public int successHappinessDelta;
     public int successMaxHealthDelta;
     public bool successSetGirlfriend;
-
+    public bool successScheduleMeetingScene;
     [Header("Effects On Fail")]
     public int failMoneyDelta;
     public int failAppearanceDelta;
