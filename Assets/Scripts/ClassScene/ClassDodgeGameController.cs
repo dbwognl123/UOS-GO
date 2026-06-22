@@ -1,10 +1,18 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class ClassDodgeGameController : MonoBehaviour
 {
+    [Header("Blackout")]
+    [SerializeField] private CanvasGroup blackoutOverlay;
+    [SerializeField] private float blackoutInterval = 5f;
+    [SerializeField] private float blackoutDuration = 0.5f;
+    [SerializeField] private float blackoutFadeTime = 0.12f;
+
+    private Coroutine blackoutRoutine;
+
     [Header("References")]
     [SerializeField] private Transform arenaCenter;
     [SerializeField] private DodgePlayerController player;
@@ -44,6 +52,19 @@ public class ClassDodgeGameController : MonoBehaviour
         if (player != null)
             player.SetupArena(arenaCenter, arenaRadius);
 
+        if (blackoutOverlay != null)
+        {
+            blackoutOverlay.alpha = 0f;
+            blackoutOverlay.blocksRaycasts = false;
+            blackoutOverlay.interactable = false;
+        }
+
+        if (GameManager.Instance != null &&
+            (GameManager.Instance.CurrentWeek == 8 || GameManager.Instance.CurrentWeek == 16))
+        {
+            blackoutRoutine = StartCoroutine(BlackoutRoutine());
+        }
+
         StartCoroutine(SpawnRoutine());
     }
 
@@ -74,8 +95,13 @@ public class ClassDodgeGameController : MonoBehaviour
         // 1주차  15  30 45  60  75  90 105 120 135 150 165 180 195 210 225
         // 플레   10  20 30 40 50 60 70 80 90 100 110 120 130 140 150
         int requiredIntelligence = week * 15;
-        int gap = Mathf.Max(0, requiredIntelligence - intelligence);
 
+        if (GameManager.Instance != null)
+            requiredIntelligence -= GameManager.Instance.GetRequiredIntelligenceReduction();
+
+        requiredIntelligence = Mathf.Max(0, requiredIntelligence);
+
+        int gap = Mathf.Max(0, requiredIntelligence - intelligence);
         int difficultyTier;
 
         if (gap <= 10)
@@ -182,33 +208,60 @@ public class ClassDodgeGameController : MonoBehaviour
         if (isFinished) return;
         Fail();
     }
-
+   
+    private int GetSurvivedSeconds()
+    {
+        float survived = surviveTime - remainingTime;
+        return Mathf.Clamp(Mathf.FloorToInt(survived), 0, Mathf.FloorToInt(surviveTime));
+    }
     private void Success()
     {
+
         if (isFinished) return;
         isFinished = true;
+        if (blackoutRoutine != null)
+        {
+            StopCoroutine(blackoutRoutine);
+            blackoutRoutine = null;
+        }
+
+        if (blackoutOverlay != null)
+            blackoutOverlay.alpha = 0f;
+
+        int survivedSeconds = Mathf.FloorToInt(surviveTime);
 
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.AddIntelligence(1);
-            GameManager.Instance.AddGrade(1);
+            GameManager.Instance.AddIntelligence(survivedSeconds);
+            GameManager.Instance.ApplyClassResult(survivedSeconds, surviveTime);
             GameManager.Instance.FinishCurrentClass();
         }
 
-        SceneManager.LoadScene("SchoolScene");
+        SceneTransitionManager.Instance.LoadScene("SchoolScene");
     }
 
     private void Fail()
     {
         if (isFinished) return;
         isFinished = true;
+        if (blackoutRoutine != null)
+        {
+            StopCoroutine(blackoutRoutine);
+            blackoutRoutine = null;
+        }
+
+        if (blackoutOverlay != null)
+            blackoutOverlay.alpha = 0f;
+        int survivedSeconds = GetSurvivedSeconds();
 
         if (GameManager.Instance != null)
         {
+            GameManager.Instance.AddIntelligence(survivedSeconds);
+            GameManager.Instance.ApplyClassResult(survivedSeconds, surviveTime);
             GameManager.Instance.FinishCurrentClass();
         }
 
-        SceneManager.LoadScene("SchoolScene");
+        SceneTransitionManager.Instance.LoadScene("SchoolScene");
     }
     private void OnDrawGizmosSelected()
     {
@@ -216,5 +269,39 @@ public class ClassDodgeGameController : MonoBehaviour
 
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(arenaCenter.position, arenaRadius);
+    }
+
+    private IEnumerator BlackoutRoutine()
+    {
+        while (!isFinished)
+        {
+            yield return new WaitForSeconds(blackoutInterval);
+
+            if (isFinished)
+                yield break;
+
+            yield return StartCoroutine(FadeBlackout(0f, 1f, blackoutFadeTime));
+            yield return new WaitForSeconds(blackoutDuration);
+            yield return StartCoroutine(FadeBlackout(1f, 0f, blackoutFadeTime));
+        }
+    }
+
+    private IEnumerator FadeBlackout(float from, float to, float duration)
+    {
+        if (blackoutOverlay == null)
+            yield break;
+
+        float time = 0f;
+        blackoutOverlay.alpha = from;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = Mathf.Clamp01(time / duration);
+            blackoutOverlay.alpha = Mathf.Lerp(from, to, t);
+            yield return null;
+        }
+
+        blackoutOverlay.alpha = to;
     }
 }

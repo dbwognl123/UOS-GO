@@ -54,7 +54,8 @@ public class SchoolNPCActor : MonoBehaviour
         {
             if (SchoolNPCUI.Instance == null) return;
 
-            if (GameManager.Instance != null && GameManager.Instance.IsNPCTypeUsedToday(encounterData.npcType))
+            if (GameManager.Instance != null &&
+    GameManager.Instance.IsNPCStageUsedToday(encounterData.npcType, encounterData.stageIndex))
             {
                 SchoolNPCUI.Instance.OpenSimpleDialogue(
                     encounterData.npcName,

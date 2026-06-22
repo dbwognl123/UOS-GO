@@ -20,7 +20,7 @@ MonoBehaviour:
     \uAC08\uB798?"
   stageIndex: 1
   minAppearanceToAppear: 0
-  minCampusLifeToAppear: 200
+  minCampusLifeToAppear: 300
   minIntelligenceToAppear: 0
   minMoneyToAppear: 0
   requireNoGirlfriend: 0

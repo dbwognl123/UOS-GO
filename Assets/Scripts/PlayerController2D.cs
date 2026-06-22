@@ -26,6 +26,8 @@ public class PlayerController2D : MonoBehaviour
 
     private void Update()
     {
+        if (ConvenienceStoreUI.Instance != null && ConvenienceStoreUI.Instance.IsOpen)
+            return;
         bool a = Input.GetKey(KeyCode.A);
         bool d = Input.GetKey(KeyCode.D);
         bool w = Input.GetKey(KeyCode.W);

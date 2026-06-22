@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class SchoolNPCManager : MonoBehaviour
 {
@@ -99,29 +100,22 @@ public class SchoolNPCManager : MonoBehaviour
         if (GameManager.Instance.IsNPCRetired(candidate.npcType))
             return null;
 
-        int currentStage = GameManager.Instance.GetNPCCurrentStage(candidate.npcType);
-        int stageCap = GameManager.Instance.GetNPCStageCap(candidate.npcType);
-
-        int targetStage = Mathf.Min(currentStage, stageCap);
-
-        NPCEncounterSO fallback = null;
+        List<NPCEncounterSO> eligible = new List<NPCEncounterSO>();
 
         for (int i = 0; i < candidate.stageEncounters.Length; i++)
         {
             NPCEncounterSO encounter = candidate.stageEncounters[i];
             if (encounter == null) continue;
 
-            if (encounter.stageIndex == targetStage)
-            {
-                if (CanEncounterAppear(encounter))
-                    return encounter;
-            }
-
-            if (encounter.stageIndex == 1)
-                fallback = encounter;
+            if (CanEncounterAppear(encounter))
+                eligible.Add(encounter);
         }
 
-        return fallback;
+        if (eligible.Count == 0)
+            return null;
+
+        int randomIndex = Random.Range(0, eligible.Count);
+        return eligible[randomIndex];
     }
 
     private bool CanEncounterAppear(NPCEncounterSO encounter)
