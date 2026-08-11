@@ -42,7 +42,26 @@ public class SchoolNPCActor : MonoBehaviour
             interactHint.SetActive(false);
     }
 
+    private string GetAlreadyTalkedLine(SchoolNPCType npcType)
+    {
+        switch (npcType)
+        {
+            case SchoolNPCType.Professor:
+                return "모르는 게 있으면 또 물어보러 오세요~";
 
+            case SchoolNPCType.Senior:
+                return "필요한 거 있으면 또 연락해~";
+
+            case SchoolNPCType.Friend:
+                return "ㅎㅇ?";
+
+            case SchoolNPCType.Romance:
+                return "안녕하세요 ㅎㅎ";
+
+            default:
+                return "안녕";
+        }
+    }
 
     private void Update()
     {
@@ -55,12 +74,17 @@ public class SchoolNPCActor : MonoBehaviour
             if (SchoolNPCUI.Instance == null) return;
 
             if (GameManager.Instance != null &&
-    GameManager.Instance.IsNPCStageUsedToday(encounterData.npcType, encounterData.stageIndex))
+    GameManager.Instance.IsNPCStageUsedToday(
+        encounterData.npcType,
+        encounterData.stageIndex))
             {
+                string alreadyTalkedLine =
+                    GetAlreadyTalkedLine(encounterData.npcType);
+
                 SchoolNPCUI.Instance.OpenSimpleDialogue(
                     encounterData.npcName,
                     encounterData.portrait,
-                    "안녕"
+                    alreadyTalkedLine
                 );
             }
             else

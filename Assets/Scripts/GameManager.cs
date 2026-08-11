@@ -19,7 +19,6 @@ public enum SchoolEntryType
     SideGate,
     BackGate
 }
-
 public enum SchoolFacilityType
 {
     Playground,
@@ -50,6 +49,7 @@ public enum ShopItemType
     EnergyDrink,
     MemoryBread
 }
+
 public class GameManager : MonoBehaviour
 {
 
@@ -93,14 +93,19 @@ public class GameManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.F3))
             {
-                AddCurrentHealth(10);
+                AddMaxHealth(10);
                 Debug.Log("디버그: 현재체력 +10");
             }
 
             if (Input.GetKeyDown(KeyCode.F4))
             {
-                AddCurrentHealth(-10);
-                Debug.Log("디버그: 현재체력 -10");
+                AddMaxHealth(-10);
+
+                Debug.Log(
+                    $"디버그: 최대체력 -10 " +
+                    $"(현재 최대체력: {CurrentPlayer.maxHealth}, " +
+                    $"현재체력: {CurrentPlayer.currentHealth})"
+                );
             }
 
             if (Input.GetKeyDown(KeyCode.F5))
@@ -112,19 +117,18 @@ public class GameManager : MonoBehaviour
           
         }
 #endif
-        if (Input.GetKeyDown(KeyCode.F3))
-        {
-            Debug.Log("테스트용: MeetingScene으로 이동");
-            meetingSceneScheduled = true;
-            SceneTransitionManager.Instance.LoadScene("MeetingScene");
-        }
+        
     }
     public static GameManager Instance { get; private set; }
 
     [Header("Ending Sequence Result")]
     public EndingSequenceResult currentEndingSequence = new EndingSequenceResult();
 
-    
+    public bool IsDialogueOpen { get; private set; }
+    public void SetDialogueOpen(bool isOpen)
+    {
+        IsDialogueOpen = isOpen;
+    }
     [Header("NPC Progress")]
     public int friendCurrentStage = 1;
     public int friendStageCap = 99;
@@ -140,9 +144,10 @@ public class GameManager : MonoBehaviour
     public bool hasEnergyDrinkToday = false;
     public bool hasMemoryBreadToday = false;
 
-    [SerializeField] private int vendingItemCost = 10;
+    [SerializeField] private int vendingItemCost = 20;
     [SerializeField] private float energyDrinkDrainMultiplier = 0.5f;
     [SerializeField] private int memoryBreadRequiredIntReduction = 20;
+    [SerializeField] private int workoutCost = 5;
 
     [Header("Grade Components")]
     [SerializeField] private float regularEarned = 0f;
@@ -316,17 +321,7 @@ public bool romanceNpc1Unlocked = false;
         
         SceneTransitionManager.Instance.LoadScene("MorningScene");
     }
-    public bool StudyInEvening()
-    {
-        if (CurrentPlayer == null) return false;
-        if (StudiedToday) return false;
-
-        AddMaxHealth(-5);
-        AddIntelligence(5);
-        StudiedToday = true;
-
-        return true;
-    }
+    
 
     public bool CanUseSchoolFacility()
     {
@@ -334,28 +329,48 @@ public bool romanceNpc1Unlocked = false;
         return !usedSchoolFacilityToday;
     }
 
+    public string GetWorkoutUnavailableReason()
+    {
+        if (CurrentPlayer == null)
+            return "플레이어 정보를 불러올 수 없습니다.";
+
+        if (usedSchoolFacilityToday)
+            return "오늘은 이미 운동을 했습니다.";
+
+        if (!IsAllClassesFinished)
+            return "오늘 수업을 모두 마친 뒤 이용할 수 있습니다.";
+
+        if (CurrentPlayer.money < workoutCost)
+            return $"돈이 부족합니다.\n운동에는 {workoutCost}원이 필요합니다.";
+
+        return "";
+    }
     public bool TryUseWorkoutFacility()
     {
         if (!CanUseWorkoutFacility())
             return false;
 
-        AddCurrentHealth(-10);
-        AddMaxHealth(2);
+        AddMoney(-workoutCost);
+        AddMaxHealth(3);
         AddAppearance(1);
 
         usedSchoolFacilityToday = true;
-        OnPlayerStatsRefreshed?.Invoke();
 
         return true;
     }
-
     public bool CanUseWorkoutFacility()
     {
-        if (CurrentPlayer == null) return false;
+        if (CurrentPlayer == null)
+            return false;
 
-        if (usedSchoolFacilityToday) return false;
-        if (!IsAllClassesFinished) return false;
-        if (CurrentPlayer.currentHealth < 10) return false;
+        if (usedSchoolFacilityToday)
+            return false;
+
+        if (!IsAllClassesFinished)
+            return false;
+
+        if (CurrentPlayer.money < workoutCost)
+            return false;
 
         return true;
     }
@@ -385,16 +400,31 @@ public bool romanceNpc1Unlocked = false;
     }
 
 
-    public bool WorkPartTimeInEvening()
+    
+
+    public float GetMaxHealthSpeedMultiplier(
+    float minimumMultiplier = 0.45f,
+    float healthExponent = 2f)
     {
-        if (CurrentPlayer == null) return false;
-        if (WorkedToday) return false;
+        if (CurrentPlayer == null)
+            return 1f;
 
-        AddMaxHealth(-3);
-        AddMoney(3);
-        WorkedToday = true;
+        const float standardMaxHealth = 100f;
 
-        return true;
+        float health01 = Mathf.Clamp01(
+            CurrentPlayer.maxHealth / standardMaxHealth
+        );
+
+        float curvedHealth = Mathf.Pow(
+            health01,
+            healthExponent
+        );
+
+        return Mathf.Lerp(
+            minimumMultiplier,
+            1f,
+            curvedHealth
+        );
     }
     public void AddHappiness(int value)
     {
@@ -500,6 +530,7 @@ public bool romanceNpc1Unlocked = false;
     {
         return finalScore;
     }
+    
     public void ApplyClassResult(float survivedSeconds, float maxSeconds)
     {
         if (CurrentPlayer == null) return;
@@ -526,11 +557,15 @@ public bool romanceNpc1Unlocked = false;
     }
     public void EnterSchool(SchoolEntryType entryType)
     {
+        ClearSchoolHealthDrainPauses();
+
         CurrentSchoolEntry = entryType;
         ClearSavedSchoolPlayerPosition();
-        SceneTransitionManager.Instance.LoadScene("SchoolScene");
-    }
 
+        SceneTransitionManager.Instance.LoadScene(
+            "SchoolScene"
+        );
+    }
     public int GetShopItemCost(ShopItemType itemType)
     {
         switch (itemType)
@@ -573,6 +608,15 @@ public bool romanceNpc1Unlocked = false;
         return "";
     }
 
+    public void UnlockRomanceNpc1()
+    {
+        romanceNpc1Unlocked = true;
+    }
+
+    public void LockRomanceNpc1()
+    {
+        romanceNpc1Unlocked = false;
+    }
     public bool HasBoughtShopItemToday(ShopItemType itemType)
     {
         switch (itemType)
@@ -734,14 +778,48 @@ public bool romanceNpc1Unlocked = false;
         }
     }
 
-   
 
-    
+
+    private readonly HashSet<string> schoolDrainPauseReasons =
+    new HashSet<string>();
+
+    public bool IsSchoolHealthDrainPaused
+    {
+        get
+        {
+            return IsDialogueOpen ||
+                   schoolDrainPauseReasons.Count > 0;
+        }
+    }
+
+    public void PauseSchoolHealthDrain(string reason)
+    {
+        if (string.IsNullOrEmpty(reason))
+            return;
+
+        schoolDrainPauseReasons.Add(reason);
+    }
+
+    public void ResumeSchoolHealthDrain(string reason)
+    {
+        if (string.IsNullOrEmpty(reason))
+            return;
+
+        schoolDrainPauseReasons.Remove(reason);
+    }
+
+    public void ClearSchoolHealthDrainPauses()
+    {
+        schoolDrainPauseReasons.Clear();
+        IsDialogueOpen = false;
+    }
 
 
     public float GetSchoolHealthDrainMultiplier()
     {
-        return hasEnergyDrinkToday ? 0.5f : 1f;
+        return hasEnergyDrinkToday
+            ? energyDrinkDrainMultiplier
+            : 1f;
     }
 
     public int GetRequiredIntelligenceReduction()
@@ -754,7 +832,7 @@ public bool romanceNpc1Unlocked = false;
         List<int> pool = new List<int>(allClassrooms);
         todaySchedule.Clear();
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 4; i++)
         {
             int randomIndex = UnityEngine.Random.Range(0, pool.Count);
             int classroomNumber = pool[randomIndex];
@@ -912,18 +990,14 @@ public bool romanceNpc1Unlocked = false;
         correctCount = Mathf.Clamp(correctCount, 0, 3);
 
         femaleFriendCount += correctCount;
-
-        // 기본 보상은 일단 학교생활력으로 두는 걸 추천
         AddCampusLife(correctCount * 10);
 
         if (correctCount == 3)
-            romanceNpc1Unlocked = true;
+            UnlockRomanceNpc1();
 
         meetingSceneScheduled = false;
-
         EndDay();
     }
-
     public void GoToShop()
     {
         SceneTransitionManager.Instance.LoadScene("ShopScene");
@@ -1001,6 +1075,9 @@ public bool romanceNpc1Unlocked = false;
                 break;
         }
     }
+    
+
+    
     private void BuildEndingSequenceResult()
     {
         if (CurrentPlayer == null)

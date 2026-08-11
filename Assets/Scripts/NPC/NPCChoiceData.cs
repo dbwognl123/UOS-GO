@@ -67,4 +67,13 @@ public class NPCChoiceData
     public bool failRetireNpcType;
     public int failProfessorQuestionCountDelta;
     public string failUnlockEndingId;
+
+    public bool successUnlockRomanceNpc1;
+    public bool failLockRomanceNpc1;
+
+    public bool useDynamicRomanceSuccessChance;
+    public float romanceBaseChance = 15f;
+    public float romanceAppearanceWeight = 1.5f;
+    public float romanceCampusLifeWeight = 0.15f;
+    public float romanceMaxChance = 85f;
 }

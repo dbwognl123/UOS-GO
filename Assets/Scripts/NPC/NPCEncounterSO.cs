@@ -31,6 +31,10 @@ public class NPCEncounterSO : ScriptableObject
     public bool requireNoGirlfriend;
     public int requiredProfessorQuestionCount;
 
+    [Header("Week Conditions")]
+    public int minWeekToAppear = 1;
+    public int maxWeekToAppear = 999;
+
     [Range(0f, 100f)]
     public float appearChance = 100f;
 

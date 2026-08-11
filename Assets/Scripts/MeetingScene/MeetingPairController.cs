@@ -268,13 +268,16 @@ public class MeetingPairController : MonoBehaviour
                 : $"정답 {correctCount}/3\n정답 하트를 확인하세요.";
         }
 
-        if (correctCount == 3 && GameManager.Instance != null)
-        {
-            GameManager.Instance.romanceNpc1Unlocked = true;
-        }
-
+        StartCoroutine(FinishMeetingRoutine(correctCount));
     }
 
+    private System.Collections.IEnumerator FinishMeetingRoutine(int correctCount)
+    {
+        yield return new WaitForSeconds(2f);
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.ApplyMeetingSceneResult(correctCount);
+    }
     private void RevealCorrectAnswer()
     {
         for (int femaleIndex = 0; femaleIndex < femaleNodes.Length; femaleIndex++)

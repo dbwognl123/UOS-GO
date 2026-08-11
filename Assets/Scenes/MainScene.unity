@@ -667,6 +667,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 0a9daa27605978740a4a14144c97cb50, type: 3}
   - sceneName: PartTimeQTEScene
     clip: {fileID: 8300000, guid: d22bccccc1e8b634a90ab59841006980, type: 3}
+  - sceneName: MeetingScene
+    clip: {fileID: 8300000, guid: f1f687da98c32864fb507ebe0d285cc5, type: 3}
   defaultVolume: 0.6
 --- !u!4 &522038279
 Transform:
@@ -2775,6 +2777,9 @@ MonoBehaviour:
   regularPossible: 0
   midtermScore: 0
   finalScore: 0
+  meetingSceneScheduled: 0
+  femaleFriendCount: 0
+  romanceNpc1Unlocked: 0
   professorCurrentStage: 2
   professorStageCap: 99
   professorRetired: 0

@@ -396,7 +396,7 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0.04534005
-    width: 0.99999994
+    width: 1
     height: 0.906801
   near clip plane: 0.3
   far clip plane: 1000
@@ -2995,8 +2995,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7134a5d436836c7469194473a947bce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController2D
-  moveSpeed: 10
+  minMoveSpeed: 1
+  maxMoveSpeed: 15
+  healthExponent: 4
   animator: {fileID: 2018984184}
+  debugMaxHealth: 0
+  debugHealth01: 0
+  debugCurrentMoveSpeed: 0
 --- !u!61 &1483305411
 BoxCollider2D:
   m_ObjectHideFlags: 0

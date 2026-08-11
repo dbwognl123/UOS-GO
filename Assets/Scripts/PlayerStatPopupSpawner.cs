@@ -29,8 +29,10 @@ public class PlayerStatPopupSpawner : MonoBehaviour
 
     private void OnDisable()
     {
+
         if (GameManager.Instance != null)
             GameManager.Instance.OnPlayerStatChanged -= HandleStatChanged;
+        GameManager.Instance?.SetDialogueOpen(false);
     }
 
     private void HandleStatChanged(PlayerStatType statType, int delta)
