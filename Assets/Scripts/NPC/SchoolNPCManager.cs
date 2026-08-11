@@ -6,6 +6,12 @@ public class SchoolNPCManager : MonoBehaviour
     [SerializeField] private NPCSpawnZone[] zones;
     [SerializeField] private GameObject npcPrefab;
 
+    private class WeightedEncounterOption
+    {
+        public NPCEncounterSO encounter;
+        public float weight;
+    }
+
     private void Start()
     {
         SpawnNPCsForToday();
@@ -23,25 +29,20 @@ public class SchoolNPCManager : MonoBehaviour
         {
             NPCSpawnZone zone = zones[i];
             if (zone == null) continue;
-            if (zone.spawnPoint == null) continue;
+           
 
-            NPCSpawnCandidate selectedCandidate = PickCandidate(zone);
-            if (selectedCandidate == null)
-                continue;
-
-            NPCEncounterSO selectedEncounter = ResolveEncounterForCurrentProgress(selectedCandidate);
+            NPCEncounterSO selectedEncounter = ResolveRandomEncounterFromZone(zone);
             if (selectedEncounter == null)
             {
-                Debug.Log($"[{zone.zoneId}] 조건을 만족하는 단계형 대화가 없음");
+                Debug.Log($"[{zone.zoneId}] 조건을 만족하는 NPC encounter가 없음");
                 continue;
             }
 
             GameObject npcObj = Instantiate(
-                npcPrefab,
-                zone.spawnPoint.position,
-                Quaternion.identity
+            npcPrefab,
+            zone.transform.position,
+            Quaternion.identity
             );
-
             npcObj.name = $"NPC_{selectedEncounter.npcType}_{selectedEncounter.stageIndex}_{zone.zoneId}";
 
             SchoolNPCActor actor = npcObj.GetComponent<SchoolNPCActor>();
@@ -50,19 +51,50 @@ public class SchoolNPCManager : MonoBehaviour
         }
     }
 
-    private NPCSpawnCandidate PickCandidate(NPCSpawnZone zone)
+    private NPCEncounterSO ResolveRandomEncounterFromZone(NPCSpawnZone zone)
     {
-        if (zone.candidates == null || zone.candidates.Length == 0)
+        if (zone == null || zone.candidates == null || zone.candidates.Length == 0)
             return null;
 
-        float totalWeight = zone.noneWeight;
+        List<WeightedEncounterOption> options = new List<WeightedEncounterOption>();
 
         for (int i = 0; i < zone.candidates.Length; i++)
         {
-            NPCSpawnCandidate c = zone.candidates[i];
-            if (c == null) continue;
-            totalWeight += Mathf.Max(0f, c.weight);
+            NPCSpawnCandidate candidate = zone.candidates[i];
+            if (candidate == null) continue;
+            if (candidate.stageEncounters == null || candidate.stageEncounters.Length == 0) continue;
+
+            List<NPCEncounterSO> eligibleInCandidate = new List<NPCEncounterSO>();
+
+            for (int j = 0; j < candidate.stageEncounters.Length; j++)
+            {
+                NPCEncounterSO encounter = candidate.stageEncounters[j];
+                if (encounter == null) continue;
+
+                if (CanEncounterAppear(encounter))
+                    eligibleInCandidate.Add(encounter);
+            }
+
+            if (eligibleInCandidate.Count == 0)
+                continue;
+
+            float candidateWeight = Mathf.Max(0f, candidate.weight);
+            float splitWeight = candidateWeight / eligibleInCandidate.Count;
+
+            for (int j = 0; j < eligibleInCandidate.Count; j++)
+            {
+                options.Add(new WeightedEncounterOption
+                {
+                    encounter = eligibleInCandidate[j],
+                    weight = splitWeight
+                });
+            }
         }
+
+        float totalWeight = zone.noneWeight;
+
+        for (int i = 0; i < options.Count; i++)
+            totalWeight += options[i].weight;
 
         if (totalWeight <= 0f)
             return null;
@@ -74,54 +106,26 @@ public class SchoolNPCManager : MonoBehaviour
 
         roll -= zone.noneWeight;
 
-        for (int i = 0; i < zone.candidates.Length; i++)
+        for (int i = 0; i < options.Count; i++)
         {
-            NPCSpawnCandidate c = zone.candidates[i];
-            if (c == null) continue;
+            if (roll < options[i].weight)
+                return options[i].encounter;
 
-            float w = Mathf.Max(0f, c.weight);
-            if (roll < w)
-                return c;
-
-            roll -= w;
+            roll -= options[i].weight;
         }
 
         return null;
     }
 
-    private NPCEncounterSO ResolveEncounterForCurrentProgress(NPCSpawnCandidate candidate)
-    {
-        if (candidate == null || candidate.stageEncounters == null || candidate.stageEncounters.Length == 0)
-            return null;
-
-        if (GameManager.Instance == null || GameManager.Instance.CurrentPlayer == null)
-            return null;
-
-        if (GameManager.Instance.IsNPCRetired(candidate.npcType))
-            return null;
-
-        List<NPCEncounterSO> eligible = new List<NPCEncounterSO>();
-
-        for (int i = 0; i < candidate.stageEncounters.Length; i++)
-        {
-            NPCEncounterSO encounter = candidate.stageEncounters[i];
-            if (encounter == null) continue;
-
-            if (CanEncounterAppear(encounter))
-                eligible.Add(encounter);
-        }
-
-        if (eligible.Count == 0)
-            return null;
-
-        int randomIndex = Random.Range(0, eligible.Count);
-        return eligible[randomIndex];
-    }
-
     private bool CanEncounterAppear(NPCEncounterSO encounter)
     {
+        if (GameManager.Instance == null || GameManager.Instance.CurrentPlayer == null)
+            return false;
+
         PlayerRunData player = GameManager.Instance.CurrentPlayer;
-        if (player == null) return false;
+
+        if (GameManager.Instance.IsNPCRetired(encounter.npcType))
+            return false;
 
         if (player.appearance < encounter.minAppearanceToAppear)
             return false;
@@ -140,6 +144,17 @@ public class SchoolNPCManager : MonoBehaviour
 
         if (encounter.requiredProfessorQuestionCount > 0 &&
             GameManager.Instance.professorQuestionCount < encounter.requiredProfessorQuestionCount)
+            return false;
+
+        if (GameManager.Instance.CurrentWeek < encounter.minWeekToAppear)
+            return false;
+
+        if (GameManager.Instance.CurrentWeek > encounter.maxWeekToAppear)
+            return false;
+
+        if (encounter.npcType == SchoolNPCType.Romance &&
+            encounter.stageIndex == 1 &&
+            !GameManager.Instance.romanceNpc1Unlocked)
             return false;
 
         float roll = Random.Range(0f, 100f);

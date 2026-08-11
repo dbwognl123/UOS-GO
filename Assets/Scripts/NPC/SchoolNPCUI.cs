@@ -29,7 +29,30 @@ public class SchoolNPCUI : MonoBehaviour
 
     private SchoolNPCActor currentActor;
     private readonly List<Button> spawnedButtons = new();
-    
+
+    private float GetFinalSuccessChance(PlayerRunData player, NPCChoiceData choice)
+    {
+        // 기존 시스템 확률을 기본값으로 사용
+        float chance = NPCChoiceResolver.EvaluateSuccessChance(player, choice);
+
+        // Romance만 추가 보정
+        if (currentActor != null &&
+            currentActor.EncounterData != null &&
+            currentActor.EncounterData.npcType == SchoolNPCType.Romance)
+        {
+            // 외모 30부터 보정
+            chance += Mathf.Max(0, player.appearance - 30) * 1.5f;
+
+            // 학교생활력 보정
+            chance += player.campusLife * 0.15f;
+
+            // 상한 제한
+            chance = Mathf.Clamp(chance, 0f, 85f);
+        }
+
+        return chance;
+    }
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -49,6 +72,10 @@ public class SchoolNPCUI : MonoBehaviour
 
     public void OpenSimpleDialogue(string npcName, Sprite portrait, string line)
     {
+        GameManager.Instance?.SetDialogueOpen(true);
+
+        gameObject.SetActive(true);
+
         currentActor = null;
 
         if (rootPanel != null)
@@ -74,7 +101,9 @@ public class SchoolNPCUI : MonoBehaviour
     {
         if (actor == null || actor.EncounterData == null)
             return;
+        GameManager.Instance?.SetDialogueOpen(true);
 
+        gameObject.SetActive(true);
         currentActor = actor;
         NPCEncounterSO data = actor.EncounterData;
 
@@ -98,6 +127,9 @@ public class SchoolNPCUI : MonoBehaviour
 
     public void CloseDialogue()
     {
+        gameObject.SetActive(false);
+        GameManager.Instance?.SetDialogueOpen(false);
+
         ClearChoiceButtons();
 
         if (rootPanel != null)
@@ -155,8 +187,7 @@ public class SchoolNPCUI : MonoBehaviour
                 resultText.text = reason;
             return;
         }
-
-        float chance = NPCChoiceResolver.EvaluateSuccessChance(player, choice);
+        float chance = GetFinalSuccessChance(player, choice);
         float roll = Random.Range(0f, 100f);
         bool success = roll <= chance;
 
@@ -177,6 +208,7 @@ public class SchoolNPCUI : MonoBehaviour
     
 
     }
+    
 
     private void ApplyChoiceResult(NPCChoiceData choice, bool success)
     {
@@ -198,11 +230,7 @@ public class SchoolNPCUI : MonoBehaviour
             if (choice.successSetGirlfriend)
                 GameManager.Instance.CurrentPlayer.hasGirlfriend = true;
 
-            if (choice.successSetStageTo >= 1)
-                GameManager.Instance.SetNPCStage(npcType, choice.successSetStageTo);
-
-            if (choice.successSetStageCapTo >= 1)
-                GameManager.Instance.SetNPCStageCap(npcType, choice.successSetStageCapTo);
+         
 
             if (choice.successRetireNpcType)
                 GameManager.Instance.RetireNPCType(npcType);
@@ -213,9 +241,11 @@ public class SchoolNPCUI : MonoBehaviour
             if (!string.IsNullOrEmpty(choice.successUnlockEndingId))
                 GameManager.Instance.UnlockEndingFlag(choice.successUnlockEndingId);
 
-            // 추가: 친구 3단계 성공 선택지 같은 특수 이벤트 예약
             if (choice.successScheduleMeetingScene)
                 GameManager.Instance.ScheduleMeetingScene();
+
+            if (choice.successUnlockRomanceNpc1)
+                GameManager.Instance.UnlockRomanceNpc1();
         }
         else
         {
@@ -227,12 +257,7 @@ public class SchoolNPCUI : MonoBehaviour
             ApplyHappiness(choice.failHappinessDelta);
             ApplyMaxHealth(choice.failMaxHealthDelta);
 
-            if (choice.failSetStageTo >= 1)
-                GameManager.Instance.SetNPCStage(npcType, choice.failSetStageTo);
-
-            if (choice.failSetStageCapTo >= 1)
-                GameManager.Instance.SetNPCStageCap(npcType, choice.failSetStageCapTo);
-
+          
             if (choice.failRetireNpcType)
                 GameManager.Instance.RetireNPCType(npcType);
 
@@ -241,6 +266,9 @@ public class SchoolNPCUI : MonoBehaviour
 
             if (!string.IsNullOrEmpty(choice.failUnlockEndingId))
                 GameManager.Instance.UnlockEndingFlag(choice.failUnlockEndingId);
+
+            if (choice.failLockRomanceNpc1)
+                GameManager.Instance.LockRomanceNpc1();
         }
 
         GameManager.Instance.MarkNPCStageUsedToday(
@@ -248,7 +276,6 @@ public class SchoolNPCUI : MonoBehaviour
             currentActor.EncounterData.stageIndex
         );
     }
-
     private void ApplyMoney(int delta)
     {
         if (delta == 0 || GameManager.Instance == null) return;

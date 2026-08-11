@@ -35,7 +35,7 @@ public class MorningSceneUI : MonoBehaviour
             if (i < schedule.Count)
                 classTexts[i].text = GameManager.Instance.GetClassroomDisplayMultiline(schedule[i]);
             else
-                classTexts[i].text = "-";
+                classTexts[i].text = "공강";
         }
     }
 

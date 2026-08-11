@@ -28,7 +28,7 @@ MonoBehaviour:
   appearChance: 100
   choices:
   - choiceText: "\uC751 \uADF8\uB798"
-    requiredMoney: 4
+    requiredMoney: 20
     minAppearance: 0
     minCampusLife: 0
     minIntelligence: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
     successCampusLifeDelta: 60
     successIntelligenceDelta: 0
     successGradeDelta: 0
-    successHappinessDelta: -5
+    successHappinessDelta: 0
     successMaxHealthDelta: -5
     successSetGirlfriend: 0
     successScheduleMeetingScene: 1

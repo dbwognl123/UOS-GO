@@ -1,0 +1,135 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1c5225fbcf2dac4fb43cd08c361062d, type: 3}
+  m_Name: NPC_R_weekend
+  m_EditorClassIdentifier: Assembly-CSharp::NPCEncounterSO
+  encounterId: Romance1_Festival
+  npcType: 3
+  npcName: G
+  portrait: {fileID: 0}
+  openingLine: "\uC548\uB155 \uC624\uB79C\uB9CC\uC774\uB124 \uC798 \uC9C0\uB0C8\uC5B4?"
+  stageIndex: 1
+  minAppearanceToAppear: 30
+  minCampusLifeToAppear: 0
+  minIntelligenceToAppear: 0
+  minMoneyToAppear: 0
+  requireNoGirlfriend: 1
+  requiredProfessorQuestionCount: 0
+  appearChance: 100
+  choices:
+  - choiceText: "\uC548\uB155 \uC624\uB79C\uB9CC\uC774\uB124 \uC774\uBC88 \uC8FC\uB9D0\uC5D0
+      \uC220\uC774\uB098 \uBA39\uC744\uB798??"
+    requiredMoney: 0
+    minAppearance: 0
+    minCampusLife: 0
+    minIntelligence: 0
+    blockIfHasGirlfriend: 0
+    useFixedChance: 0
+    fixedSuccessChance: 0
+    autoFailIfAppearanceBelow: 30
+    autoFailIfCampusLifeBelow: 0
+    autoFailIfIntelligenceBelow: 0
+    baseChance: 50
+    appearanceWeight: 0
+    campusLifeWeight: 0
+    intelligenceWeight: 0
+    minChance: 0
+    maxChance: 0
+    successLine: "\uC751 \uADF8\uB7F4\uAE4C? \u314E\u314E "
+    failLine: "\uC544... \u314E\u314E \uC0DD\uAC01 \uC880 \uD574\uBCFC\uAC8C~ "
+    successMoneyDelta: 0
+    successAppearanceDelta: 0
+    successCampusLifeDelta: 0
+    successIntelligenceDelta: 0
+    successGradeDelta: 0
+    successHappinessDelta: 0
+    successMaxHealthDelta: 0
+    successSetGirlfriend: 0
+    successScheduleMeetingScene: 0
+    failMoneyDelta: 0
+    failAppearanceDelta: 0
+    failCampusLifeDelta: 0
+    failIntelligenceDelta: 0
+    failGradeDelta: 0
+    failHappinessDelta: 0
+    failMaxHealthDelta: 0
+    successSetStageTo: 0
+    successSetStageCapTo: 0
+    successRetireNpcType: 0
+    successProfessorQuestionCountDelta: 0
+    successUnlockEndingId: 
+    failSetStageTo: 0
+    failSetStageCapTo: 0
+    failRetireNpcType: 0
+    failProfessorQuestionCountDelta: 0
+    failUnlockEndingId: 
+    successUnlockRomanceNpc1: 0
+    failLockRomanceNpc1: 1
+    useDynamicRomanceSuccessChance: 1
+    romanceBaseChance: 20
+    romanceAppearanceWeight: 1
+    romanceCampusLifeWeight: 0.1
+    romanceMaxChance: 80
+  - choiceText: 
+    requiredMoney: 0
+    minAppearance: 0
+    minCampusLife: 0
+    minIntelligence: 0
+    blockIfHasGirlfriend: 0
+    useFixedChance: 0
+    fixedSuccessChance: 0
+    autoFailIfAppearanceBelow: 0
+    autoFailIfCampusLifeBelow: 0
+    autoFailIfIntelligenceBelow: 0
+    baseChance: 0
+    appearanceWeight: 0
+    campusLifeWeight: 0
+    intelligenceWeight: 0
+    minChance: 0
+    maxChance: 0
+    successLine: 
+    failLine: 
+    successMoneyDelta: 0
+    successAppearanceDelta: 0
+    successCampusLifeDelta: 0
+    successIntelligenceDelta: 0
+    successGradeDelta: 0
+    successHappinessDelta: 0
+    successMaxHealthDelta: 0
+    successSetGirlfriend: 0
+    successScheduleMeetingScene: 0
+    failMoneyDelta: 0
+    failAppearanceDelta: 0
+    failCampusLifeDelta: 0
+    failIntelligenceDelta: 0
+    failGradeDelta: 0
+    failHappinessDelta: 0
+    failMaxHealthDelta: 0
+    successSetStageTo: 0
+    successSetStageCapTo: 0
+    successRetireNpcType: 0
+    successProfessorQuestionCountDelta: 0
+    successUnlockEndingId: 
+    failSetStageTo: 0
+    failSetStageCapTo: 0
+    failRetireNpcType: 0
+    failProfessorQuestionCountDelta: 0
+    failUnlockEndingId: 
+    successUnlockRomanceNpc1: 0
+    failLockRomanceNpc1: 0
+    useDynamicRomanceSuccessChance: 0
+    romanceBaseChance: 15
+    romanceAppearanceWeight: 1.5
+    romanceCampusLifeWeight: 0.15
+    romanceMaxChance: 85
+  minWeekToAppear: 10
+  maxWeekToAppear: 16
