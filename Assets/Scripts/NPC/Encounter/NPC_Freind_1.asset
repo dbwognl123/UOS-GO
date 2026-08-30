@@ -15,7 +15,7 @@ MonoBehaviour:
   encounterId: friend1
   npcType: 2
   npcName: A
-  portrait: {fileID: 8223760342256937110, guid: 7f47c20b7df2e2944a2507fbd0d1400d, type: 3}
+  portrait: {fileID: 9033130954255262074, guid: 5ee883e3b99cc6241ae3a7c034bf9d50, type: 3}
   openingLine: "\uC548\uB155 \uC800\uB141\uC774\uB098 \uAC19\uC774 \uBA39\uC73C\uB7EC
     \uAC08\uB798?"
   stageIndex: 1
@@ -25,6 +25,8 @@ MonoBehaviour:
   minMoneyToAppear: 0
   requireNoGirlfriend: 0
   requiredProfessorQuestionCount: 0
+  minWeekToAppear: 1
+  maxWeekToAppear: 999
   appearChance: 100
   choices:
   - choiceText: "\uC751 \uADF8\uB798"
@@ -54,6 +56,7 @@ MonoBehaviour:
     successHappinessDelta: 0
     successMaxHealthDelta: 0
     successSetGirlfriend: 0
+    successScheduleMeetingScene: 0
     failMoneyDelta: 0
     failAppearanceDelta: 0
     failCampusLifeDelta: 0
@@ -71,6 +74,13 @@ MonoBehaviour:
     failRetireNpcType: 0
     failProfessorQuestionCountDelta: 0
     failUnlockEndingId: 
+    successUnlockRomanceNpc1: 0
+    failLockRomanceNpc1: 0
+    useDynamicRomanceSuccessChance: 0
+    romanceBaseChance: 15
+    romanceAppearanceWeight: 1.5
+    romanceCampusLifeWeight: 0.15
+    romanceMaxChance: 85
   - choiceText: "\uC544\uB2C8 \uC9D1\uC5D0 \uAC00\uB824\uACE0"
     requiredMoney: 0
     minAppearance: 0
@@ -98,6 +108,7 @@ MonoBehaviour:
     successHappinessDelta: 0
     successMaxHealthDelta: 0
     successSetGirlfriend: 0
+    successScheduleMeetingScene: 0
     failMoneyDelta: 0
     failAppearanceDelta: 0
     failCampusLifeDelta: 0
@@ -115,3 +126,10 @@ MonoBehaviour:
     failRetireNpcType: 0
     failProfessorQuestionCountDelta: 0
     failUnlockEndingId: 
+    successUnlockRomanceNpc1: 0
+    failLockRomanceNpc1: 0
+    useDynamicRomanceSuccessChance: 0
+    romanceBaseChance: 15
+    romanceAppearanceWeight: 1.5
+    romanceCampusLifeWeight: 0.15
+    romanceMaxChance: 85

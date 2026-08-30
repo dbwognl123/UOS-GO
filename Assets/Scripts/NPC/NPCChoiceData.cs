@@ -45,6 +45,9 @@ public class NPCChoiceData
     public int successMaxHealthDelta;
     public bool successSetGirlfriend;
     public bool successScheduleMeetingScene;
+
+    public bool successRetireNpcType;
+    public bool successUnlockRomanceNpc1;
     [Header("Effects On Fail")]
     public int failMoneyDelta;
     public int failAppearanceDelta;
@@ -57,7 +60,6 @@ public class NPCChoiceData
     [Header("Progression On Success")]
     public int successSetStageTo = -1;
     public int successSetStageCapTo = -1;
-    public bool successRetireNpcType;
     public int successProfessorQuestionCountDelta;
     public string successUnlockEndingId;
 
@@ -68,7 +70,6 @@ public class NPCChoiceData
     public int failProfessorQuestionCountDelta;
     public string failUnlockEndingId;
 
-    public bool successUnlockRomanceNpc1;
     public bool failLockRomanceNpc1;
 
     public bool useDynamicRomanceSuccessChance;
@@ -76,4 +77,9 @@ public class NPCChoiceData
     public float romanceAppearanceWeight = 1.5f;
     public float romanceCampusLifeWeight = 0.15f;
     public float romanceMaxChance = 85f;
+
+    [Header("Festival Romance")]
+    public bool successSetFestivalDatePromise;
+
+    public bool successStartFestivalDate;
 }

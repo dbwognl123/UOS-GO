@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SchoolNPCUI : MonoBehaviour
 {
     public static SchoolNPCUI Instance { get; private set; }
-
+    private System.Action simpleDialogueCloseCallback;
     [Header("Root")]
     [SerializeField] private GameObject rootPanel;
 
@@ -70,9 +70,15 @@ public class SchoolNPCUI : MonoBehaviour
             closeButton.onClick.AddListener(CloseDialogue);
     }
 
-    public void OpenSimpleDialogue(string npcName, Sprite portrait, string line)
+    public void OpenSimpleDialogue(
+    string npcName,
+    Sprite portrait,
+    string line,
+    System.Action onClosed = null)
     {
         GameManager.Instance?.SetDialogueOpen(true);
+
+        simpleDialogueCloseCallback = onClosed;
 
         gameObject.SetActive(true);
 
@@ -96,11 +102,11 @@ public class SchoolNPCUI : MonoBehaviour
         ClearChoiceButtons();
         LockPlayer(true);
     }
-
     public void OpenDialogue(SchoolNPCActor actor)
     {
         if (actor == null || actor.EncounterData == null)
             return;
+        simpleDialogueCloseCallback = null;
         GameManager.Instance?.SetDialogueOpen(true);
 
         gameObject.SetActive(true);
@@ -127,7 +133,12 @@ public class SchoolNPCUI : MonoBehaviour
 
     public void CloseDialogue()
     {
+        // 닫힌 다음 실행해야 할 작업을 임시 저장
+        System.Action callback = simpleDialogueCloseCallback;
+        simpleDialogueCloseCallback = null;
+
         gameObject.SetActive(false);
+
         GameManager.Instance?.SetDialogueOpen(false);
 
         ClearChoiceButtons();
@@ -141,6 +152,9 @@ public class SchoolNPCUI : MonoBehaviour
         currentActor = null;
 
         LockPlayer(false);
+
+        // UI 정리가 전부 끝난 다음 실행
+        callback?.Invoke();
     }
     private void RebuildChoiceButtons(NPCEncounterSO data)
     {
@@ -244,6 +258,9 @@ public class SchoolNPCUI : MonoBehaviour
             if (choice.successScheduleMeetingScene)
                 GameManager.Instance.ScheduleMeetingScene();
 
+            if (choice.successSetFestivalDatePromise)
+                GameManager.Instance.SetFestivalDatePromise();
+
             if (choice.successUnlockRomanceNpc1)
                 GameManager.Instance.UnlockRomanceNpc1();
         }
@@ -256,8 +273,11 @@ public class SchoolNPCUI : MonoBehaviour
             ApplyGrade(choice.failGradeDelta);
             ApplyHappiness(choice.failHappinessDelta);
             ApplyMaxHealth(choice.failMaxHealthDelta);
+            if (choice.successStartFestivalDate)
+            {
+                GameManager.Instance.StartFestivalDate();
+            }
 
-          
             if (choice.failRetireNpcType)
                 GameManager.Instance.RetireNPCType(npcType);
 
