@@ -119,10 +119,12 @@ public class SchoolNPCManager : MonoBehaviour
 
     private bool CanEncounterAppear(NPCEncounterSO encounter)
     {
-        if (GameManager.Instance == null || GameManager.Instance.CurrentPlayer == null)
+        if (GameManager.Instance == null ||
+            GameManager.Instance.CurrentPlayer == null)
             return false;
 
-        PlayerRunData player = GameManager.Instance.CurrentPlayer;
+        PlayerRunData player =
+            GameManager.Instance.CurrentPlayer;
 
         if (GameManager.Instance.IsNPCRetired(encounter.npcType))
             return false;
@@ -139,25 +141,62 @@ public class SchoolNPCManager : MonoBehaviour
         if (player.money < encounter.minMoneyToAppear)
             return false;
 
-        if (encounter.requireNoGirlfriend && player.hasGirlfriend)
+        if (encounter.requireNoGirlfriend &&
+            player.hasGirlfriend)
             return false;
 
         if (encounter.requiredProfessorQuestionCount > 0 &&
-            GameManager.Instance.professorQuestionCount < encounter.requiredProfessorQuestionCount)
+            GameManager.Instance.professorQuestionCount <
+            encounter.requiredProfessorQuestionCount)
             return false;
 
-        if (GameManager.Instance.CurrentWeek < encounter.minWeekToAppear)
+        if (GameManager.Instance.CurrentWeek <
+            encounter.minWeekToAppear)
             return false;
 
-        if (GameManager.Instance.CurrentWeek > encounter.maxWeekToAppear)
+        if (GameManager.Instance.CurrentWeek >
+            encounter.maxWeekToAppear)
             return false;
 
-        if (encounter.npcType == SchoolNPCType.Romance &&
-            encounter.stageIndex == 1 &&
-            !GameManager.Instance.romanceNpc1Unlocked)
-            return false;
+        // ==========================
+        // Romance NPC 전용 등장 확률
+        // ==========================
+        if (encounter.npcType == SchoolNPCType.Romance)
+        {
+            // 축제 약속을 잡은 상태라면
+            // 10주차까지 랜덤 Romance NPC 등장 금지
+            if (GameManager.Instance.hasFestivalDatePromise &&
+                GameManager.Instance.CurrentWeek <= 10)
+            {
+                return false;
+            }
 
-        float roll = Random.Range(0f, 100f);
+            float romanceChance =
+                GameManager.Instance.GetRomanceSpawnChance();
+
+            if (romanceChance <= 0f)
+                return false;
+
+            float romanceRoll =
+                Random.Range(0f, 100f);
+
+            Debug.Log(
+                $"[Romance Spawn] " +
+                $"Week={GameManager.Instance.CurrentWeek}, " +
+                $"FestivalPromise={GameManager.Instance.hasFestivalDatePromise}, " +
+                $"Chance={romanceChance:F0}%, " +
+                $"Roll={romanceRoll:F1}"
+            );
+
+            return romanceRoll <= romanceChance;
+        }
+
+        // ==========================
+        // 일반 NPC
+        // ==========================
+        float roll =
+            Random.Range(0f, 100f);
+
         return roll <= encounter.appearChance;
     }
 }

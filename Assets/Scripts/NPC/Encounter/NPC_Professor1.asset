@@ -15,7 +15,7 @@ MonoBehaviour:
   encounterId: Professor1
   npcType: 0
   npcName: P
-  portrait: {fileID: -8441426913774170602, guid: e984ea5e2b7005a41b66a23b9415c0a0, type: 3}
+  portrait: {fileID: -7376690901357878632, guid: 0339aec1e761e194f9a971b28d8319da, type: 3}
   openingLine: "\uBB34\uC2A8\uC77C\uC778\uAC00\uC694 \uD559\uC0DD?"
   stageIndex: 1
   minAppearanceToAppear: 0
@@ -24,6 +24,8 @@ MonoBehaviour:
   minMoneyToAppear: 0
   requireNoGirlfriend: 0
   requiredProfessorQuestionCount: 0
+  minWeekToAppear: 1
+  maxWeekToAppear: 999
   appearChance: 100
   choices:
   - choiceText: "\uAD50\uC218\uB2D8 \uBAA8\uB974\uB294 \uAC70 \uC880 \uC54C\uB824\uC8FC\uC2E4
@@ -54,6 +56,7 @@ MonoBehaviour:
     successHappinessDelta: -2
     successMaxHealthDelta: 0
     successSetGirlfriend: 0
+    successScheduleMeetingScene: 0
     failMoneyDelta: 0
     failAppearanceDelta: 0
     failCampusLifeDelta: 0
@@ -71,6 +74,13 @@ MonoBehaviour:
     failRetireNpcType: 0
     failProfessorQuestionCountDelta: 0
     failUnlockEndingId: 
+    successUnlockRomanceNpc1: 0
+    failLockRomanceNpc1: 0
+    useDynamicRomanceSuccessChance: 0
+    romanceBaseChance: 15
+    romanceAppearanceWeight: 1.5
+    romanceCampusLifeWeight: 0.15
+    romanceMaxChance: 85
   - choiceText: "\uC544 \uC544\uBB34\uAC83\uB3C4 \uC544\uB2D9\uB2C8\uB2E4"
     requiredMoney: 0
     minAppearance: 0
@@ -98,6 +108,7 @@ MonoBehaviour:
     successHappinessDelta: 0
     successMaxHealthDelta: 0
     successSetGirlfriend: 0
+    successScheduleMeetingScene: 0
     failMoneyDelta: 0
     failAppearanceDelta: 0
     failCampusLifeDelta: 0
@@ -115,3 +126,10 @@ MonoBehaviour:
     failRetireNpcType: 0
     failProfessorQuestionCountDelta: 0
     failUnlockEndingId: 
+    successUnlockRomanceNpc1: 0
+    failLockRomanceNpc1: 0
+    useDynamicRomanceSuccessChance: 0
+    romanceBaseChance: 15
+    romanceAppearanceWeight: 1.5
+    romanceCampusLifeWeight: 0.15
+    romanceMaxChance: 85

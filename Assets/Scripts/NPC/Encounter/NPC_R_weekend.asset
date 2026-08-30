@@ -15,7 +15,7 @@ MonoBehaviour:
   encounterId: Romance1_Festival
   npcType: 3
   npcName: G
-  portrait: {fileID: 0}
+  portrait: {fileID: 4356588906812027909, guid: 4d4c9b4916a77b84797be8230a8ce150, type: 3}
   openingLine: "\uC548\uB155 \uC624\uB79C\uB9CC\uC774\uB124 \uC798 \uC9C0\uB0C8\uC5B4?"
   stageIndex: 1
   minAppearanceToAppear: 30
@@ -24,6 +24,8 @@ MonoBehaviour:
   minMoneyToAppear: 0
   requireNoGirlfriend: 1
   requiredProfessorQuestionCount: 0
+  minWeekToAppear: 10
+  maxWeekToAppear: 16
   appearChance: 100
   choices:
   - choiceText: "\uC548\uB155 \uC624\uB79C\uB9CC\uC774\uB124 \uC774\uBC88 \uC8FC\uB9D0\uC5D0
@@ -55,6 +57,8 @@ MonoBehaviour:
     successMaxHealthDelta: 0
     successSetGirlfriend: 0
     successScheduleMeetingScene: 0
+    successRetireNpcType: 0
+    successUnlockRomanceNpc1: 0
     failMoneyDelta: 0
     failAppearanceDelta: 0
     failCampusLifeDelta: 0
@@ -64,7 +68,6 @@ MonoBehaviour:
     failMaxHealthDelta: 0
     successSetStageTo: 0
     successSetStageCapTo: 0
-    successRetireNpcType: 0
     successProfessorQuestionCountDelta: 0
     successUnlockEndingId: 
     failSetStageTo: 0
@@ -72,13 +75,13 @@ MonoBehaviour:
     failRetireNpcType: 0
     failProfessorQuestionCountDelta: 0
     failUnlockEndingId: 
-    successUnlockRomanceNpc1: 0
     failLockRomanceNpc1: 1
     useDynamicRomanceSuccessChance: 1
     romanceBaseChance: 20
     romanceAppearanceWeight: 1
     romanceCampusLifeWeight: 0.1
     romanceMaxChance: 80
+    successSetFestivalDatePromise: 0
   - choiceText: 
     requiredMoney: 0
     minAppearance: 0
@@ -107,6 +110,8 @@ MonoBehaviour:
     successMaxHealthDelta: 0
     successSetGirlfriend: 0
     successScheduleMeetingScene: 0
+    successRetireNpcType: 0
+    successUnlockRomanceNpc1: 0
     failMoneyDelta: 0
     failAppearanceDelta: 0
     failCampusLifeDelta: 0
@@ -116,7 +121,6 @@ MonoBehaviour:
     failMaxHealthDelta: 0
     successSetStageTo: 0
     successSetStageCapTo: 0
-    successRetireNpcType: 0
     successProfessorQuestionCountDelta: 0
     successUnlockEndingId: 
     failSetStageTo: 0
@@ -124,12 +128,10 @@ MonoBehaviour:
     failRetireNpcType: 0
     failProfessorQuestionCountDelta: 0
     failUnlockEndingId: 
-    successUnlockRomanceNpc1: 0
     failLockRomanceNpc1: 0
     useDynamicRomanceSuccessChance: 0
     romanceBaseChance: 15
     romanceAppearanceWeight: 1.5
     romanceCampusLifeWeight: 0.15
     romanceMaxChance: 85
-  minWeekToAppear: 10
-  maxWeekToAppear: 16
+    successSetFestivalDatePromise: 0

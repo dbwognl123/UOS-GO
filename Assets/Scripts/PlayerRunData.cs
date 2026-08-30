@@ -12,4 +12,6 @@ public class PlayerRunData
     public bool hasGirlfriend; // 여자친구 유무
     public int appearance;     // 외모
     public int grade;          // 학점
+
+    public int romanceAffection;
 }

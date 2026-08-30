@@ -15,7 +15,7 @@ MonoBehaviour:
   encounterId: friend3
   npcType: 2
   npcName: A
-  portrait: {fileID: 5217204289928282442, guid: 17a9db80268cbb842bf022c789ac3e4c, type: 3}
+  portrait: {fileID: 9033130954255262074, guid: 5ee883e3b99cc6241ae3a7c034bf9d50, type: 3}
   openingLine: "\uC774\uBC88\uC5D0 \uACFC\uD305 \uD558\uB824\uB294\uB370 \uB108\uB3C4
     \uAC08\uB798?"
   stageIndex: 3
@@ -25,6 +25,8 @@ MonoBehaviour:
   minMoneyToAppear: 0
   requireNoGirlfriend: 0
   requiredProfessorQuestionCount: 0
+  minWeekToAppear: 1
+  maxWeekToAppear: 999
   appearChance: 100
   choices:
   - choiceText: "\uC751 \uADF8\uB798"
@@ -72,6 +74,13 @@ MonoBehaviour:
     failRetireNpcType: 0
     failProfessorQuestionCountDelta: 0
     failUnlockEndingId: 
+    successUnlockRomanceNpc1: 0
+    failLockRomanceNpc1: 0
+    useDynamicRomanceSuccessChance: 0
+    romanceBaseChance: 15
+    romanceAppearanceWeight: 1.5
+    romanceCampusLifeWeight: 0.15
+    romanceMaxChance: 85
   - choiceText: "\uC544\uB2C8"
     requiredMoney: 0
     minAppearance: 0
@@ -117,3 +126,10 @@ MonoBehaviour:
     failRetireNpcType: 0
     failProfessorQuestionCountDelta: 0
     failUnlockEndingId: 
+    successUnlockRomanceNpc1: 0
+    failLockRomanceNpc1: 0
+    useDynamicRomanceSuccessChance: 0
+    romanceBaseChance: 15
+    romanceAppearanceWeight: 1.5
+    romanceCampusLifeWeight: 0.15
+    romanceMaxChance: 85

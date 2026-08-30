@@ -17,10 +17,17 @@ public class SchoolNPCActor : MonoBehaviour
 
     public void Setup(NPCEncounterSO data)
     {
+        // Spawner가 넘겨준 축제 전용 Encounter를 저장
         encounterData = data;
 
-        if (worldSpriteRenderer != null && data != null && data.portrait != null)
-            worldSpriteRenderer.sprite = data.portrait;
+        // 중요:
+        // portrait는 대화창용 이미지이므로
+        // 월드 SpriteRenderer를 변경하지 않는다.
+
+        Debug.Log(
+            $"[SchoolNPCActor] Setup 완료 / " +
+            $"Encounter={(encounterData != null ? encounterData.name : "NULL")}"
+        );
     }
 
     public void Consume()
@@ -65,38 +72,74 @@ public class SchoolNPCActor : MonoBehaviour
 
     private void Update()
     {
-        if (isConsumed) return;
-        if (!playerInRange) return;
-        if (encounterData == null) return;
+        if (isConsumed)
+            return;
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (!playerInRange)
+            return;
+
+        if (encounterData == null)
+            return;
+
+        if (!Input.GetKeyDown(KeyCode.E))
+            return;
+
+        if (SchoolNPCUI.Instance == null)
         {
-            if (SchoolNPCUI.Instance == null) return;
+            Debug.LogWarning("[SchoolNPCActor] SchoolNPCUI.Instance가 없습니다.");
+            return;
+        }
 
-            if (GameManager.Instance != null &&
-    GameManager.Instance.IsNPCStageUsedToday(
-        encounterData.npcType,
-        encounterData.stageIndex))
-            {
-                string alreadyTalkedLine =
-                    GetAlreadyTalkedLine(encounterData.npcType);
+        GameManager gm = GameManager.Instance;
 
-                SchoolNPCUI.Instance.OpenSimpleDialogue(
-                    encounterData.npcName,
-                    encounterData.portrait,
-                    alreadyTalkedLine
-                );
-            }
-            else
+        if (gm == null)
+            return;
+
+        // ======================================
+        // 10주차 축제 데이트 여자 NPC
+        // ======================================
+        if (gm.CurrentWeek == 10 &&
+            gm.hasFestivalDatePromise &&
+            encounterData.npcType == SchoolNPCType.Romance)
+        {
+            if (!gm.festivalDateStarted)
             {
-                SchoolNPCUI.Instance.OpenDialogue(this);
+                Debug.Log("[Festival] 여자 NPC와 첫 상호작용");
+
+                gm.StartFestivalDate();
+                return;
             }
         }
+
+        // ======================================
+        // 기존 NPC 처리
+        // ======================================
+        if (gm.IsNPCStageUsedToday(
+                encounterData.npcType,
+                encounterData.stageIndex))
+        {
+            string alreadyTalkedLine =
+                GetAlreadyTalkedLine(encounterData.npcType);
+
+            SchoolNPCUI.Instance.OpenSimpleDialogue(
+                encounterData.npcName,
+                encounterData.portrait,
+                alreadyTalkedLine
+            );
+        }
+        else
+        {
+            SchoolNPCUI.Instance.OpenDialogue(this);
+        }
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (isConsumed) return;
-        if (!other.CompareTag("Player")) return;
+        if (isConsumed)
+            return;
+
+        if (!other.CompareTag("Player"))
+            return;
 
         playerInRange = true;
 
@@ -106,7 +149,8 @@ public class SchoolNPCActor : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (!other.CompareTag("Player"))
+            return;
 
         playerInRange = false;
 

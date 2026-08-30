@@ -49,12 +49,44 @@ public enum ShopItemType
     EnergyDrink,
     MemoryBread
 }
+public enum FestivalDatePhase
+{
+    None,
+    Booth,
+    Food,
+    Concert,
+    Finished
+}
 
+public enum FestivalBoothType
+{
+    Tarot,
+    BlindDate,
+    Sports,
+    Food
+}
+
+public enum FestivalFoodType
+{
+    Steak,
+    IceCream,
+    ChickenGangjeong,
+    ChickenSkewer,
+    Pizza,
+    Sushi
+}
 public class GameManager : MonoBehaviour
 {
 
     private void Update()
     {
+        #if UNITY_EDITOR
+    if (Input.GetKeyDown(KeyCode.F7))
+    {
+        DebugSetWeek9WithFestivalPromise();
+    }
+#endif
+
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.F8))
         {
@@ -62,19 +94,19 @@ public class GameManager : MonoBehaviour
         }
 #endif
 
-#if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.F6))
-        {
-            CurrentWeek = 8;
-            Debug.Log("테스트용: 현재 주차를 8주차로 변경");
-        }
+//#if UNITY_EDITOR
+//        if (Input.GetKeyDown(KeyCode.F6))
+//        {
+//            CurrentWeek = 8;
+//            Debug.Log("테스트용: 현재 주차를 8주차로 변경");
+//        }
 
-        if (Input.GetKeyDown(KeyCode.F7))
-        {
-            CurrentWeek = 16;
-            Debug.Log("테스트용: 현재 주차를 16주차로 변경");
-        }
-#endif
+//        if (Input.GetKeyDown(KeyCode.F7))
+//        {
+//            CurrentWeek = 16;
+//            Debug.Log("테스트용: 현재 주차를 16주차로 변경");
+//        }
+//#endif
 
 #if UNITY_EDITOR
         if (CurrentPlayer != null)
@@ -156,9 +188,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int finalScore = 0;   // 0 ~ 30
 
     [Header("Meeting")]
-public bool meetingSceneScheduled = false;
-public int femaleFriendCount = 0;
-public bool romanceNpc1Unlocked = false;
+    public bool meetingSceneScheduled = false;
+    public int femaleFriendCount = 0;
+
+    // 3:3 미팅에서 3쌍을 전부 맞힌 횟수
+    public int perfectMeetingSuccessCount = 0;
+
+    public bool romanceNpc1Unlocked = false;
 
     private readonly HashSet<string> usedNpcStageToday = new HashSet<string>();
     public float RegularEarned => regularEarned;
@@ -176,6 +212,7 @@ public bool romanceNpc1Unlocked = false;
     public int romanceStageCap = 99;
     public bool romanceRetired = false;
 
+    
 
     [Header("School Facility")]
     public bool usedSchoolFacilityToday = false;
@@ -190,6 +227,24 @@ public bool romanceNpc1Unlocked = false;
     public bool WorkedToday { get; private set; } = false;
     private const int MAX_WEEK = 16;
 
+   
+    [SerializeField] private int totalFestivalBoothCount = 4;
+
+    [Header("Festival Date")]
+    public bool hasFestivalDatePromise = false;
+    public bool festivalDateStarted = false;
+    public bool festivalDateFinished = false;
+    public bool festivalDateEndedByLowHealth = false;
+
+    public FestivalDatePhase festivalDatePhase = FestivalDatePhase.None;
+
+    public FestivalBoothType targetFestivalBoothType;
+    public FestivalFoodType targetFestivalFoodType;
+
+    public int visitedTargetBoothCount = 0;
+
+    private readonly HashSet<string> visitedFestivalBooths =
+        new HashSet<string>();
     private readonly int[] allClassrooms =
     {
         01, 03, 04, 05, 06, 07,
@@ -299,6 +354,14 @@ public bool romanceNpc1Unlocked = false;
         regularPossible = 0f;
         midtermScore = 0;
         finalScore = 0;
+        perfectMeetingSuccessCount = 0;
+        femaleFriendCount = 0;
+        romanceNpc1Unlocked = false;
+        hasFestivalDatePromise = false;
+        festivalDateStarted = false;
+        festivalDateFinished = false;
+        festivalDateEndedByLowHealth = false;
+
 
         hasEnergyDrinkToday = false;
         hasMemoryBreadToday = false;
@@ -314,6 +377,7 @@ public bool romanceNpc1Unlocked = false;
             appearance = 5,
             grade = 0
         };
+        CurrentPlayer.romanceAffection = 0;
 
         GenerateTodaySchedule();
         ClearSavedSchoolPlayerPosition();
@@ -335,13 +399,16 @@ public bool romanceNpc1Unlocked = false;
             return "플레이어 정보를 불러올 수 없습니다.";
 
         if (usedSchoolFacilityToday)
-            return "오늘은 이미 운동을 했습니다.";
+            return "오늘은 이미 운동 시설을 이용했습니다.";
 
         if (!IsAllClassesFinished)
-            return "오늘 수업을 모두 마친 뒤 이용할 수 있습니다.";
+            return "수업을 모두 마친 뒤에 이용할 수 있습니다.";
+
+        if (CurrentPlayer.currentHealth <= 20)
+            return "너무 지쳐서 운동을 할 수 없습니다.";
 
         if (CurrentPlayer.money < workoutCost)
-            return $"돈이 부족합니다.\n운동에는 {workoutCost}원이 필요합니다.";
+            return $"돈이 부족합니다. 운동에는 {workoutCost}원이 필요합니다.";
 
         return "";
     }
@@ -367,6 +434,9 @@ public bool romanceNpc1Unlocked = false;
             return false;
 
         if (!IsAllClassesFinished)
+            return false;
+
+        if (CurrentPlayer.currentHealth <= 20)
             return false;
 
         if (CurrentPlayer.money < workoutCost)
@@ -507,7 +577,40 @@ public bool romanceNpc1Unlocked = false;
         CurrentPlayer.appearance = Mathf.Clamp(CurrentPlayer.appearance + value, 0, 999);
         OnPlayerStatsRefreshed?.Invoke();
     }
+    public void AddRomanceAffection(int value)
+    {
+        if (CurrentPlayer == null)
+            return;
 
+        CurrentPlayer.romanceAffection =
+            Mathf.Clamp(
+                CurrentPlayer.romanceAffection + value,
+                0,
+                100
+            );
+
+        Debug.Log(
+            $"[Romance] 호감도=" +
+            $"{CurrentPlayer.romanceAffection}"
+        );
+
+        OnPlayerStatsRefreshed?.Invoke();
+    }
+    public float GetRomanceSpawnChance()
+    {
+        if (perfectMeetingSuccessCount <= 0)
+            return 0f;
+
+        float chance =
+            20f +
+            (perfectMeetingSuccessCount -1) * 20f;
+
+        return Mathf.Clamp(
+            chance,
+            20f,
+            60f
+        );
+    }
     public void SetGirlfriend(bool value)
     {
         if (CurrentPlayer == null) return;
@@ -616,6 +719,218 @@ public bool romanceNpc1Unlocked = false;
     public void LockRomanceNpc1()
     {
         romanceNpc1Unlocked = false;
+    }
+    public void SetFestivalDatePromise()
+    {
+        hasFestivalDatePromise = true;
+
+        Debug.Log(
+            $"[Romance] 10주차 축제 약속 설정 완료. " +
+            $"현재 주차={CurrentWeek}"
+        );
+    }
+
+    public void StartFestivalDate()
+    {
+        if (CurrentWeek != 10)
+            return;
+
+        if (!hasFestivalDatePromise)
+            return;
+
+        festivalDateStarted = true;
+        festivalDateFinished = false;
+        festivalDateEndedByLowHealth = false;
+
+        festivalDatePhase = FestivalDatePhase.Booth;
+
+        visitedFestivalBooths.Clear();
+        visitedTargetBoothCount = 0;
+
+        // 4종류 중 하나 랜덤 선택
+        targetFestivalBoothType =
+            (FestivalBoothType)UnityEngine.Random.Range(0, 4);
+
+        Debug.Log(
+            $"[Festival Date] 시작 / 목표 부스 = {targetFestivalBoothType}"
+        );
+        FestivalDialogueController.Instance?.
+    ShowStartDialogue();
+    }
+    public string GetFestivalBoothDateLine()
+    {
+        string boothName = GetFestivalBoothName(targetFestivalBoothType);
+
+        return $"왔어? 우리 과가 {boothName} 하는데 한번 구경 가볼래?";
+    }
+    public string GetFestivalBoothName(FestivalBoothType type)
+    {
+        switch (type)
+        {
+            case FestivalBoothType.Tarot:
+                return "타로 부스";
+
+            case FestivalBoothType.BlindDate:
+                return "소개팅 부스";
+
+            case FestivalBoothType.Sports:
+                return "운동 부스";
+
+            case FestivalBoothType.Food:
+                return "음식 부스";
+        }
+
+        return "부스";
+    }
+
+    public void VisitFestivalBooth(
+    string boothId,
+    FestivalBoothType boothType)
+    {
+        if (!festivalDateStarted ||
+            festivalDateFinished)
+            return;
+
+        if (festivalDatePhase != FestivalDatePhase.Booth)
+            return;
+
+        if (boothType != targetFestivalBoothType)
+            return;
+
+        // 같은 장소 중복 방문 방지
+        if (!visitedFestivalBooths.Add(boothId))
+            return;
+
+        visitedTargetBoothCount++;
+
+        Debug.Log(
+            $"[Festival] 목표 부스 방문 " +
+            $"{visitedTargetBoothCount}/3"
+        );
+
+        // 1번째 부스
+        if (visitedTargetBoothCount == 1)
+        {
+            FestivalDialogueController.Instance?.
+                ShowFirstWrongBoothDialogue();
+
+            return;
+        }
+
+        // 2번째 부스
+        if (visitedTargetBoothCount == 2)
+        {
+            FestivalDialogueController.Instance?.
+                ShowSecondWrongBoothDialogue();
+
+            return;
+        }
+
+        // 3번째 부스
+        if (visitedTargetBoothCount >= 3)
+        {
+            StartFestivalFoodPhase();
+        }
+    }
+    private void StartFestivalFoodPhase()
+    {
+        festivalDatePhase =
+            FestivalDatePhase.Food;
+
+        targetFestivalFoodType =
+            (FestivalFoodType)UnityEngine.Random.Range(0, 6);
+
+        FestivalDialogueController.Instance?.
+            ShowFoodRequestDialogue();
+
+        Debug.Log(
+            $"[Festival] 원하는 음식 = " +
+            $"{targetFestivalFoodType}"
+        );
+    }
+    public bool IsAllFestivalBoothsVisited()
+    {
+        return visitedFestivalBooths.Count
+            >= totalFestivalBoothCount;
+    }
+
+    public int GetVisitedFestivalBoothCount()
+    {
+        return visitedFestivalBooths.Count;
+    }
+
+    public string GetFestivalFoodName(FestivalFoodType type)
+    {
+        switch (type)
+        {
+            case FestivalFoodType.Steak:
+                return "스테이크";
+
+            case FestivalFoodType.IceCream:
+                return "구슬아이스크림";
+
+            case FestivalFoodType.ChickenGangjeong:
+                return "닭강정";
+
+            case FestivalFoodType.ChickenSkewer:
+                return "닭꼬치";
+
+            case FestivalFoodType.Pizza:
+                return "피자";
+
+            case FestivalFoodType.Sushi:
+                return "초밥";
+        }
+
+        return "뭐 맛있는 거";
+    }
+    public void StartFestivalConcertPhase()
+    {
+        if (!festivalDateStarted ||
+            festivalDateFinished)
+            return;
+
+        festivalDatePhase =
+            FestivalDatePhase.Concert;
+
+        Debug.Log("[Festival] 공연 단계 시작");
+    }
+    public string GetFestivalFoodRequestLine()
+    {
+        string foodName =
+            GetFestivalFoodName(targetFestivalFoodType);
+
+        return $"ㅋㅋ 재밌네. 푸드트럭도 가보자. 나 {foodName} 땡긴다.";
+    }
+
+    public void CompleteFestivalDate()
+    {
+        if (festivalDateFinished)
+            return;
+
+        festivalDateFinished = true;
+        festivalDatePhase = FestivalDatePhase.Finished;
+
+        AddRomanceAffection(40);
+
+        Debug.Log(
+            $"[Festival] 데이트 성공 / 호감도 +40"
+        );
+    }
+    public void EndFestivalDateByLowHealth()
+    {
+        if (festivalDateFinished)
+            return;
+
+        festivalDateFinished = true;
+        festivalDateEndedByLowHealth = true;
+        festivalDatePhase = FestivalDatePhase.Finished;
+
+        AddRomanceAffection(20);
+
+        Debug.Log(
+            "[Festival] 체력 부족으로 데이트 종료 / 호감도 +20"
+        );
     }
     public bool HasBoughtShopItemToday(ShopItemType itemType)
     {
@@ -992,8 +1307,17 @@ public bool romanceNpc1Unlocked = false;
         femaleFriendCount += correctCount;
         AddCampusLife(correctCount * 10);
 
+        // 한 번의 3:3 미팅에서 3쌍 모두 정확히 매칭하면
+        // "완벽 성공" 1회 누적
         if (correctCount == 3)
-            UnlockRomanceNpc1();
+        {
+            perfectMeetingSuccessCount++;
+
+            Debug.Log(
+                $"[미팅] 완벽 성공! " +
+                $"누적 성공 횟수: {perfectMeetingSuccessCount}"
+            );
+        }
 
         meetingSceneScheduled = false;
         EndDay();
@@ -1094,9 +1418,9 @@ public bool romanceNpc1Unlocked = false;
             currentEndingSequence.sceneA = EndingSceneAType.LonerCampusLife;
 
         // B: 학점
-        if (CurrentPlayer.grade >= 150)
+        if (CurrentPlayer.grade >= 80)
             currentEndingSequence.sceneB = EndingSceneBType.GoodGrade;
-        else if (CurrentPlayer.grade >= 70)
+        else if (CurrentPlayer.grade >= 50)
             currentEndingSequence.sceneB = EndingSceneBType.NormalGrade;
         else
             currentEndingSequence.sceneB = EndingSceneBType.BadGrade;
@@ -1149,4 +1473,22 @@ public bool romanceNpc1Unlocked = false;
 
         SceneTransitionManager.Instance.LoadScene("EveningScene");
     }
+    public void DebugSetWeek9WithFestivalPromise()
+    {
+        CurrentWeek = 9;
+
+        hasFestivalDatePromise = true;
+
+        festivalDateStarted = false;
+        festivalDateFinished = false;
+        festivalDateEndedByLowHealth = false;
+
+        festivalDatePhase = FestivalDatePhase.None;
+
+        Debug.Log(
+            $"[Debug] 9주차 / 축제 데이트 약속 완료 상태로 변경"
+        );
+    }
 }
+
+
