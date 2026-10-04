@@ -45,18 +45,36 @@ public class FestivalStageInteraction : MonoBehaviour
     {
         watchingPerformance = true;
 
-        Debug.Log("[Festival] 공연 관람 시작");
-
-        yield return new WaitForSeconds(5f);
-
         GameManager gm = GameManager.Instance;
 
-        if (gm == null ||
-            gm.festivalDateFinished)
+        if (gm == null)
         {
             watchingPerformance = false;
             yield break;
         }
+
+        Debug.Log("[Festival] 공연 관람 시작");
+
+        yield return new WaitForSeconds(performanceDuration);
+
+        gm = GameManager.Instance;
+
+        if (gm == null)
+        {
+            watchingPerformance = false;
+            yield break;
+        }
+
+        // 그 사이 체력 부족 종료가 시작됐으면 공연 성공 처리 X
+        if (gm.festivalDateFinished ||
+            gm.festivalDateEnding)
+        {
+            watchingPerformance = false;
+            yield break;
+        }
+
+        // 다른 종료 루트가 들어오지 못하도록 잠금
+        gm.festivalDateEnding = true;
 
         if (FestivalDialogueController.Instance != null)
         {
@@ -65,15 +83,17 @@ public class FestivalStageInteraction : MonoBehaviour
                     () =>
                     {
                         gm.CompleteFestivalDate();
-                        watchingPerformance = false;
+                        gm.GoToEveningSceneAfterFestival();
                     }
                 );
         }
         else
         {
             gm.CompleteFestivalDate();
-            watchingPerformance = false;
+            gm.GoToEveningSceneAfterFestival();
         }
+
+        watchingPerformance = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

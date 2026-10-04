@@ -82,4 +82,9 @@ public class NPCChoiceData
     public bool successSetFestivalDatePromise;
 
     public bool successStartFestivalDate;
+
+    [Header("Final Romance")]
+    public bool isFinalConfession;
+    public bool isFinalConfessionDecline;
+    public int minRomanceAffection;
 }

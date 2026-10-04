@@ -270,11 +270,42 @@ MonoBehaviour:
   sceneText: {fileID: 2075286186}
   finishButtons: {fileID: 1738946313}
   fadeOverlay: {fileID: 1033087024}
-  fadeDuration: 3
-  blackHoldTime: 0.5
+  fadeDuration: 2
+  blackHoldTime: 0.2
   slideDatabase:
-  - key: A_GoodCampusLife
-    text: "\uD559\uAD50 \uC0DD\uD65C\uC740 \uAF64 \uC798 \uD55C \uAC83 \uAC19\uC544"
+  - key: A_GoodGrade
+    text: "\uC5F4\uC2EC\uD788 \uACF5\uBD80\uD588\uB354\uB2C8 \uC131\uC801\uC740 \uC798
+      \uB098\uC628 \uAC83 \uAC19\uC544"
+    imageA: {fileID: -4582833091583542330, guid: 76114623186b9654286f1f33c67b3931, type: 3}
+    imageB: {fileID: -5016020197574784473, guid: 17da610cc6aa1b0468feecfc2e6cac26, type: 3}
+    totalDuration: 2
+    swapInterval: 1
+    startAnchoredPos: {x: 0, y: 0}
+    endAnchoredPos: {x: 0, y: 0}
+    startScale: {x: 1, y: 1, z: 1}
+    endScale: {x: 1.03, y: 1.03, z: 1.03}
+  - key: A_NormalGrade
+    text: "\uACF5\uBD80\uB294 \uADF8\uB0E5 \uD3C9\uBC94\uD788 \uD55C\uAC70\uAC19\uC544"
+    imageA: {fileID: -4457005990340782664, guid: 51b20bb850da30743a25515e87a40c43, type: 3}
+    imageB: {fileID: 4303208600212578640, guid: e44ab711a8cc4f042b108dc00713581b, type: 3}
+    totalDuration: 2
+    swapInterval: 1
+    startAnchoredPos: {x: 0, y: 0}
+    endAnchoredPos: {x: 0, y: 0}
+    startScale: {x: 1, y: 1, z: 1}
+    endScale: {x: 1.03, y: 1.03, z: 1.03}
+  - key: A_BadGrade
+    text: "\uACF5\uBD80\uB294 \uD574\uBCF8 \uC801\uC774 \uC5C6\uB294\uAC70 \uAC19\uC544"
+    imageA: {fileID: -3687348052613884379, guid: d76bb269a7c8e454aa0141e477297521, type: 3}
+    imageB: {fileID: -7301891738916945114, guid: 86e5f2c2199754343bbaa921aa547864, type: 3}
+    totalDuration: 2
+    swapInterval: 1
+    startAnchoredPos: {x: 0, y: 0}
+    endAnchoredPos: {x: 0, y: 0}
+    startScale: {x: 1, y: 1, z: 1}
+    endScale: {x: 1.03, y: 1.03, z: 1.03}
+  - key: B_GoodCampusLife
+    text: "\uB9CE\uC740 \uC0AC\uB78C\uB4E4\uACFC \uC7AC\uBC0C\uAC8C \uC9C0\uB0C8\uACE0"
     imageA: {fileID: 8481801075558220300, guid: eb6d037df7f7d0b47919d1e43c3c277e, type: 3}
     imageB: {fileID: 7863609087321319063, guid: 60f843e48b0766046a9a503a36d8b91d, type: 3}
     totalDuration: 2
@@ -283,134 +314,82 @@ MonoBehaviour:
     endAnchoredPos: {x: 0, y: 0}
     startScale: {x: 1, y: 1, z: 1}
     endScale: {x: 1.03, y: 1.03, z: 1.03}
-  - key: A_NormalCampusLife
-    text: "\uD559\uAD50 \uC0DD\uD65C\uC740 \uD3C9\uBC94\uD588\uB358 \uAC83 \uAC19\uC544"
-    imageA: {fileID: 0}
-    imageB: {fileID: 0}
-    totalDuration: 3
-    swapInterval: 0.18
+  - key: B_NormalCampusLife
+    text: "\uD3C9\uBC94\uD558\uAC8C \uD559\uAD50 \uC0DD\uD65C\uD588\uACE0"
+    imageA: {fileID: -8014261502490571653, guid: 5b1ef739504585c4b85008b8890ccc62, type: 3}
+    imageB: {fileID: -2627626495299027640, guid: fe5c0ee25a6bcd34e843b2576eb4e484, type: 3}
+    totalDuration: 2
+    swapInterval: 1
     startAnchoredPos: {x: 0, y: 0}
     endAnchoredPos: {x: 0, y: 0}
     startScale: {x: 1, y: 1, z: 1}
     endScale: {x: 1.03, y: 1.03, z: 1.03}
-  - key: A_LonerCampusLife
-    text: "\uADF8\uB0E5 \uC544\uC2F8\uCC98\uB7FC \uC9C0\uB0C8\uB358 \uAC83 \uAC19\uC544"
-    imageA: {fileID: 0}
-    imageB: {fileID: 0}
-    totalDuration: 3
-    swapInterval: 0.18
-    startAnchoredPos: {x: 0, y: 0}
-    endAnchoredPos: {x: 0, y: 0}
-    startScale: {x: 1, y: 1, z: 1}
-    endScale: {x: 1.03, y: 1.03, z: 1.03}
-  - key: B_GoodGrade
-    text: "\uC131\uC801\uC740 \uC5C4\uCCAD \uC798 \uB098\uC654\uACE0"
-    imageA: {fileID: 0}
-    imageB: {fileID: 0}
-    totalDuration: 3
-    swapInterval: 0.18
-    startAnchoredPos: {x: 0, y: 0}
-    endAnchoredPos: {x: 0, y: 0}
-    startScale: {x: 1, y: 1, z: 1}
-    endScale: {x: 1.03, y: 1.03, z: 1.03}
-  - key: B_NormalGrade
-    text: "\uC131\uC801\uC740 \uBB34\uB09C\uD588\uACE0"
-    imageA: {fileID: 0}
-    imageB: {fileID: 0}
-    totalDuration: 3
-    swapInterval: 0.18
-    startAnchoredPos: {x: 0, y: 0}
-    endAnchoredPos: {x: 0, y: 0}
-    startScale: {x: 1, y: 1, z: 1}
-    endScale: {x: 1.03, y: 1.03, z: 1.03}
-  - key: B_BadGrade
-    text: "\uC131\uC801\uC740... \uADF8\uB0E5 \uB9DD\uD55C \uAC83 \uAC19\uACE0"
-    imageA: {fileID: 0}
-    imageB: {fileID: 0}
-    totalDuration: 3
-    swapInterval: 0.18
+  - key: B_BadCampusLife
+    text: "\uBB54\uAC00 \uC544\uC2F8\uCC98\uB7FC \uC9C0\uB0B8 \uAC83 \uAC19\uACE0"
+    imageA: {fileID: -4420781712680604251, guid: e575fba334502f7428403900fc4184e5, type: 3}
+    imageB: {fileID: 8862680222830431580, guid: efb128252199e624e9d35dcc814c71b6, type: 3}
+    totalDuration: 2
+    swapInterval: 1
     startAnchoredPos: {x: 0, y: 0}
     endAnchoredPos: {x: 0, y: 0}
     startScale: {x: 1, y: 1, z: 1}
     endScale: {x: 1.03, y: 1.03, z: 1.03}
   - key: C_NoGirlfriend
-    text: "\uC5EC\uC790\uCE5C\uAD6C\uB294 \uC0AC\uADC0\uC9C0 \uBABB\uD588\uB124"
-    imageA: {fileID: 0}
-    imageB: {fileID: 0}
-    totalDuration: 3
-    swapInterval: 0.18
+    text: "\uC5EC\uC790\uCE5C\uAD6C\uB294 \uC0AC\uADC0\uC9C0 \uBABB\uD588\uC5B4"
+    imageA: {fileID: 2006403636970969561, guid: 1c373f4fc0c3cb74e99db28591968c73, type: 3}
+    imageB: {fileID: -5079443550128457409, guid: 8f1236608ec5ec745ab1c521d59ae225, type: 3}
+    totalDuration: 2
+    swapInterval: 1
     startAnchoredPos: {x: 0, y: 0}
     endAnchoredPos: {x: 0, y: 0}
     startScale: {x: 1, y: 1, z: 1}
     endScale: {x: 1.03, y: 1.03, z: 1.03}
   - key: C_HasGirlfriend
-    text: "\uC5EC\uC790\uCE5C\uAD6C\uB97C \uC0AC\uADC8 \uC218 \uC788\uC5C8\uB124"
-    imageA: {fileID: 0}
-    imageB: {fileID: 0}
-    totalDuration: 3
-    swapInterval: 0.18
+    text: "\uC5B4\uCA4C\uB2E4\uBCF4\uB2C8 \uC5EC\uC790\uCE5C\uAD6C\uAC00 \uC0DD\uACBC\uC5B4"
+    imageA: {fileID: -1358131734794722829, guid: e93bf68480e2acf40b9351b691cd62f2, type: 3}
+    imageB: {fileID: 5235430900060486200, guid: 23d69347b0a72894fbb26e14cd0128e3, type: 3}
+    totalDuration: 2
+    swapInterval: 1
     startAnchoredPos: {x: 0, y: 0}
     endAnchoredPos: {x: 0, y: 0}
     startScale: {x: 1, y: 1, z: 1}
     endScale: {x: 1.03, y: 1.03, z: 1.03}
-  - key: D_BestFriend
-    text: "\uC5B4\uCA4C\uB2E4 \uBCF4\uB2C8 \uCD5C\uACE0\uC758 \uCE5C\uAD6C\uB97C
-      \uC0AC\uADC8 \uC218 \uC788\uC5C8\uC5B4"
-    imageA: {fileID: 0}
-    imageB: {fileID: 0}
-    totalDuration: 3
-    swapInterval: 0.18
+  - key: D_Happy
+    text: "\uD559\uAD50 \uC0DD\uD65C\uC740 \uC7AC\uBC0C\uC5C8\uB124"
+    imageA: {fileID: -8011202738254376441, guid: 7af544272b9e9b34492af24995fc2ab1, type: 3}
+    imageB: {fileID: 6266176060360064, guid: 735fb268c9547114fa10c4adeaf2a069, type: 3}
+    totalDuration: 2
+    swapInterval: 1
     startAnchoredPos: {x: 0, y: 0}
     endAnchoredPos: {x: 0, y: 0}
     startScale: {x: 1, y: 1, z: 1}
     endScale: {x: 1.03, y: 1.03, z: 1.03}
-  - key: D_GraduateSchool
-    text: "\uC5B4\uCA4C\uB2E4 \uBCF4\uB2C8 \uB300\uD559\uC6D0 \uC0DD\uAC01\uB3C4
-      \uD574\uC57C\uACA0\uC5B4"
-    imageA: {fileID: 0}
-    imageB: {fileID: 0}
-    totalDuration: 3
-    swapInterval: 0.18
+  - key: D_Unhappy
+    text: "\uD559\uAD50\uC0DD\uD65C\uC740 \uB531\uD788 \uC7AC\uBC0C\uC9C4 \uC54A\uB124"
+    imageA: {fileID: -8011202738254376441, guid: 7af544272b9e9b34492af24995fc2ab1, type: 3}
+    imageB: {fileID: -836548560875035080, guid: 4b9e792834b570547888b6383afe5951, type: 3}
+    totalDuration: 2
+    swapInterval: 1
     startAnchoredPos: {x: 0, y: 0}
     endAnchoredPos: {x: 0, y: 0}
     startScale: {x: 1, y: 1, z: 1}
     endScale: {x: 1.03, y: 1.03, z: 1.03}
-  - key: E_Healthy
-    text: "\uD559\uAD50 \uB2E4\uB2C8\uB294 \uAC74 \uD798\uB4E4\uC9C0 \uC54A\uB354\uB77C"
-    imageA: {fileID: 0}
-    imageB: {fileID: 0}
-    totalDuration: 3
-    swapInterval: 0.18
+  - key: 'E_BestFriend '
+    text: "\uC544 \uB9DE\uB2E4 \uC9C4\uC9DC \uC778\uC0DD \uCC10\uCE5C\uC744 \uB9CC\uB4E4\uC5C8\uC5B4!"
+    imageA: {fileID: 435429667062075967, guid: 66113d5e8a26f1b4293097fe4ea68ef1, type: 3}
+    imageB: {fileID: -6937091128503541224, guid: d5f21e83d5387864c86e4e34c1345a17, type: 3}
+    totalDuration: 2
+    swapInterval: 1
     startAnchoredPos: {x: 0, y: 0}
     endAnchoredPos: {x: 0, y: 0}
     startScale: {x: 1, y: 1, z: 1}
     endScale: {x: 1.03, y: 1.03, z: 1.03}
-  - key: E_Tired
-    text: "\uD559\uAD50 \uB2E4\uB2C8\uB294 \uAC74 \uC0DD\uAC01\uBCF4\uB2E4 \uD798\uB4E4\uB354\uB77C"
-    imageA: {fileID: 0}
-    imageB: {fileID: 0}
-    totalDuration: 3
-    swapInterval: 0.18
-    startAnchoredPos: {x: 0, y: 0}
-    endAnchoredPos: {x: 0, y: 0}
-    startScale: {x: 1, y: 1, z: 1}
-    endScale: {x: 1.03, y: 1.03, z: 1.03}
-  - key: F_Happy
-    text: "\uC544\uBB34\uD2BC... \uD589\uBCF5\uD588\uB358 \uAC83 \uAC19\uC544"
-    imageA: {fileID: 0}
-    imageB: {fileID: 0}
-    totalDuration: 3
-    swapInterval: 0.18
-    startAnchoredPos: {x: 0, y: 0}
-    endAnchoredPos: {x: 0, y: 0}
-    startScale: {x: 1, y: 1, z: 1}
-    endScale: {x: 1.03, y: 1.03, z: 1.03}
-  - key: F_Unsatisfied
-    text: "\uD760... \uD589\uBCF5\uD558\uC9C4 \uC54A\uC558\uB358 \uAC83 \uAC19\uC544"
-    imageA: {fileID: 0}
-    imageB: {fileID: 0}
-    totalDuration: 3
-    swapInterval: 0.18
+  - key: F_GraduateSchool
+    text: "\uACE0\uBBFC\uC778\uAC8C... \uB300\uD559\uC6D0\uC744 \uAC00\uC57C\uB418\uB098..?"
+    imageA: {fileID: 5382340491724001517, guid: 5adb9302f665be244bb7bde40bfafa58, type: 3}
+    imageB: {fileID: 8189139302705092968, guid: 98e8cf7baffc1dc44bb1f478042d8177, type: 3}
+    totalDuration: 2
+    swapInterval: 1
     startAnchoredPos: {x: 0, y: 0}
     endAnchoredPos: {x: 0, y: 0}
     startScale: {x: 1, y: 1, z: 1}

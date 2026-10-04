@@ -94,12 +94,13 @@ public class ClassDodgeGameController : MonoBehaviour
 
         // 1주차  15  30 45  60  75  90 105 120 135 150 165 180 195 210 225
         // 플레   10  20 30 40 50 60 70 80 90 100 110 120 130 140 150
-        int requiredIntelligence = week * 15;
+        int requiredIntelligence = week * 20;
 
         if (GameManager.Instance != null)
-            requiredIntelligence -= GameManager.Instance.GetRequiredIntelligenceReduction();
-
-        requiredIntelligence = Mathf.Max(0, requiredIntelligence);
+        {
+            requiredIntelligence =
+                GameManager.Instance.GetCurrentRequiredIntelligence();
+        }
 
         int gap = Mathf.Max(0, requiredIntelligence - intelligence);
         int difficultyTier;

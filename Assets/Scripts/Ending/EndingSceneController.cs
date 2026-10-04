@@ -35,22 +35,40 @@ public class EndingSceneController : MonoBehaviour
     {
         runtimeSlides.Clear();
 
-        if (GameManager.Instance == null || GameManager.Instance.currentEndingSequence == null)
+        if (GameManager.Instance == null ||
+            GameManager.Instance.currentEndingSequence == null)
+        {
             return;
+        }
 
-        EndingSequenceResult result = GameManager.Instance.currentEndingSequence;
+        EndingSequenceResult result =
+            GameManager.Instance.currentEndingSequence;
 
+        // A : 성적
         AddSlide($"A_{result.sceneA}");
+
+        // B : 학교생활
         AddSlide($"B_{result.sceneB}");
+
+        // C : 여자친구
         AddSlide($"C_{result.sceneC}");
 
-        if (result.sceneD != EndingSceneDType.None)
-            AddSlide($"D_{result.sceneD}");
+        // E : 히든 - 찐친
+        if (result.sceneE != EndingSceneEType.None)
+        {
+            AddSlide($"E_{result.sceneE}");
+        }
 
-        AddSlide($"E_{result.sceneE}");
-        AddSlide($"F_{result.sceneF}");
+        // F : 히든 - 대학원
+        if (result.sceneF != EndingSceneFType.None)
+        {
+            AddSlide($"F_{result.sceneF}");
+        }
+
+        // D : 행복
+        // 항상 마지막에 재생
+        AddSlide($"D_{result.sceneD}");
     }
-
     private void AddSlide(string key)
     {
         for (int i = 0; i < slideDatabase.Length; i++)
