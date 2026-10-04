@@ -163,8 +163,12 @@ public class SchoolNPCManager : MonoBehaviour
         // ==========================
         if (encounter.npcType == SchoolNPCType.Romance)
         {
-            // 축제 약속을 잡은 상태라면
-            // 10주차까지 랜덤 Romance NPC 등장 금지
+            // 16주차에는 랜덤 Romance 등장 금지
+            // 최종 고백 NPC를 별도로 고정 생성할 예정
+            if (GameManager.Instance.CurrentWeek >= 16)
+                return false;
+
+            // 축제 약속 이후 10주차까지 랜덤 등장 금지
             if (GameManager.Instance.hasFestivalDatePromise &&
                 GameManager.Instance.CurrentWeek <= 10)
             {
@@ -180,14 +184,6 @@ public class SchoolNPCManager : MonoBehaviour
             float romanceRoll =
                 Random.Range(0f, 100f);
 
-            Debug.Log(
-                $"[Romance Spawn] " +
-                $"Week={GameManager.Instance.CurrentWeek}, " +
-                $"FestivalPromise={GameManager.Instance.hasFestivalDatePromise}, " +
-                $"Chance={romanceChance:F0}%, " +
-                $"Roll={romanceRoll:F1}"
-            );
-
             return romanceRoll <= romanceChance;
         }
 
@@ -199,4 +195,5 @@ public class SchoolNPCManager : MonoBehaviour
 
         return roll <= encounter.appearChance;
     }
+
 }

@@ -80,75 +80,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        #if UNITY_EDITOR
-    if (Input.GetKeyDown(KeyCode.F7))
-    {
-        DebugSetWeek9WithFestivalPromise();
-    }
-#endif
+  
 
-#if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.F8))
-        {
-            SceneTransitionManager.Instance.LoadScene("EndingScene");
-        }
-#endif
 
-//#if UNITY_EDITOR
-//        if (Input.GetKeyDown(KeyCode.F6))
-//        {
-//            CurrentWeek = 8;
-//            Debug.Log("테스트용: 현재 주차를 8주차로 변경");
-//        }
-
-//        if (Input.GetKeyDown(KeyCode.F7))
-//        {
-//            CurrentWeek = 16;
-//            Debug.Log("테스트용: 현재 주차를 16주차로 변경");
-//        }
-//#endif
-
-#if UNITY_EDITOR
-        if (CurrentPlayer != null)
-        {
-            if (Input.GetKeyDown(KeyCode.F1))
-            {
-                AddIntelligence(10);
-                Debug.Log("디버그: 지능 +10");
-            }
-
-            if (Input.GetKeyDown(KeyCode.F2))
-            {
-                AddIntelligence(-10);
-                Debug.Log("디버그: 지능 -10");
-            }
-
-            if (Input.GetKeyDown(KeyCode.F3))
-            {
-                AddMaxHealth(10);
-                Debug.Log("디버그: 현재체력 +10");
-            }
-
-            if (Input.GetKeyDown(KeyCode.F4))
-            {
-                AddMaxHealth(-10);
-
-                Debug.Log(
-                    $"디버그: 최대체력 -10 " +
-                    $"(현재 최대체력: {CurrentPlayer.maxHealth}, " +
-                    $"현재체력: {CurrentPlayer.currentHealth})"
-                );
-            }
-
-            if (Input.GetKeyDown(KeyCode.F5))
-            {
-                AddMoney(50);
-                Debug.Log("디버그: 돈 +50");
-            }
-
-          
-        }
-#endif
         
     }
     public static GameManager Instance { get; private set; }
@@ -179,7 +113,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int vendingItemCost = 20;
     [SerializeField] private float energyDrinkDrainMultiplier = 0.5f;
     [SerializeField] private int memoryBreadRequiredIntReduction = 20;
-    [SerializeField] private int workoutCost = 5;
+    [SerializeField] private int workoutCost = 10;
 
     [Header("Grade Components")]
     [SerializeField] private float regularEarned = 0f;
@@ -190,6 +124,8 @@ public class GameManager : MonoBehaviour
     [Header("Meeting")]
     public bool meetingSceneScheduled = false;
     public int femaleFriendCount = 0;
+
+
 
     // 3:3 미팅에서 3쌍을 전부 맞힌 횟수
     public int perfectMeetingSuccessCount = 0;
@@ -236,6 +172,8 @@ public class GameManager : MonoBehaviour
     public bool festivalDateFinished = false;
     public bool festivalDateEndedByLowHealth = false;
 
+    public bool festivalDateEnding = false;
+
     public FestivalDatePhase festivalDatePhase = FestivalDatePhase.None;
 
     public FestivalBoothType targetFestivalBoothType;
@@ -245,6 +183,11 @@ public class GameManager : MonoBehaviour
 
     private readonly HashSet<string> visitedFestivalBooths =
         new HashSet<string>();
+
+    [Header("Romance Weekly")]
+    public bool talkedToRomanceThisWeek = false;
+    [Header("Final Romance")]
+    public bool finalConfessionResolved = false;
     private readonly int[] allClassrooms =
     {
         01, 03, 04, 05, 06, 07,
@@ -340,7 +283,10 @@ public class GameManager : MonoBehaviour
     {
         OnSchoolMessagePopupRequested?.Invoke(message);
     }
-
+    public void ShowSchoolMessagePopup(string message)
+    {
+        RaiseSchoolMessagePopup(message);
+    }
 
     public void StartNewGame()
     {
@@ -361,7 +307,13 @@ public class GameManager : MonoBehaviour
         festivalDateStarted = false;
         festivalDateFinished = false;
         festivalDateEndedByLowHealth = false;
+        talkedToRomanceThisWeek = false;
+        finalConfessionResolved = false;
+        endingACutUnlocked = false;
+        endingGraduateSchoolUnlocked = false;
 
+        currentEndingSequence =
+            new EndingSequenceResult();
 
         hasEnergyDrinkToday = false;
         hasMemoryBreadToday = false;
@@ -399,16 +351,16 @@ public class GameManager : MonoBehaviour
             return "플레이어 정보를 불러올 수 없습니다.";
 
         if (usedSchoolFacilityToday)
-            return "오늘은 이미 운동 시설을 이용했습니다.";
+            return "오늘은 이미 운동했어.";
 
         if (!IsAllClassesFinished)
-            return "수업을 모두 마친 뒤에 이용할 수 있습니다.";
+            return "수업부터 다 듣고 운동하자.";
 
-        if (CurrentPlayer.currentHealth <= 20)
-            return "너무 지쳐서 운동을 할 수 없습니다.";
+        if (CurrentPlayer.currentHealth <= 10)
+            return "아 오늘은 힘들어서 운동 못하겠다..";
 
         if (CurrentPlayer.money < workoutCost)
-            return $"돈이 부족합니다. 운동에는 {workoutCost}원이 필요합니다.";
+            return $"돈이 부족하네... 운동하려면 {workoutCost}원이 필요해.";
 
         return "";
     }
@@ -418,8 +370,9 @@ public class GameManager : MonoBehaviour
             return false;
 
         AddMoney(-workoutCost);
-        AddMaxHealth(3);
-        AddAppearance(1);
+        AddCurrentHealth(-10);
+        AddMaxHealth(10);
+        AddAppearance(3);
 
         usedSchoolFacilityToday = true;
 
@@ -436,7 +389,7 @@ public class GameManager : MonoBehaviour
         if (!IsAllClassesFinished)
             return false;
 
-        if (CurrentPlayer.currentHealth <= 20)
+        if (CurrentPlayer.currentHealth <= 10)
             return false;
 
         if (CurrentPlayer.money < workoutCost)
@@ -450,7 +403,7 @@ public class GameManager : MonoBehaviour
         if (StudiedToday) return false;
 
         // 공부 시작 비용
-        AddMaxHealth(-5);
+        AddMaxHealth(-10);
         StudiedToday = true;
         SceneTransitionManager.Instance.LoadScene("StudyMemoryScene");
         
@@ -528,26 +481,48 @@ public class GameManager : MonoBehaviour
 
     public void AddIntelligence(int value)
     {
-        if (CurrentPlayer == null) return;
+        if (CurrentPlayer == null)
+            return;
 
-        CurrentPlayer.intelligence = Mathf.Clamp(CurrentPlayer.intelligence + value, 0, 200);
-        OnPlayerStatChanged?.Invoke(PlayerStatType.Intelligence, value);
+        CurrentPlayer.intelligence =
+            Mathf.Max(
+                0,
+                CurrentPlayer.intelligence + value
+            );
+
+        OnPlayerStatChanged?.Invoke(
+            PlayerStatType.Intelligence,
+            value
+        );
+
         OnPlayerStatsRefreshed?.Invoke();
     }
-
     public void AddMaxHealth(int value)
     {
-        if (CurrentPlayer == null) return;
+        if (CurrentPlayer == null)
+            return;
 
-        CurrentPlayer.maxHealth = Mathf.Clamp(CurrentPlayer.maxHealth + value, 1, 100);
+        // 최대체력 상한 제거
+        CurrentPlayer.maxHealth = Mathf.Max(
+            1,
+            CurrentPlayer.maxHealth + value
+        );
 
-        if (CurrentPlayer.currentHealth > CurrentPlayer.maxHealth)
-            CurrentPlayer.currentHealth = CurrentPlayer.maxHealth;
+        // 최대체력이 감소해서 현재체력보다 작아진 경우만 보정
+        if (CurrentPlayer.currentHealth >
+            CurrentPlayer.maxHealth)
+        {
+            CurrentPlayer.currentHealth =
+                CurrentPlayer.maxHealth;
+        }
 
-        OnPlayerStatChanged?.Invoke(PlayerStatType.Health, value);
+        OnPlayerStatChanged?.Invoke(
+            PlayerStatType.Health,
+            value
+        );
+
         OnPlayerStatsRefreshed?.Invoke();
     }
-
     public void AddCurrentHealth(int value)
     {
         if (CurrentPlayer == null) return;
@@ -624,6 +599,7 @@ public class GameManager : MonoBehaviour
             OnPlayerStatsRefreshed?.Invoke();
         }
     }
+
     public int GetMidtermScore()
     {
         return midtermScore;
@@ -740,6 +716,7 @@ public class GameManager : MonoBehaviour
 
         festivalDateStarted = true;
         festivalDateFinished = false;
+        festivalDateEnding = false;
         festivalDateEndedByLowHealth = false;
 
         festivalDatePhase = FestivalDatePhase.Booth;
@@ -747,15 +724,15 @@ public class GameManager : MonoBehaviour
         visitedFestivalBooths.Clear();
         visitedTargetBoothCount = 0;
 
-        // 4종류 중 하나 랜덤 선택
         targetFestivalBoothType =
             (FestivalBoothType)UnityEngine.Random.Range(0, 4);
 
-        Debug.Log(
-            $"[Festival Date] 시작 / 목표 부스 = {targetFestivalBoothType}"
-        );
         FestivalDialogueController.Instance?.
-    ShowStartDialogue();
+            ShowStartDialogue();
+
+        Debug.Log(
+            $"[Festival] 데이트 시작 / 목표={targetFestivalBoothType}"
+        );
     }
     public string GetFestivalBoothDateLine()
     {
@@ -909,28 +886,63 @@ public class GameManager : MonoBehaviour
             return;
 
         festivalDateFinished = true;
+        festivalDateEnding = false;
         festivalDatePhase = FestivalDatePhase.Finished;
 
         AddRomanceAffection(40);
 
         Debug.Log(
-            $"[Festival] 데이트 성공 / 호감도 +40"
+            "[Festival] 축제 데이트 정상 완료 / 호감도 +40"
         );
     }
+
     public void EndFestivalDateByLowHealth()
     {
         if (festivalDateFinished)
             return;
 
         festivalDateFinished = true;
+        festivalDateEnding = false;
         festivalDateEndedByLowHealth = true;
         festivalDatePhase = FestivalDatePhase.Finished;
 
         AddRomanceAffection(20);
 
         Debug.Log(
-            "[Festival] 체력 부족으로 데이트 종료 / 호감도 +20"
+            "[Festival] 체력 부족 종료 / 호감도 +20"
         );
+    }
+
+    public void ResolveFinalConfession(bool success)
+    {
+        if (finalConfessionResolved)
+            return;
+
+        finalConfessionResolved = true;
+
+        if (success && CurrentPlayer != null)
+        {
+            CurrentPlayer.hasGirlfriend = true;
+
+            Debug.Log(
+                $"[Romance] 고백 성공 / 호감도={CurrentPlayer.romanceAffection}"
+            );
+        }
+        else
+        {
+            Debug.Log(
+                $"[Romance] 고백 종료 / 성공={success}"
+            );
+        }
+
+        OnPlayerStatsRefreshed?.Invoke();
+    }
+    public bool CanAttemptFinalConfession()
+    {
+        if (CurrentPlayer == null)
+            return false;
+
+        return CurrentPlayer.romanceAffection >= 50;
     }
     public bool HasBoughtShopItemToday(ShopItemType itemType)
     {
@@ -944,6 +956,48 @@ public class GameManager : MonoBehaviour
         }
 
         return false;
+    }
+    public void RegisterRomanceConversation()
+    {
+        // 11~15주차에서만 적용
+        if (CurrentWeek < 11 || CurrentWeek > 15)
+            return;
+
+        // 이번 주에 이미 호감도를 받았으면 중복 지급 X
+        if (talkedToRomanceThisWeek)
+            return;
+
+        talkedToRomanceThisWeek = true;
+
+        AddRomanceAffection(10);
+
+        Debug.Log(
+            $"[Romance] {CurrentWeek}주차 Romance NPC 대화 / " +
+            $"호감도 +10 / 현재={CurrentPlayer.romanceAffection}"
+        );
+    }
+    private void ApplyWeeklyRomanceResult()
+    {
+        // 11~15주차에서만
+        if (CurrentWeek < 11 || CurrentWeek > 15)
+            return;
+
+        if (!talkedToRomanceThisWeek)
+        {
+            AddRomanceAffection(-10);
+
+            Debug.Log(
+                $"[Romance] {CurrentWeek}주차 Romance NPC와 대화하지 않음 / " +
+                $"호감도 -10 / 현재={CurrentPlayer.romanceAffection}"
+            );
+        }
+        else
+        {
+            Debug.Log(
+                $"[Romance] {CurrentWeek}주차 Romance NPC 대화 완료 / " +
+                $"호감도 감소 없음"
+            );
+        }
     }
 
     public bool CanBuyShopItem(ShopItemType itemType, out string reason)
@@ -1142,6 +1196,20 @@ public class GameManager : MonoBehaviour
         return hasMemoryBreadToday ? memoryBreadRequiredIntReduction : 0;
     }
 
+    public int GetCurrentRequiredIntelligence()
+    {
+        int requiredIntelligence =
+            CurrentWeek * 20;
+
+        requiredIntelligence -=
+            GetRequiredIntelligenceReduction();
+
+        return Mathf.Max(
+            0,
+            requiredIntelligence
+        );
+    }
+
     public void GenerateTodaySchedule()
     {
         List<int> pool = new List<int>(allClassrooms);
@@ -1192,10 +1260,6 @@ public class GameManager : MonoBehaviour
             CurrentEnteredClassroom = -1;
             SaveSchoolPlayerPosition(schoolPlayerPosition);
 
-            int nextClassroom = GetCurrentTargetClassroom();
-            RaiseSchoolMessagePopup(
-    $"출석 완료!\n다음 장소: {GetClassroomDisplayInline(nextClassroom)}"
-);
             return ClassEnterResult.AttendanceOnly;
         }
 
@@ -1362,102 +1426,181 @@ public class GameManager : MonoBehaviour
     }
     public void EndDay()
     {
+        // 현재 주차의 Romance 결과를 먼저 정산
+        ApplyWeeklyRomanceResult();
+
+        // 다음 주차를 위해 초기화
+        talkedToRomanceThisWeek = false;
+
+        // 그 다음 주차 증가
         CurrentWeek++;
+
         usedSchoolFacilityToday = false;
+
         if (CurrentWeek > MAX_WEEK)
         {
+            // 이번 플레이 결과 계산
             BuildEndingSequenceResult();
-            SceneTransitionManager.Instance.LoadScene("EndingScene");
+
+            // 실제 플레이로 획득한 엔딩만
+            // 영구 컬렉션에 저장
+            UnlockCurrentEndingCollection();
+
+            SceneTransitionManager.Instance.LoadScene(
+                "EndingScene"
+            );
+
             return;
         }
-
         StudiedToday = false;
         WorkedToday = false;
         hasEnergyDrinkToday = false;
         hasMemoryBreadToday = false;
+
         ResetDailyNPCUsage();
 
         if (CurrentPlayer != null)
-            CurrentPlayer.currentHealth = CurrentPlayer.maxHealth;
+            CurrentPlayer.currentHealth =
+                CurrentPlayer.maxHealth;
 
         GenerateTodaySchedule();
         OnPlayerStatsRefreshed?.Invoke();
-        SceneTransitionManager.Instance.LoadScene("MorningScene");
+
+        SceneTransitionManager.Instance.
+            LoadScene("MorningScene");
     }
     public void UnlockEndingFlag(string endingId)
     {
-        if (string.IsNullOrEmpty(endingId)) return;
+        if (string.IsNullOrEmpty(endingId))
+            return;
 
         switch (endingId)
         {
             case "A_CUT":
+            case "BEST_FRIEND":
                 endingACutUnlocked = true;
+
+                Debug.Log(
+                    "[Ending] 찐친 히든 조건 달성"
+                );
                 break;
 
             case "GRAD_SCHOOL":
                 endingGraduateSchoolUnlocked = true;
+
+                Debug.Log(
+                    "[Ending] 대학원 히든 조건 달성"
+                );
                 break;
         }
     }
-    
 
-    
     private void BuildEndingSequenceResult()
     {
         if (CurrentPlayer == null)
             return;
 
-        currentEndingSequence = new EndingSequenceResult();
+        currentEndingSequence =
+            new EndingSequenceResult();
 
-        // A: 학교생활력
-        if (CurrentPlayer.campusLife >= 200)
-            currentEndingSequence.sceneA = EndingSceneAType.GoodCampusLife;
-        else if (CurrentPlayer.campusLife >= 80)
-            currentEndingSequence.sceneA = EndingSceneAType.NormalCampusLife;
-        else
-            currentEndingSequence.sceneA = EndingSceneAType.LonerCampusLife;
+        // =========================================
+        // A : 성적
+        // =========================================
 
-        // B: 학점
         if (CurrentPlayer.grade >= 80)
-            currentEndingSequence.sceneB = EndingSceneBType.GoodGrade;
+        {
+            currentEndingSequence.sceneA =
+                EndingSceneAType.GoodGrade;
+        }
         else if (CurrentPlayer.grade >= 50)
-            currentEndingSequence.sceneB = EndingSceneBType.NormalGrade;
+        {
+            currentEndingSequence.sceneA =
+                EndingSceneAType.NormalGrade;
+        }
         else
-            currentEndingSequence.sceneB = EndingSceneBType.BadGrade;
+        {
+            currentEndingSequence.sceneA =
+                EndingSceneAType.BadGrade;
+        }
 
-        // C: 여자친구 유무
-        currentEndingSequence.sceneC = CurrentPlayer.hasGirlfriend
-            ? EndingSceneCType.HasGirlfriend
-            : EndingSceneCType.NoGirlfriend;
+        // =========================================
+        // B : 학교생활
+        // =========================================
 
-        // D: 특수 이벤트
-        if (endingACutUnlocked)
-            currentEndingSequence.sceneD = EndingSceneDType.BestFriend;
-        else if (endingGraduateSchoolUnlocked)
-            currentEndingSequence.sceneD = EndingSceneDType.GraduateSchool;
+        if (CurrentPlayer.campusLife >= 200)
+        {
+            currentEndingSequence.sceneB =
+                EndingSceneBType.GoodCampusLife;
+        }
+        else if (CurrentPlayer.campusLife >= 80)
+        {
+            currentEndingSequence.sceneB =
+                EndingSceneBType.NormalCampusLife;
+        }
         else
-            currentEndingSequence.sceneD = EndingSceneDType.None;
+        {
+            currentEndingSequence.sceneB =
+                EndingSceneBType.BadCampusLife;
+        }
 
-        // E: 최대체력
-        if (CurrentPlayer.maxHealth >= 60)
-            currentEndingSequence.sceneE = EndingSceneEType.Healthy;
-        else
-            currentEndingSequence.sceneE = EndingSceneEType.Tired;
+        // =========================================
+        // C : 여자친구
+        // =========================================
 
-        // F: 행복
+        currentEndingSequence.sceneC =
+            CurrentPlayer.hasGirlfriend
+                ? EndingSceneCType.HasGirlfriend
+                : EndingSceneCType.NoGirlfriend;
+
+        // =========================================
+        // D : 행복
+        // =========================================
+
         if (CurrentPlayer.happiness >= 50)
-            currentEndingSequence.sceneF = EndingSceneFType.Happy;
+        {
+            currentEndingSequence.sceneD =
+                EndingSceneDType.Happy;
+        }
         else
-            currentEndingSequence.sceneF = EndingSceneFType.Unsatisfied;
+        {
+            currentEndingSequence.sceneD =
+                EndingSceneDType.Unhappy;
+        }
+
+        // =========================================
+        // E : 히든 - 찐친
+        // =========================================
+
+        currentEndingSequence.sceneE =
+            endingACutUnlocked
+                ? EndingSceneEType.BestFriend
+                : EndingSceneEType.None;
+
+        // =========================================
+        // F : 히든 - 대학원
+        // =========================================
+
+        currentEndingSequence.sceneF =
+            endingGraduateSchoolUnlocked
+                ? EndingSceneFType.GraduateSchool
+                : EndingSceneFType.None;
+
+        Debug.Log(
+            $"[Ending] " +
+            $"A={currentEndingSequence.sceneA}, " +
+            $"B={currentEndingSequence.sceneB}, " +
+            $"C={currentEndingSequence.sceneC}, " +
+            $"D={currentEndingSequence.sceneD}, " +
+            $"E={currentEndingSequence.sceneE}, " +
+            $"F={currentEndingSequence.sceneF}"
+        );
     }
-
-
     public bool StartPartTimeQTEMinigame()
     {
         if (CurrentPlayer == null) return false;
         if (WorkedToday) return false;
 
-        AddMaxHealth(-5);
+        AddMaxHealth(-10);
         WorkedToday = true;
 
         SceneTransitionManager.Instance.LoadScene("PartTimeQTEScene");
@@ -1479,16 +1622,75 @@ public class GameManager : MonoBehaviour
 
         hasFestivalDatePromise = true;
 
+        // 테스트용: 미팅 완벽 성공 1회
+        perfectMeetingSuccessCount = 1;
+
         festivalDateStarted = false;
         festivalDateFinished = false;
         festivalDateEndedByLowHealth = false;
+        festivalDateEnding = false;
 
         festivalDatePhase = FestivalDatePhase.None;
 
         Debug.Log(
-            $"[Debug] 9주차 / 축제 데이트 약속 완료 상태로 변경"
+            $"[Debug] 9주차 / 축제 약속 완료 / " +
+            $"미팅 완벽 성공={perfectMeetingSuccessCount}회 / " +
+            $"Romance 등장확률={GetRomanceSpawnChance()}%"
         );
     }
+
+
+    public void GoToEveningSceneAfterFestival()
+    {
+        SceneManager.LoadScene("EveningScene");
+    
+    }
+
+    private void UnlockCurrentEndingCollection()
+    {
+        if (currentEndingSequence == null)
+            return;
+
+        EndingSequenceResult result =
+            currentEndingSequence;
+
+        // A : 성적
+        EndingCollectionSave.Unlock(
+            $"A_{result.sceneA}"
+        );
+
+        // B : 학교생활
+        EndingCollectionSave.Unlock(
+            $"B_{result.sceneB}"
+        );
+
+        // C : 여자친구
+        EndingCollectionSave.Unlock(
+            $"C_{result.sceneC}"
+        );
+
+        // E : 히든 - 찐친
+        if (result.sceneE != EndingSceneEType.None)
+        {
+            EndingCollectionSave.Unlock(
+                $"E_{result.sceneE}"
+            );
+        }
+
+        // F : 히든 - 대학원
+        if (result.sceneF != EndingSceneFType.None)
+        {
+            EndingCollectionSave.Unlock(
+                $"F_{result.sceneF}"
+            );
+        }
+
+        // D : 행복
+        EndingCollectionSave.Unlock(
+            $"D_{result.sceneD}"
+        );
+    }
+
 }
 
 

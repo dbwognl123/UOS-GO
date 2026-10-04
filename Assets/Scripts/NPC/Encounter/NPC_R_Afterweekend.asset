@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1c5225fbcf2dac4fb43cd08c361062d, type: 3}
+  m_Name: NPC_R_Afterweekend
+  m_EditorClassIdentifier: Assembly-CSharp::NPCEncounterSO
+  encounterId: Romance1_Festival
+  npcType: 3
+  npcName: G
+  portrait: {fileID: 4356588906812027909, guid: 4d4c9b4916a77b84797be8230a8ce150, type: 3}
+  openingLine: "\uC548\uB155? \uB610 \uB9C8\uC8FC\uCCE4\uB124 \u314B\u314B\n\uB2E4\uC74C\uC8FC\uC5D0\uB3C4
+    \uB610 \uBCF4\uC790~\n"
+  stageIndex: 1
+  minAppearanceToAppear: 0
+  minCampusLifeToAppear: 0
+  minIntelligenceToAppear: 0
+  minMoneyToAppear: 0
+  requireNoGirlfriend: 1
+  requiredProfessorQuestionCount: 0
+  minWeekToAppear: 11
+  maxWeekToAppear: 15
+  appearChance: 100
+  choices: []

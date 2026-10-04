@@ -2,8 +2,20 @@
 
 public class FestivalDateController : MonoBehaviour
 {
+    public static FestivalDateController Instance
+    {
+        get;
+        private set;
+    }
+
+    [Header("Health")]
     [SerializeField] private int lowHealthThreshold = 10;
-    private bool lowHealthEndingStarted;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Update()
     {
         GameManager gm = GameManager.Instance;
@@ -18,27 +30,38 @@ public class FestivalDateController : MonoBehaviour
         if (gm.festivalDateFinished)
             return;
 
+        if (gm.festivalDateEnding)
+            return;
+
         if (gm.CurrentPlayer.currentHealth <=
             lowHealthThreshold)
         {
-            EndDateByLowHealth();
+            TryStartLowHealthEnding();
         }
     }
 
-    private void EndDateByLowHealth()
+    public void TryStartLowHealthEnding()
     {
-        if (lowHealthEndingStarted)
-            return;
-
         GameManager gm = GameManager.Instance;
 
         if (gm == null)
             return;
 
+        if (!gm.festivalDateStarted)
+            return;
+
         if (gm.festivalDateFinished)
             return;
 
-        lowHealthEndingStarted = true;
+        if (gm.festivalDateEnding)
+            return;
+
+        // 공연 성공 등의 다른 종료가 들어오지 못하게 잠금
+        gm.festivalDateEnding = true;
+
+        Debug.Log(
+            "[Festival] 체력 부족 종료 대사 시작"
+        );
 
         if (FestivalDialogueController.Instance != null)
         {
@@ -47,12 +70,14 @@ public class FestivalDateController : MonoBehaviour
                     () =>
                     {
                         gm.EndFestivalDateByLowHealth();
+                        gm.GoToEveningSceneAfterFestival();
                     }
                 );
         }
         else
         {
             gm.EndFestivalDateByLowHealth();
+            gm.GoToEveningSceneAfterFestival();
         }
     }
 }

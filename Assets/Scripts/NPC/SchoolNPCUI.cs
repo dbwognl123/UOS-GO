@@ -16,6 +16,7 @@ public class SchoolNPCUI : MonoBehaviour
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private TMP_Text resultText;
 
+   
     [Header("Choices")]
     [SerializeField] private Transform choicesRoot;
     [SerializeField] private Button choiceButtonPrefab;
@@ -27,8 +28,11 @@ public class SchoolNPCUI : MonoBehaviour
     [SerializeField] private MonoBehaviour playerMovementScript;
     [SerializeField] private MonoBehaviour schoolFatigueScript;
 
+
+
     private SchoolNPCActor currentActor;
     private readonly List<Button> spawnedButtons = new();
+
 
     private float GetFinalSuccessChance(PlayerRunData player, NPCChoiceData choice)
     {
@@ -106,12 +110,21 @@ public class SchoolNPCUI : MonoBehaviour
     {
         if (actor == null || actor.EncounterData == null)
             return;
-        simpleDialogueCloseCallback = null;
+
         GameManager.Instance?.SetDialogueOpen(true);
 
         gameObject.SetActive(true);
         currentActor = actor;
+
         NPCEncounterSO data = actor.EncounterData;
+
+        // 11~15주차 Romance NPC와 첫 대화를 하면
+        // 해당 주 호감도 +10
+        if (data.npcType == SchoolNPCType.Romance)
+        {
+            GameManager.Instance?.
+                RegisterRomanceConversation();
+        }
 
         if (rootPanel != null)
             rootPanel.SetActive(true);
@@ -127,10 +140,10 @@ public class SchoolNPCUI : MonoBehaviour
 
         if (resultText != null)
             resultText.text = string.Empty;
+
         LockPlayer(true);
         RebuildChoiceButtons(data);
     }
-
     public void CloseDialogue()
     {
         // 닫힌 다음 실행해야 할 작업을 임시 저장
@@ -175,6 +188,18 @@ public class SchoolNPCUI : MonoBehaviour
             TMP_Text btnText = btn.GetComponentInChildren<TMP_Text>();
             bool canChoose = NPCChoiceResolver.CanChoose(player, choice, out string reason);
 
+            if (choice.isFinalConfession)
+            {
+                if (player.romanceAffection <
+                    choice.minRomanceAffection)
+                {
+                    canChoose = false;
+
+                    reason =
+                        $"호감도 {choice.minRomanceAffection} 이상 필요";
+                }
+            }
+
             if (btnText != null)
             {
                 btnText.text = canChoose
@@ -189,40 +214,146 @@ public class SchoolNPCUI : MonoBehaviour
         }
     }
 
+
+
     private void OnChoiceClicked(NPCChoiceData choice)
     {
-        PlayerRunData player = GameManager.Instance != null ? GameManager.Instance.CurrentPlayer : null;
-        if (player == null) return;
+        PlayerRunData player =
+            GameManager.Instance != null
+                ? GameManager.Instance.CurrentPlayer
+                : null;
 
-        bool canChoose = NPCChoiceResolver.CanChoose(player, choice, out string reason);
+        if (player == null)
+            return;
+
+        bool canChoose =
+            NPCChoiceResolver.CanChoose(
+                player,
+                choice,
+                out string reason
+            );
+
+        // =========================================
+        // 최종 고백 선택지는 호감도 조건 추가 검사
+        // =========================================
+        if (choice.isFinalConfession &&
+            player.romanceAffection < choice.minRomanceAffection)
+        {
+            canChoose = false;
+            reason =
+                $"호감도 {choice.minRomanceAffection} 이상 필요";
+        }
+
         if (!canChoose)
         {
             if (resultText != null)
                 resultText.text = reason;
+
             return;
         }
-        float chance = GetFinalSuccessChance(player, choice);
-        float roll = Random.Range(0f, 100f);
-        bool success = roll <= chance;
+
+        // =========================================
+        // 최종 고백 - 아무 일도 아니야
+        // =========================================
+        if (choice.isFinalConfessionDecline)
+        {
+            GameManager.Instance.ResolveFinalConfession(false);
+
+            if (dialogueText != null)
+                dialogueText.text = "그래? 방학 잘 보내~";
+
+            if (resultText != null)
+                resultText.text = string.Empty;
+
+            ClearChoiceButtons();
+            if (currentActor != null)
+                currentActor.Consume();
+
+            return;
+        }
+
+        // =========================================
+        // 최종 고백 - 나랑 사귈래?
+        // =========================================
+        if (choice.isFinalConfession)
+        {
+            // 호감도 자체가 성공 확률
+            float confessionChance =
+                Mathf.Clamp(
+                    player.romanceAffection,
+                    0f,
+                    100f
+                );
+
+            float confessionRoll =
+                Random.Range(0f, 100f);
+
+            bool confessionSuccess =
+                confessionRoll <= confessionChance;
+
+            GameManager.Instance.ResolveFinalConfession(
+                confessionSuccess
+            );
+
+            if (dialogueText != null)
+            {
+                dialogueText.text =
+                    confessionSuccess
+                        ? "그래 ㅎㅎ"
+                        : "미안...";
+            }
+
+            // 플레이어에게 확률/주사위 결과는 굳이 보여주지 않음
+            if (resultText != null)
+                resultText.text = string.Empty;
+
+            ClearChoiceButtons();
+
+            if (currentActor != null)
+                currentActor.Consume();
+
+            Debug.Log(
+                $"[Final Romance] " +
+                $"호감도={confessionChance:F0}% / " +
+                $"Roll={confessionRoll:F1} / " +
+                $"성공={confessionSuccess}"
+            );
+
+            return;
+        }
+
+        // =========================================
+        // 여기부터 기존 일반 NPC 선택지
+        // =========================================
+        float chance =
+            GetFinalSuccessChance(player, choice);
+
+        float roll =
+            Random.Range(0f, 100f);
+
+        bool success =
+            roll <= chance;
 
         ApplyChoiceResult(choice, success);
 
         if (dialogueText != null)
-            dialogueText.text = success ? choice.successLine : choice.failLine;
+        {
+            dialogueText.text =
+                success
+                    ? choice.successLine
+                    : choice.failLine;
+        }
 
         if (resultText != null)
-            resultText.text = $"성공확률 {chance:F0}% / 판정 {roll:F0}";
+        {
+            resultText.text =
+                $"성공확률 {chance:F0}% / 판정 {roll:F0}";
+        }
 
         // 한 번 선택했으면 다시 선택지 못 누르게
         ClearChoiceButtons();
-
-        // NPC를 1회성으로 만들고 싶으면 주석 해제
-        // if (currentActor != null)
-        //     currentActor.gameObject.SetActive(false);
-    
-
     }
-    
+
 
     private void ApplyChoiceResult(NPCChoiceData choice, bool success)
     {
