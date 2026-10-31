@@ -19,14 +19,14 @@ MonoBehaviour:
   openingLine: "\uC774\uC81C \uACE7 \uC885\uAC15\uC774\uB124\u314E\u314E \n\uD560\uB9D0
     \uC788\uB2E4\uACE0 \uD558\uC9C0 \uC54A\uC558\uC5B4?"
   stageIndex: 1
-  minAppearanceToAppear: 16
-  minCampusLifeToAppear: 16
+  minAppearanceToAppear: 0
+  minCampusLifeToAppear: 0
   minIntelligenceToAppear: 0
   minMoneyToAppear: 0
   requireNoGirlfriend: 0
   requiredProfessorQuestionCount: 0
-  minWeekToAppear: 1
-  maxWeekToAppear: 999
+  minWeekToAppear: 16
+  maxWeekToAppear: 16
   appearChance: 100
   choices:
   - choiceText: "\uB098\uB791 \uC0AC\uADC8\uB798?"

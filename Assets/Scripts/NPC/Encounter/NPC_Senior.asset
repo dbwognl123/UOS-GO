@@ -36,7 +36,7 @@ MonoBehaviour:
     minIntelligence: 0
     blockIfHasGirlfriend: 0
     useFixedChance: 0
-    fixedSuccessChance: 100
+    fixedSuccessChance: 60
     autoFailIfAppearanceBelow: 0
     autoFailIfCampusLifeBelow: 0
     autoFailIfIntelligenceBelow: 0
@@ -48,13 +48,13 @@ MonoBehaviour:
     maxChance: 100
     successLine: "\uADF8\uB798 \uAC00\uC790\t"
     failLine: "\uC544 \uC624\uB298 \uC2DC\uAC04\uC774 \uC548\uB3FC\uC11C \uB2E4\uC74C\uC5D0
-      \uAC08\uAE4C \u314E\u314E"
+      \uAC00\uC790"
     successMoneyDelta: 0
     successAppearanceDelta: 0
-    successCampusLifeDelta: 2
+    successCampusLifeDelta: 20
     successIntelligenceDelta: 0
     successGradeDelta: 0
-    successHappinessDelta: 2
+    successHappinessDelta: 10
     successMaxHealthDelta: 5
     successSetGirlfriend: 0
     successScheduleMeetingScene: 0
@@ -94,7 +94,7 @@ MonoBehaviour:
     minIntelligence: 0
     blockIfHasGirlfriend: 0
     useFixedChance: 0
-    fixedSuccessChance: 50
+    fixedSuccessChance: 60
     autoFailIfAppearanceBelow: 0
     autoFailIfCampusLifeBelow: 0
     autoFailIfIntelligenceBelow: 0
@@ -108,10 +108,10 @@ MonoBehaviour:
     failLine: "\uBBF8\uC548 \uB098\uB3C4 \uACF5\uBD80\uB97C \uC548\uD574\uC11C \u314E..."
     successMoneyDelta: 0
     successAppearanceDelta: 0
-    successCampusLifeDelta: 2
-    successIntelligenceDelta: 10
+    successCampusLifeDelta: 10
+    successIntelligenceDelta: 20
     successGradeDelta: 0
-    successHappinessDelta: 2
+    successHappinessDelta: 5
     successMaxHealthDelta: 0
     successSetGirlfriend: 0
     successScheduleMeetingScene: 0

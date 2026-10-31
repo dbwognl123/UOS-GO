@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: e984ea5e2b7005a41b66a23b9415c0a0
+guid: bf3a23a3802f62a40a9b6747f1202f57
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8441426913774170602
-    second: 20260319_144614_bc75f408_0
+      213: 1782428251640165731
+    second: "\uD3EC\uAE30_0"
+  - first:
+      213: -1663167237365239610
+    second: "\uD3EC\uAE30_1"
+  - first:
+      213: -8080109370740373372
+    second: "\uD3EC\uAE30_2"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +52,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 20260319_144614_bc75f408_0
+      name: "\uD3EC\uAE30_0"
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 1024
-        height: 1024
+        y: 64
+        width: 14
+        height: 270
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 61e811f42f60ada80800000000000000
-      internalID: -8441426913774170602
+      spriteID: 365f1a81d057cb810800000000000000
+      internalID: 1782428251640165731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uD3EC\uAE30_1"
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 7
+        width: 849
+        height: 414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c0f6ce953e3be8e0800000000000000
+      internalID: -1663167237365239610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uD3EC\uAE30_2"
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 0
+        width: 711
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48807ba665faddf80800000000000000
+      internalID: -8080109370740373372
       vertices: []
       indices: 
       edges: []
@@ -125,7 +175,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      20260319_144614_bc75f408_0: -8441426913774170602
+      "\uD3EC\uAE30_0": 1782428251640165731
+      "\uD3EC\uAE30_1": -1663167237365239610
+      "\uD3EC\uAE30_2": -8080109370740373372
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -34,7 +34,7 @@ public class SchoolFatigueController : MonoBehaviour
         {
             timer -= currentDrainInterval;
 
-            GameManager.Instance.AddCurrentHealth(-drainAmount);
+            GameManager.Instance.ApplySchoolHealthLoss(drainAmount);
 
             if (GameManager.Instance.CurrentPlayer.currentHealth <= 0)
             {

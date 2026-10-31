@@ -65,6 +65,11 @@ public class EndingSceneController : MonoBehaviour
             AddSlide($"F_{result.sceneF}");
         }
 
+        // 결석 4회 이상이면 학사경고 히든 엔딩 추가
+        if (GameManager.Instance.HasAcademicWarning)
+        {
+            AddSlide("H_AcademicWarning");
+        }
         // D : 행복
         // 항상 마지막에 재생
         AddSlide($"D_{result.sceneD}");

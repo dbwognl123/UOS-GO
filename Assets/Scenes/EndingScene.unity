@@ -394,6 +394,17 @@ MonoBehaviour:
     endAnchoredPos: {x: 0, y: 0}
     startScale: {x: 1, y: 1, z: 1}
     endScale: {x: 1.03, y: 1.03, z: 1.03}
+  - key: "\tH_AcademicWarning"
+    text: "\uD559\uAD50\uB97C \uB108\uBB34 \uCA0C\uB354\uB2C8... \uD559\uC0AC\uACBD\uACE0\uB97C
+      \uBC1B\uC558\uC5B4"
+    imageA: {fileID: 5709341872385726240, guid: 9c0a5534e33dd7342a00e093c58ad35e, type: 3}
+    imageB: {fileID: 5709341872385726240, guid: 9c0a5534e33dd7342a00e093c58ad35e, type: 3}
+    totalDuration: 2
+    swapInterval: 1
+    startAnchoredPos: {x: 0, y: 0}
+    endAnchoredPos: {x: 0, y: 0}
+    startScale: {x: 1, y: 1, z: 1}
+    endScale: {x: 1.03, y: 1.03, z: 1.03}
 --- !u!4 &862813039
 Transform:
   m_ObjectHideFlags: 0
