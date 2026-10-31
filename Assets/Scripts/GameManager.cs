@@ -121,6 +121,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int midtermScore = 0; // 0 ~ 30
     [SerializeField] private int finalScore = 0;   // 0 ~ 30
 
+    [Header("Attendance")]
+    [SerializeField] private int absenceCount = 0;
+    [SerializeField] private int lastAbsenceWeek = 0;
+
+    public int AbsenceCount => absenceCount;
+    public bool HasAcademicWarning => absenceCount >= 4;
+
     [Header("Meeting")]
     public bool meetingSceneScheduled = false;
     public int femaleFriendCount = 0;
@@ -290,12 +297,43 @@ public class GameManager : MonoBehaviour
 
     public void StartNewGame()
     {
-        usedSchoolFacilityToday = false;
         CurrentWeek = 1;
         CurrentSchoolEntry = SchoolEntryType.None;
         StudiedToday = false;
         WorkedToday = false;
         ResetDailyNPCUsage();
+        // NPC 진행 초기화
+        friendCurrentStage = 1;
+        friendStageCap = 99;
+        friendRetired = false;
+
+        seniorCurrentStage = 1;
+        seniorStageCap = 99;
+        seniorRetired = false;
+
+        // 교수 시작 단계는 현재 네 기획값에 맞춰 유지
+        professorCurrentStage = 1;
+        professorStageCap = 99;
+        professorRetired = false;
+        professorQuestionCount = 0;
+
+        romanceCurrentStage = 1;
+        romanceStageCap = 99;
+        romanceRetired = false;
+
+        // 미팅
+        meetingSceneScheduled = false;
+
+        // 축제 진행상태
+        festivalDateEnding = false;
+        festivalDatePhase = FestivalDatePhase.None;
+        visitedTargetBoothCount = 0;
+        visitedFestivalBooths.Clear();
+
+        // 학교 관련 임시 상태
+        usedSchoolFacilityToday = false;
+        ClearSchoolHealthDrainPauses();
+
         regularEarned = 0f;
         regularPossible = 0f;
         midtermScore = 0;
@@ -310,6 +348,10 @@ public class GameManager : MonoBehaviour
         talkedToRomanceThisWeek = false;
         finalConfessionResolved = false;
         endingACutUnlocked = false;
+
+        absenceCount = 0;
+        lastAbsenceWeek = 0;
+
         endingGraduateSchoolUnlocked = false;
 
         currentEndingSequence =
@@ -329,13 +371,97 @@ public class GameManager : MonoBehaviour
             appearance = 5,
             grade = 0
         };
+
+
+        // 장착한 소모품의 능력치 보너스 적용
+        StartBonusData bonus =
+            MetaProgressSystem.ConsumeSelectedBonus();
+        // 장착 캐릭터의 시작 보너스
+        StartBonusData characterBonus =
+            MetaProgressSystem.GetSelectedCharacterStartBonus();
+
+        // 장착 캐릭터 능력 확정
+        CurrentPlayer.activeCharacterId =
+            MetaProgressSystem.GetSelectedCharacterId();
+
+        CurrentPlayer.activeCharacterAbility =
+            MetaProgressSystem.GetSelectedCharacterAbility();
+
+        // 기존 코드에서 가져온 bonus 사용
+        CurrentPlayer.schoolHealthLossReduction =
+            bonus.schoolHealthLossReduction;
+
+        CurrentPlayer.confessionBonusPercent =
+            bonus.confessionBonusPercent;
+
+        CurrentPlayer.weeklyMoneyBonus =
+            bonus.weeklyMoneyBonus;
+
+
+
+        // ========================================
+        // 시작 능력치 적용
+        // 소모품 보너스 + 캐릭터 보너스
+        // 배율은 적용하지 않음
+        // ========================================
+
+        CurrentPlayer.money = Mathf.Max(
+            0,
+            CurrentPlayer.money
+            + bonus.money
+            + characterBonus.money
+        );
+
+        CurrentPlayer.intelligence = Mathf.Max(
+            0,
+            CurrentPlayer.intelligence
+            + bonus.intelligence
+            + characterBonus.intelligence
+        );
+
+        CurrentPlayer.maxHealth = Mathf.Max(
+            1,
+            CurrentPlayer.maxHealth
+            + bonus.maxHealth
+            + characterBonus.maxHealth
+        );
+
+        // 시작 시 현재체력은 최대체력으로 설정
+        CurrentPlayer.currentHealth =
+            CurrentPlayer.maxHealth;
+
+        CurrentPlayer.happiness = Mathf.Clamp(
+            CurrentPlayer.happiness
+            + bonus.happiness
+            + characterBonus.happiness,
+            0, 999
+        );
+
+        CurrentPlayer.campusLife = Mathf.Clamp(
+            CurrentPlayer.campusLife
+            + bonus.campusLife
+            + characterBonus.campusLife,
+            0, 999
+        );
+
+        CurrentPlayer.appearance = Mathf.Clamp(
+            CurrentPlayer.appearance
+            + bonus.appearance
+            + characterBonus.appearance,
+            0, 999
+        );
+
+
+
         CurrentPlayer.romanceAffection = 0;
+
+        // 1주차 용돈 지급
+        GiveWeeklyAllowanceIfNeeded();
 
         GenerateTodaySchedule();
         ClearSavedSchoolPlayerPosition();
         OnPlayerStatsRefreshed?.Invoke();
-        
-        SceneTransitionManager.Instance.LoadScene("MorningScene");
+        SaveGame();
     }
     
 
@@ -371,8 +497,17 @@ public class GameManager : MonoBehaviour
 
         AddMoney(-workoutCost);
         AddCurrentHealth(-10);
-        AddMaxHealth(10);
-        AddAppearance(3);
+
+        // 운동부 캐릭터 효과
+        int healthGain =
+            CharacterEffectCalculator.GetExerciseHealthGain(
+                10,
+                CurrentPlayer.activeCharacterAbility
+            );
+
+        AddMaxHealth(healthGain);
+
+        AddAppearance(5);
 
         usedSchoolFacilityToday = true;
 
@@ -472,31 +607,72 @@ public class GameManager : MonoBehaviour
         OnPlayerStatChanged?.Invoke(PlayerStatType.Grade, value);
         OnPlayerStatsRefreshed?.Invoke();
     }
+
     public void AddCampusLife(int value)
     {
-        if (CurrentPlayer == null) return;
-        CurrentPlayer.campusLife = Mathf.Clamp(CurrentPlayer.campusLife + value, 0, 999);
+        if (CurrentPlayer == null)
+            return;
+
+        // 현재 캐릭터의 학교생활력 증가 배율 적용
+        int finalValue =
+            CharacterEffectCalculator.GetCampusLifeGain(
+                value,
+                CurrentPlayer.activeCharacterAbility
+            );
+
+        int before = CurrentPlayer.campusLife;
+
+        CurrentPlayer.campusLife = Mathf.Clamp(
+            CurrentPlayer.campusLife + finalValue,
+            0,
+            999
+        );
+
+        int actualChange =
+            CurrentPlayer.campusLife - before;
+
+        Debug.Log(
+            $"[Character] 학교생활력: {value} → {actualChange}"
+        );
+
         OnPlayerStatsRefreshed?.Invoke();
     }
+
 
     public void AddIntelligence(int value)
     {
         if (CurrentPlayer == null)
             return;
 
-        CurrentPlayer.intelligence =
-            Mathf.Max(
-                0,
-                CurrentPlayer.intelligence + value
+        // 캐릭터 고유 능력 적용
+        int finalValue =
+            CharacterEffectCalculator.GetIntelligenceGain(
+                value,
+                CurrentPlayer.activeCharacterAbility
             );
+
+        int before = CurrentPlayer.intelligence;
+
+        CurrentPlayer.intelligence = Mathf.Max(
+            0,
+            CurrentPlayer.intelligence + finalValue
+        );
+
+        int actualChange =
+            CurrentPlayer.intelligence - before;
 
         OnPlayerStatChanged?.Invoke(
             PlayerStatType.Intelligence,
-            value
+            actualChange
         );
 
         OnPlayerStatsRefreshed?.Invoke();
+
+        Debug.Log(
+            $"[Character] 지능 변화: {value} → {actualChange}"
+        );
     }
+
     public void AddMaxHealth(int value)
     {
         if (CurrentPlayer == null)
@@ -1342,7 +1518,7 @@ public class GameManager : MonoBehaviour
         if (regularPossible <= 0f)
             return 0;
 
-        float ratio = Mathf.Clamp01(regularEarned / regularPossible);
+        float ratio = Mathf.Clamp01(regularEarned / 200);
         return Mathf.RoundToInt(ratio * 40f);
     }
 
@@ -1402,10 +1578,49 @@ public class GameManager : MonoBehaviour
     {
         SceneTransitionManager.Instance.LoadScene("MainScene");
     }
+
     public void SkipSchool()
     {
-        SceneTransitionManager.Instance.LoadScene("EveningScene");
+        if (CurrentPlayer == null)
+            return;
+
+        // 한 주차에 결석은 한 번만 기록
+        if (lastAbsenceWeek != CurrentWeek)
+        {
+            lastAbsenceWeek = CurrentWeek;
+            absenceCount++;
+
+            // 휴식 보상
+            AddMaxHealth(20);
+            AddHappiness(10);
+
+            // 결석 패널티
+            AddCampusLife(-30);
+
+            Debug.Log(
+                $"[Attendance] 누적 결석: {absenceCount}회 / " +
+                $"최대체력: {CurrentPlayer.maxHealth} / " +
+                $"행복: {CurrentPlayer.happiness} / " +
+                $"학교생활력: {CurrentPlayer.campusLife}"
+            );
+
+            if (HasAcademicWarning)
+            {
+                Debug.Log(
+                    "[Ending] 학사경고 히든 엔딩 조건 달성!"
+                );
+            }
+
+            // 결석 기록 및 스탯 저장
+            SaveGame();
+        }
+
+        // 기존 저녁 이동
+        SceneTransitionManager.Instance.LoadScene(
+            "EveningScene"
+        );
     }
+
 
     public void GoToEvening()
     {
@@ -1446,12 +1661,21 @@ public class GameManager : MonoBehaviour
             // 영구 컬렉션에 저장
             UnlockCurrentEndingCollection();
 
+            // 16주 완주 보상
+            MetaProgressSystem.AddCoin(20);
+
+            SaveSystem.DeleteSave();//진행중인 세이브 제거
+
             SceneTransitionManager.Instance.LoadScene(
                 "EndingScene"
             );
 
             return;
         }
+        GiveWeeklyAllowanceIfNeeded();
+
+        StudiedToday = false;
+        WorkedToday = false;
         StudiedToday = false;
         WorkedToday = false;
         hasEnergyDrinkToday = false;
@@ -1465,6 +1689,8 @@ public class GameManager : MonoBehaviour
 
         GenerateTodaySchedule();
         OnPlayerStatsRefreshed?.Invoke();
+
+        SaveGame();
 
         SceneTransitionManager.Instance.
             LoadScene("MorningScene");
@@ -1507,7 +1733,7 @@ public class GameManager : MonoBehaviour
         // A : 성적
         // =========================================
 
-        if (CurrentPlayer.grade >= 80)
+        if (CurrentPlayer.grade >= 70)
         {
             currentEndingSequence.sceneA =
                 EndingSceneAType.GoodGrade;
@@ -1527,12 +1753,12 @@ public class GameManager : MonoBehaviour
         // B : 학교생활
         // =========================================
 
-        if (CurrentPlayer.campusLife >= 200)
+        if (CurrentPlayer.campusLife >= 250)
         {
             currentEndingSequence.sceneB =
                 EndingSceneBType.GoodCampusLife;
         }
-        else if (CurrentPlayer.campusLife >= 80)
+        else if (CurrentPlayer.campusLife >= 100)
         {
             currentEndingSequence.sceneB =
                 EndingSceneBType.NormalCampusLife;
@@ -1556,7 +1782,7 @@ public class GameManager : MonoBehaviour
         // D : 행복
         // =========================================
 
-        if (CurrentPlayer.happiness >= 50)
+        if (CurrentPlayer.happiness >= 40)
         {
             currentEndingSequence.sceneD =
                 EndingSceneDType.Happy;
@@ -1646,6 +1872,24 @@ public class GameManager : MonoBehaviour
     
     }
 
+
+    private void UnlockCollectionWithReward(
+    string endingKey)
+    {
+        bool isNew =
+            EndingCollectionSave.Unlock(
+                endingKey
+            );
+
+        if (!isNew)
+            return;
+
+        const int rewardCoin = 20;
+
+        MetaProgressSystem.AddCoin(
+            rewardCoin
+        );
+    }
     private void UnlockCurrentEndingCollection()
     {
         if (currentEndingSequence == null)
@@ -1655,24 +1899,24 @@ public class GameManager : MonoBehaviour
             currentEndingSequence;
 
         // A : 성적
-        EndingCollectionSave.Unlock(
+        UnlockCollectionWithReward(
             $"A_{result.sceneA}"
         );
 
         // B : 학교생활
-        EndingCollectionSave.Unlock(
+        UnlockCollectionWithReward(
             $"B_{result.sceneB}"
         );
 
         // C : 여자친구
-        EndingCollectionSave.Unlock(
+        UnlockCollectionWithReward(
             $"C_{result.sceneC}"
         );
 
         // E : 히든 - 찐친
         if (result.sceneE != EndingSceneEType.None)
         {
-            EndingCollectionSave.Unlock(
+            UnlockCollectionWithReward(
                 $"E_{result.sceneE}"
             );
         }
@@ -1680,16 +1924,589 @@ public class GameManager : MonoBehaviour
         // F : 히든 - 대학원
         if (result.sceneF != EndingSceneFType.None)
         {
-            EndingCollectionSave.Unlock(
+            UnlockCollectionWithReward(
                 $"F_{result.sceneF}"
             );
         }
 
+        if (HasAcademicWarning)
+        {
+            UnlockCollectionWithReward(
+                "H_AcademicWarning"
+            );
+        }
         // D : 행복
-        EndingCollectionSave.Unlock(
+        UnlockCollectionWithReward(
             $"D_{result.sceneD}"
         );
     }
+
+    //세이브
+    private SaveGameData CreateSaveData()
+    {
+        if (CurrentPlayer == null)
+            return null;
+
+        SaveGameData data =
+            new SaveGameData();
+
+        // =========================
+        // 진행
+        // =========================
+
+        data.currentWeek =
+            CurrentWeek;
+
+        // =========================
+        // 플레이어
+        // =========================
+
+        data.absenceCount = absenceCount;
+        data.lastAbsenceWeek = lastAbsenceWeek;
+
+        data.happiness =
+            CurrentPlayer.happiness;
+
+        data.campusLife =
+            CurrentPlayer.campusLife;
+
+        data.intelligence =
+            CurrentPlayer.intelligence;
+
+        data.maxHealth =
+            CurrentPlayer.maxHealth;
+
+        data.currentHealth =
+            CurrentPlayer.currentHealth;
+
+        data.money =
+            CurrentPlayer.money;
+
+        data.appearance =
+            CurrentPlayer.appearance;
+
+        data.grade =
+            CurrentPlayer.grade;
+
+        data.hasGirlfriend =
+            CurrentPlayer.hasGirlfriend;
+
+        data.romanceAffection =
+            CurrentPlayer.romanceAffection;
+
+
+        // 장착 캐릭터 및 고유 능력
+        data.activeCharacterId =
+            CurrentPlayer.activeCharacterId;
+
+        data.activeCharacterAbility =
+            CurrentPlayer.activeCharacterAbility;
+
+        // 이번 회차 지속 아이템
+        data.schoolHealthLossReduction =
+            CurrentPlayer.schoolHealthLossReduction;
+
+        data.confessionBonusPercent =
+            CurrentPlayer.confessionBonusPercent;
+
+        data.weeklyMoneyBonus =
+            CurrentPlayer.weeklyMoneyBonus;
+
+        data.lastAllowanceWeek =
+            CurrentPlayer.lastAllowanceWeek;
+
+
+        // =========================
+        // 학점
+        // =========================
+
+        data.regularEarned =
+            regularEarned;
+
+        data.regularPossible =
+            regularPossible;
+
+        data.midtermScore =
+            midtermScore;
+
+        data.finalScore =
+            finalScore;
+
+        // =========================
+        // NPC
+        // =========================
+
+        data.friendCurrentStage =
+            friendCurrentStage;
+
+        data.friendStageCap =
+            friendStageCap;
+
+        data.friendRetired =
+            friendRetired;
+
+        data.seniorCurrentStage =
+            seniorCurrentStage;
+
+        data.seniorStageCap =
+            seniorStageCap;
+
+        data.seniorRetired =
+            seniorRetired;
+
+        data.professorCurrentStage =
+            professorCurrentStage;
+
+        data.professorStageCap =
+            professorStageCap;
+
+        data.professorRetired =
+            professorRetired;
+
+        data.professorQuestionCount =
+            professorQuestionCount;
+
+        data.romanceCurrentStage =
+            romanceCurrentStage;
+
+        data.romanceStageCap =
+            romanceStageCap;
+
+        data.romanceRetired =
+            romanceRetired;
+
+        // =========================
+        // 미팅 / 연애
+        // =========================
+
+        data.femaleFriendCount =
+            femaleFriendCount;
+
+        data.perfectMeetingSuccessCount =
+            perfectMeetingSuccessCount;
+
+        data.romanceNpc1Unlocked =
+            romanceNpc1Unlocked;
+
+        // =========================
+        // 축제
+        // =========================
+
+        data.hasFestivalDatePromise =
+            hasFestivalDatePromise;
+
+        data.festivalDateStarted =
+            festivalDateStarted;
+
+        data.festivalDateFinished =
+            festivalDateFinished;
+
+        data.festivalDateEndedByLowHealth =
+            festivalDateEndedByLowHealth;
+
+        // =========================
+        // 히든 엔딩
+        // =========================
+
+        data.endingACutUnlocked =
+            endingACutUnlocked;
+
+        data.endingGraduateSchoolUnlocked =
+            endingGraduateSchoolUnlocked;
+
+        // =========================
+        // 시간표
+        // =========================
+
+        data.todaySchedule =
+            new List<int>(
+                todaySchedule
+            );
+
+        return data;
+    }
+    public void SaveGame()
+    {
+        if (CurrentPlayer == null)
+        {
+            Debug.LogWarning(
+                "[Save] 플레이어가 없어서 저장할 수 없습니다."
+            );
+
+            return;
+        }
+
+        SaveGameData data =
+            CreateSaveData();
+
+        SaveSystem.Save(data);
+    }
+    private void ApplySaveData(
+    SaveGameData data)
+    {
+        if (data == null)
+            return;
+
+        // =========================
+        // 진행
+        // =========================
+
+        CurrentWeek =
+            Mathf.Clamp(
+                data.currentWeek,
+                1,
+                MAX_WEEK
+            );
+
+        // 이어하기는 항상 Morning에서 시작
+        CurrentSchoolEntry =
+            SchoolEntryType.None;
+
+        // =========================
+        // 플레이어
+        // =========================
+
+        CurrentPlayer =
+            new PlayerRunData
+            {
+                happiness =
+                    data.happiness,
+
+                campusLife =
+                    data.campusLife,
+
+                intelligence =
+                    data.intelligence,
+
+                maxHealth =
+                    data.maxHealth,
+
+                currentHealth =
+                    data.currentHealth,
+
+                money =
+                    data.money,
+
+                appearance =
+                    data.appearance,
+
+                grade =
+                    data.grade,
+
+                hasGirlfriend =
+                    data.hasGirlfriend
+            };
+
+        CurrentPlayer.romanceAffection =
+            data.romanceAffection;
+
+
+        // 해당 회차에 선택했던 캐릭터 복구
+        CurrentPlayer.activeCharacterId =
+            string.IsNullOrEmpty(data.activeCharacterId)
+                ? "DEFAULT"
+                : data.activeCharacterId;
+
+        CurrentPlayer.activeCharacterAbility =
+            data.activeCharacterAbility
+            ?? new CharacterAbilityData();
+
+        // 지속 아이템 효과 복구
+        CurrentPlayer.schoolHealthLossReduction =
+            data.schoolHealthLossReduction;
+
+        CurrentPlayer.confessionBonusPercent =
+            data.confessionBonusPercent;
+
+        CurrentPlayer.weeklyMoneyBonus =
+            data.weeklyMoneyBonus;
+
+        CurrentPlayer.lastAllowanceWeek =
+            data.lastAllowanceWeek;
+
+
+        // =========================
+        // 학점
+        // =========================
+
+        regularEarned =
+            data.regularEarned;
+
+        regularPossible =
+            data.regularPossible;
+
+        midtermScore =
+            data.midtermScore;
+
+        finalScore =
+            data.finalScore;
+
+        // =========================
+        // NPC
+        // =========================
+
+        friendCurrentStage =
+            data.friendCurrentStage;
+
+        friendStageCap =
+            data.friendStageCap;
+
+        friendRetired =
+            data.friendRetired;
+
+        seniorCurrentStage =
+            data.seniorCurrentStage;
+
+        seniorStageCap =
+            data.seniorStageCap;
+
+        seniorRetired =
+            data.seniorRetired;
+
+        professorCurrentStage =
+            data.professorCurrentStage;
+
+        professorStageCap =
+            data.professorStageCap;
+
+        professorRetired =
+            data.professorRetired;
+
+        professorQuestionCount =
+            data.professorQuestionCount;
+
+        romanceCurrentStage =
+            data.romanceCurrentStage;
+
+        romanceStageCap =
+            data.romanceStageCap;
+
+        romanceRetired =
+            data.romanceRetired;
+
+        // =========================
+        // 미팅 / 연애
+        // =========================
+
+        femaleFriendCount =
+            data.femaleFriendCount;
+
+        perfectMeetingSuccessCount =
+            data.perfectMeetingSuccessCount;
+
+        romanceNpc1Unlocked =
+            data.romanceNpc1Unlocked;
+
+        // =========================
+        // 축제
+        // =========================
+
+        hasFestivalDatePromise =
+            data.hasFestivalDatePromise;
+
+        festivalDateStarted =
+            data.festivalDateStarted;
+
+        festivalDateFinished =
+            data.festivalDateFinished;
+
+        festivalDateEndedByLowHealth =
+            data.festivalDateEndedByLowHealth;
+
+        // =========================
+        // 엔딩
+        // =========================
+
+        endingACutUnlocked =
+            data.endingACutUnlocked;
+
+        endingGraduateSchoolUnlocked =
+            data.endingGraduateSchoolUnlocked;
+
+        currentEndingSequence =
+            new EndingSequenceResult();
+
+        // =========================
+        // 일일 상태 초기화
+        // =========================
+
+        StudiedToday = false;
+        WorkedToday = false;
+
+        usedSchoolFacilityToday = false;
+
+        hasEnergyDrinkToday = false;
+        hasMemoryBreadToday = false;
+
+        talkedToRomanceThisWeek = false;
+
+        ResetDailyNPCUsage();
+
+        // =========================
+        // 축제 런타임 상태 정리
+        // =========================
+
+        festivalDateEnding = false;
+
+        visitedTargetBoothCount = 0;
+        visitedFestivalBooths.Clear();
+
+        // =========================
+        // 시간표 복원
+        // =========================
+
+        todaySchedule.Clear();
+
+        if (data.todaySchedule != null &&
+            data.todaySchedule.Count > 0)
+        {
+            todaySchedule.AddRange(
+                data.todaySchedule
+            );
+        }
+        else
+        {
+            GenerateTodaySchedule();
+        }
+
+        currentClassIndex = 0;
+        CurrentEnteredClassroom = -1;
+
+        // =========================
+        // 씬 일시상태 초기화
+        // =========================
+
+        ClearSavedSchoolPlayerPosition();
+        ClearSchoolHealthDrainPauses();
+
+        finalConfessionResolved = false;
+        meetingSceneScheduled = false;
+
+        OnPlayerStatsRefreshed?.Invoke();
+
+        Debug.Log(
+            $"[Save] 게임 데이터 복원 완료 / " +
+            $"Week={CurrentWeek} / " +
+            $"Money={CurrentPlayer.money} / " +
+            $"Int={CurrentPlayer.intelligence}"
+        );
+    }
+
+    public void ApplySchoolHealthLoss(int baseLoss)
+    {
+        if (CurrentPlayer == null || baseLoss <= 0)
+            return;
+
+        int reduction = Mathf.Max(
+            0,
+            CurrentPlayer.schoolHealthLossReduction
+        );
+
+        int finalLoss = Mathf.Max(
+            0,
+            baseLoss - reduction
+        );
+
+        if (finalLoss > 0)
+            AddCurrentHealth(-finalLoss);
+
+        Debug.Log(
+            $"[Item] 학교 체력 감소: {baseLoss} → {finalLoss}"
+        );
+    }
+
+    public float GetConfessionChanceWithBonus(
+    float baseChance)
+    {
+        if (CurrentPlayer == null)
+            return Mathf.Clamp01(baseChance);
+
+        float bonus =
+            CurrentPlayer.confessionBonusPercent / 100f;
+
+        return Mathf.Clamp01(baseChance + bonus);
+    }
+    public void LoadGame()
+    {
+        SaveGameData data =
+            SaveSystem.Load();
+
+        if (data == null)
+        {
+            Debug.LogWarning(
+                "[Save] 저장 데이터를 불러올 수 없습니다."
+            );
+
+            return;
+        }
+
+        ApplySaveData(data);
+
+        SceneTransitionManager.Instance.LoadScene(
+            "MorningScene"
+        );
+    }
+    public bool HasSavedGame()
+    {
+        return SaveSystem.HasSave();
+    }
+
+
+    public void AbandonCurrentRun()
+    {
+        // 일시정지 해제
+        Time.timeScale = 1f;
+
+        // 현재 회차 데이터 초기화
+        CurrentPlayer = null;
+        CurrentWeek = 1;
+        CurrentSchoolEntry = SchoolEntryType.None;
+
+        StudiedToday = false;
+        WorkedToday = false;
+
+        ClearSavedSchoolPlayerPosition();
+        ClearSchoolHealthDrainPauses();
+        ResetDailyNPCUsage();
+
+        // 기존 이어하기 저장 삭제
+        SaveSystem.DeleteSave();
+
+        // 메인 메뉴로 이동
+        SceneTransitionManager.Instance.LoadScene("MainScene");
+
+        Debug.Log("[Game] 현재 회차를 포기했습니다.");
+    }
+
+
+    private void GiveWeeklyAllowanceIfNeeded()
+    {
+        if (CurrentPlayer == null)
+            return;
+
+        if (CurrentWeek < 1 || CurrentWeek > 16)
+            return;
+
+        int bonus = CurrentPlayer.weeklyMoneyBonus;
+
+        if (bonus <= 0)
+            return;
+
+        // 같은 주차 중복 지급 방지
+        if (CurrentPlayer.lastAllowanceWeek >= CurrentWeek)
+            return;
+
+        // 지급 주차를 먼저 기록
+        CurrentPlayer.lastAllowanceWeek = CurrentWeek;
+
+        AddMoney(bonus);
+
+        Debug.Log(
+            $"[Item] {CurrentWeek}주차 엄마의 용돈 +{bonus}"
+        );
+    }
+
+
 
 }
 

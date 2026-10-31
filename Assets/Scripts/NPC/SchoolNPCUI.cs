@@ -279,11 +279,11 @@ public class SchoolNPCUI : MonoBehaviour
         {
             // 호감도 자체가 성공 확률
             float confessionChance =
-                Mathf.Clamp(
-                    player.romanceAffection,
-                    0f,
-                    100f
-                );
+            Mathf.Clamp(
+                player.romanceAffection +
+                player.confessionBonusPercent,
+                0f,
+                100f);
 
             float confessionRoll =
                 Random.Range(0f, 100f);

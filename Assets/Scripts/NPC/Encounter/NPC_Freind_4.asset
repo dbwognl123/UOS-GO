@@ -20,7 +20,7 @@ MonoBehaviour:
     \uAC08\uB798?"
   stageIndex: 1
   minAppearanceToAppear: 0
-  minCampusLifeToAppear: 300
+  minCampusLifeToAppear: 400
   minIntelligenceToAppear: 0
   minMoneyToAppear: 0
   requireNoGirlfriend: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
   appearChance: 100
   choices:
   - choiceText: "\uC751 \uADF8\uB798"
-    requiredMoney: 40
+    requiredMoney: 400
     minAppearance: 0
     minCampusLife: 0
     minIntelligence: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
     maxChance: 0
     successLine: "\uC54C\uACA0\uC5B4"
     failLine: 
-    successMoneyDelta: -40
+    successMoneyDelta: -400
     successAppearanceDelta: 0
     successCampusLifeDelta: 0
     successIntelligenceDelta: 0
@@ -57,6 +57,8 @@ MonoBehaviour:
     successMaxHealthDelta: 0
     successSetGirlfriend: 0
     successScheduleMeetingScene: 0
+    successRetireNpcType: 1
+    successUnlockRomanceNpc1: 0
     failMoneyDelta: 0
     failAppearanceDelta: 0
     failCampusLifeDelta: 0
@@ -66,7 +68,6 @@ MonoBehaviour:
     failMaxHealthDelta: 0
     successSetStageTo: 0
     successSetStageCapTo: 0
-    successRetireNpcType: 1
     successProfessorQuestionCountDelta: 0
     successUnlockEndingId: RealFriendCut
     failSetStageTo: 0
@@ -74,13 +75,17 @@ MonoBehaviour:
     failRetireNpcType: 0
     failProfessorQuestionCountDelta: 0
     failUnlockEndingId: 
-    successUnlockRomanceNpc1: 0
     failLockRomanceNpc1: 0
     useDynamicRomanceSuccessChance: 0
     romanceBaseChance: 15
     romanceAppearanceWeight: 1.5
     romanceCampusLifeWeight: 0.15
     romanceMaxChance: 85
+    successSetFestivalDatePromise: 0
+    successStartFestivalDate: 0
+    isFinalConfession: 0
+    isFinalConfessionDecline: 0
+    minRomanceAffection: 0
   - choiceText: "\uC5B4 \uC0DD\uAC01\uD574\uBCFC\uAC8C"
     requiredMoney: 0
     minAppearance: 0
@@ -109,6 +114,8 @@ MonoBehaviour:
     successMaxHealthDelta: 0
     successSetGirlfriend: 0
     successScheduleMeetingScene: 0
+    successRetireNpcType: 0
+    successUnlockRomanceNpc1: 0
     failMoneyDelta: 0
     failAppearanceDelta: 0
     failCampusLifeDelta: 0
@@ -118,7 +125,6 @@ MonoBehaviour:
     failMaxHealthDelta: 0
     successSetStageTo: 0
     successSetStageCapTo: 0
-    successRetireNpcType: 0
     successProfessorQuestionCountDelta: 0
     successUnlockEndingId: 
     failSetStageTo: 0
@@ -126,10 +132,14 @@ MonoBehaviour:
     failRetireNpcType: 0
     failProfessorQuestionCountDelta: 0
     failUnlockEndingId: 
-    successUnlockRomanceNpc1: 0
     failLockRomanceNpc1: 0
     useDynamicRomanceSuccessChance: 0
     romanceBaseChance: 15
     romanceAppearanceWeight: 1.5
     romanceCampusLifeWeight: 0.15
     romanceMaxChance: 85
+    successSetFestivalDatePromise: 0
+    successStartFestivalDate: 0
+    isFinalConfession: 0
+    isFinalConfessionDecline: 0
+    minRomanceAffection: 0

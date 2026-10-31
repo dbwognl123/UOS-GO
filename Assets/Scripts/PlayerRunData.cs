@@ -14,4 +14,18 @@ public class PlayerRunData
     public int grade;          // 학점
 
     public int romanceAffection;
+
+
+    public string activeCharacterId = "DEFAULT";
+
+    public CharacterAbilityData activeCharacterAbility =
+        new CharacterAbilityData();
+
+    public int schoolHealthLossReduction = 0;
+    public int confessionBonusPercent = 0;
+    public int weeklyMoneyBonus = 0;
+
+    // 중복 지급 방지용
+    public int lastAllowanceWeek = 0;
+
 }

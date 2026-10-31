@@ -16,8 +16,7 @@ MonoBehaviour:
   npcType: 3
   npcName: G
   portrait: {fileID: 4356588906812027909, guid: 4d4c9b4916a77b84797be8230a8ce150, type: 3}
-  openingLine: "\uC548\uB155? \uB610 \uB9C8\uC8FC\uCCE4\uB124 \u314B\u314B\n\uB2E4\uC74C\uC8FC\uC5D0\uB3C4
-    \uB610 \uBCF4\uC790~\n"
+  openingLine: "\uC548\uB155? \uB610 \uBCF4\uB124~\n"
   stageIndex: 1
   minAppearanceToAppear: 0
   minCampusLifeToAppear: 0

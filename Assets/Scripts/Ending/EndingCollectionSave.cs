@@ -16,30 +16,34 @@ public static class EndingCollectionSave
         ) == 1;
     }
 
-    public static void Unlock(string endingKey)
+    public static bool Unlock(string endingKey)
     {
         if (string.IsNullOrEmpty(endingKey))
-            return;
+            return false;
 
-        // 처음 해금한 경우에만 NEW 표시
-        if (!IsUnlocked(endingKey))
-        {
-            PlayerPrefs.SetInt(
-                NewPrefix + endingKey,
-                1
-            );
-        }
+        bool alreadyUnlocked =
+            IsUnlocked(endingKey);
+
+        if (alreadyUnlocked)
+            return false;
 
         PlayerPrefs.SetInt(
             UnlockPrefix + endingKey,
             1
         );
 
+        PlayerPrefs.SetInt(
+            NewPrefix + endingKey,
+            1
+        );
+
         PlayerPrefs.Save();
 
         Debug.Log(
-            $"[Collection] 엔딩 해금: {endingKey}"
+            $"[Collection] 신규 엔딩 해금: {endingKey}"
         );
+
+        return true;
     }
 
     public static bool IsNew(string endingKey)

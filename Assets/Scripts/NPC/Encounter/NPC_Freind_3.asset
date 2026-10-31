@@ -20,7 +20,7 @@ MonoBehaviour:
     \uAC08\uB798?"
   stageIndex: 3
   minAppearanceToAppear: 10
-  minCampusLifeToAppear: 90
+  minCampusLifeToAppear: 100
   minIntelligenceToAppear: 0
   minMoneyToAppear: 0
   requireNoGirlfriend: 0
@@ -30,13 +30,13 @@ MonoBehaviour:
   appearChance: 100
   choices:
   - choiceText: "\uC751 \uADF8\uB798"
-    requiredMoney: 20
+    requiredMoney: 80
     minAppearance: 0
     minCampusLife: 0
     minIntelligence: 0
     blockIfHasGirlfriend: 0
     useFixedChance: 0
-    fixedSuccessChance: 50
+    fixedSuccessChance: 100
     autoFailIfAppearanceBelow: 11
     autoFailIfCampusLifeBelow: 0
     autoFailIfIntelligenceBelow: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
     maxChance: 0
     successLine: "\uC751 \uC5F0\uB77D\uC904\uAC8C"
     failLine: "\uC544 \uADFC\uB370 \uC774\uBBF8 \uAF49\uCC3C\uB2E4\uB124 \uBBF8\uC548"
-    successMoneyDelta: -20
+    successMoneyDelta: -80
     successAppearanceDelta: 0
     successCampusLifeDelta: 60
     successIntelligenceDelta: 0
@@ -57,6 +57,8 @@ MonoBehaviour:
     successMaxHealthDelta: -5
     successSetGirlfriend: 0
     successScheduleMeetingScene: 1
+    successRetireNpcType: 0
+    successUnlockRomanceNpc1: 0
     failMoneyDelta: 0
     failAppearanceDelta: 0
     failCampusLifeDelta: 0
@@ -66,7 +68,6 @@ MonoBehaviour:
     failMaxHealthDelta: 0
     successSetStageTo: 4
     successSetStageCapTo: 0
-    successRetireNpcType: 0
     successProfessorQuestionCountDelta: 0
     successUnlockEndingId: 
     failSetStageTo: 0
@@ -74,13 +75,17 @@ MonoBehaviour:
     failRetireNpcType: 0
     failProfessorQuestionCountDelta: 0
     failUnlockEndingId: 
-    successUnlockRomanceNpc1: 0
     failLockRomanceNpc1: 0
     useDynamicRomanceSuccessChance: 0
     romanceBaseChance: 15
     romanceAppearanceWeight: 1.5
     romanceCampusLifeWeight: 0.15
     romanceMaxChance: 85
+    successSetFestivalDatePromise: 0
+    successStartFestivalDate: 0
+    isFinalConfession: 0
+    isFinalConfessionDecline: 0
+    minRomanceAffection: 0
   - choiceText: "\uC544\uB2C8"
     requiredMoney: 0
     minAppearance: 0
@@ -109,6 +114,8 @@ MonoBehaviour:
     successMaxHealthDelta: 0
     successSetGirlfriend: 0
     successScheduleMeetingScene: 0
+    successRetireNpcType: 0
+    successUnlockRomanceNpc1: 0
     failMoneyDelta: 0
     failAppearanceDelta: 0
     failCampusLifeDelta: 0
@@ -118,7 +125,6 @@ MonoBehaviour:
     failMaxHealthDelta: 0
     successSetStageTo: 0
     successSetStageCapTo: 0
-    successRetireNpcType: 0
     successProfessorQuestionCountDelta: 0
     successUnlockEndingId: 
     failSetStageTo: 3
@@ -126,10 +132,14 @@ MonoBehaviour:
     failRetireNpcType: 0
     failProfessorQuestionCountDelta: 0
     failUnlockEndingId: 
-    successUnlockRomanceNpc1: 0
     failLockRomanceNpc1: 0
     useDynamicRomanceSuccessChance: 0
     romanceBaseChance: 15
     romanceAppearanceWeight: 1.5
     romanceCampusLifeWeight: 0.15
     romanceMaxChance: 85
+    successSetFestivalDatePromise: 0
+    successStartFestivalDate: 0
+    isFinalConfession: 0
+    isFinalConfessionDecline: 0
+    minRomanceAffection: 0

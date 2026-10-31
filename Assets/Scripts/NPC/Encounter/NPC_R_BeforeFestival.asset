@@ -83,6 +83,10 @@ MonoBehaviour:
     romanceCampusLifeWeight: 0.15
     romanceMaxChance: 85
     successSetFestivalDatePromise: 1
+    successStartFestivalDate: 0
+    isFinalConfession: 0
+    isFinalConfessionDecline: 0
+    minRomanceAffection: 0
   - choiceText: "\uC751 \uC624\uB79C\uB9CC\uC774\uB124 \uC798 \uC9C0\uB0C8\uC5B4?"
     requiredMoney: 0
     minAppearance: 0
@@ -137,3 +141,7 @@ MonoBehaviour:
     romanceCampusLifeWeight: 0.15
     romanceMaxChance: 85
     successSetFestivalDatePromise: 0
+    successStartFestivalDate: 0
+    isFinalConfession: 0
+    isFinalConfessionDecline: 0
+    minRomanceAffection: 0

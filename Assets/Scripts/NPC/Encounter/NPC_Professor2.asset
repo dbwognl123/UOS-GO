@@ -53,10 +53,12 @@ MonoBehaviour:
     successCampusLifeDelta: 0
     successIntelligenceDelta: 30
     successGradeDelta: 0
-    successHappinessDelta: -10
+    successHappinessDelta: -30
     successMaxHealthDelta: 0
     successSetGirlfriend: 0
     successScheduleMeetingScene: 0
+    successRetireNpcType: 1
+    successUnlockRomanceNpc1: 0
     failMoneyDelta: 0
     failAppearanceDelta: 0
     failCampusLifeDelta: 0
@@ -66,7 +68,6 @@ MonoBehaviour:
     failMaxHealthDelta: 0
     successSetStageTo: 0
     successSetStageCapTo: 0
-    successRetireNpcType: 1
     successProfessorQuestionCountDelta: 0
     successUnlockEndingId: GranSchoolCut
     failSetStageTo: 0
@@ -74,13 +75,17 @@ MonoBehaviour:
     failRetireNpcType: 0
     failProfessorQuestionCountDelta: 0
     failUnlockEndingId: 
-    successUnlockRomanceNpc1: 0
     failLockRomanceNpc1: 0
     useDynamicRomanceSuccessChance: 0
     romanceBaseChance: 15
     romanceAppearanceWeight: 1.5
     romanceCampusLifeWeight: 0.15
     romanceMaxChance: 85
+    successSetFestivalDatePromise: 0
+    successStartFestivalDate: 0
+    isFinalConfession: 0
+    isFinalConfessionDecline: 0
+    minRomanceAffection: 0
   - choiceText: "\uC544 \uC0DD\uAC01\uD574\uBCFC\uAC8C\uC694"
     requiredMoney: 0
     minAppearance: 0
@@ -109,6 +114,8 @@ MonoBehaviour:
     successMaxHealthDelta: 0
     successSetGirlfriend: 0
     successScheduleMeetingScene: 0
+    successRetireNpcType: 0
+    successUnlockRomanceNpc1: 0
     failMoneyDelta: 0
     failAppearanceDelta: 0
     failCampusLifeDelta: 0
@@ -118,7 +125,6 @@ MonoBehaviour:
     failMaxHealthDelta: 0
     successSetStageTo: 2
     successSetStageCapTo: 0
-    successRetireNpcType: 0
     successProfessorQuestionCountDelta: 0
     successUnlockEndingId: 
     failSetStageTo: 0
@@ -126,10 +132,14 @@ MonoBehaviour:
     failRetireNpcType: 0
     failProfessorQuestionCountDelta: 0
     failUnlockEndingId: 
-    successUnlockRomanceNpc1: 0
     failLockRomanceNpc1: 0
     useDynamicRomanceSuccessChance: 0
     romanceBaseChance: 15
     romanceAppearanceWeight: 1.5
     romanceCampusLifeWeight: 0.15
     romanceMaxChance: 85
+    successSetFestivalDatePromise: 0
+    successStartFestivalDate: 0
+    isFinalConfession: 0
+    isFinalConfessionDecline: 0
+    minRomanceAffection: 0
